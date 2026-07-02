@@ -1,7 +1,7 @@
 ---
 import BrandMark from './BrandMark.astro';
 import LangSwitcher from './LangSwitcher.astro';
-import { LINKS, AI_TAGS, DEVICES, PLAN_META, PROMO_ENDS, CRYPTO } from '../consts';
+import { LINKS, AI_TAGS, DEVICES, PLAN_META, PROMO, PROMO_ACTIVE, PROMO_ENDS, CRYPTO } from '../consts';
 import { t, type Locale } from '../i18n';
 import { SHOWCASE } from '../i18n/showcase';
 import { discordMembers } from '../discord';
@@ -70,6 +70,27 @@ const CRYPTO_TEXT: Record<string, {
 };
 const cx = CRYPTO_TEXT[lang] ?? CRYPTO_TEXT.en;
 const txidLabel = lang === 'zh' ? '交易 ID（TXID）' : lang === 'ja' ? 'トランザクションID（TXID）' : 'transaction ID';
+
+// Visible sale deadline under the pricing header ("nothing said until when").
+// The label comes from pricing.json; only the "until <date>" part localizes.
+const promoUntil = (() => {
+  if (!PROMO_ACTIVE || !PROMO_ENDS) return null;
+  const [, m, d] = PROMO_ENDS.split('-').map((x) => parseInt(x, 10));
+  const EN_MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const until: Record<string, string> = {
+    en: `until ${EN_MONTHS[m - 1]} ${d}`,
+    de: `bis ${d}.${m}.`,
+    es: `hasta el ${d}/${m}`,
+    fr: `jusqu'au ${d}/${m}`,
+    it: `fino al ${d}/${m}`,
+    ja: `${m}月${d}日まで`,
+    ko: `${m}월 ${d}일까지`,
+    pt: `até ${d}/${m}`,
+    ru: `до ${d}.${String(m).padStart(2, '0')}`,
+    zh: `截止 ${m} 月 ${d} 日`,
+  };
+  return `${PROMO!.label} · ${until[lang] ?? until.en}`;
+})();
 
 // AI-section live demo: a real capture of the VR model tracking a scene
 // (content pixelated for the storefront; logo, script timeline and the live
@@ -241,6 +262,7 @@ const DIVES = [
         <p class="eyebrow">{s.pricing.eyebrow}</p>
         <h2>{s.pricing.title}</h2>
         {s.pricing.body.split('\n').map((line) => <p>{line}</p>)}
+        {promoUntil && <p class="promo-until" data-promo-until>{promoUntil}</p>}
       </div>
       <div class="plans">
         {s.pricing.plans.map((plan, i) => {
@@ -431,6 +453,7 @@ const DIVES = [
       if (card.getAttribute('data-promo-ends') >= today) return;
       card.classList.remove('plan-promo');
       var badge = card.querySelector('[data-promo-badge]'); if (badge) badge.remove();
+      document.querySelectorAll('[data-promo-until]').forEach(function (el) { el.remove(); });
       var strike = card.querySelector('[data-promo-list]'); if (strike) strike.remove();
       var price = card.querySelector('[data-price]');
       var listPrice = card.getAttribute('data-list-price');
@@ -724,6 +747,7 @@ const DIVES = [
     font-size: 0.7rem; font-weight: 750; padding: 3px 10px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.05em;
   }
   .plan-badge--promo { background: var(--coral); color: #1a0d06; margin-left: auto; }
+  .promo-until { color: var(--coral); font-weight: 700; font-size: 0.95rem; margin-top: 6px; }
   .plan h3 { font-size: 1.2rem; margin-bottom: 10px; }
   .plan-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; }
   .plan-price span { font-size: 2rem; font-weight: 800; }

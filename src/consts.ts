@@ -103,7 +103,7 @@ function promoLive(p: Promo | undefined): p is Promo {
   return p.starts <= t && t <= p.ends;
 }
 
-const PROMO = PRICING.promo;
+export const PROMO = PRICING.promo;
 export const PROMO_ACTIVE = promoLive(PROMO);
 /** ISO end date of the live promo (for the client-side expiry guard), else null. */
 export const PROMO_ENDS = PROMO_ACTIVE ? PROMO!.ends : null;
