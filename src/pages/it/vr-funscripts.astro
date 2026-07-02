@@ -1,0 +1,86 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = 'Funscript VR: generali e riproducili nel tuo visore — FunGen';
+const description =
+  'Come funzionano i funscript VR e come crearne di tuoi. FunGen genera funscript da video VR fisheye, equirettangolari, side-by-side e top/bottom, in scene POV e non-POV.';
+const canonicalPath = '/it/vr-funscripts';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Funscript VR: generali e riproducili nel tuo visore',
+  description,
+  inLanguage: 'it',
+  mainEntityOfPage: 'https://fungen.app/it/vr-funscripts',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'Funscript VR', path: '/it/vr-funscripts' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="Funscript VR"
+  lang="it"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    Un <strong>funscript VR</strong> è la stessa idea di qualsiasi altro
+    <a href={`${base}/it/what-is-a-funscript`}>funscript</a> — dati di movimento sincronizzati con
+    un video — ma pensato per le riprese immersive da visore, dove la proiezione della camera e la
+    profondità rendono lo scripting più difficile. <a href={`${base}/it/`}>FunGen</a> li genera in
+    automatico, così puoi scriptare la tua libreria VR invece di aspettare che lo faccia qualcun
+    altro.
+  </p>
+
+  <h2>Cosa rende il VR diverso</h2>
+  <p>
+    Un video VR non è un rettangolo piatto. È deformato per il visore — di solito
+    <strong>fisheye</strong>, <strong>equirettangolare</strong>, <strong>side-by-side</strong> o
+    stereo <strong>top/bottom</strong> — e l'azione avviene nella profondità del POV. Un modello di
+    scripting deve capire quella geometria per tracciare il movimento correttamente, ed è per
+    questo che un approccio 2D generico crolla sul VR.
+  </p>
+
+  <h2>Come FunGen gestisce il VR</h2>
+  <p>
+    FunGen include un <strong>modello IA dedicato al VR</strong>, separato dal suo modello 2D /
+    flat. Rileva il layout da solo, corregge la distorsione delle riprese sulla GPU e traccia sia
+    le scene <strong>POV che non-POV</strong>, così il funscript risultante corrisponde a quello
+    che vedi davvero nel visore. L'output è multi-asse, pronto da riprodurre o rifinire.
+  </p>
+  <ul>
+    <li>Rileva in automatico fisheye, equirettangolare, side-by-side e top/bottom.</li>
+    <li>Dewarp su GPU + tracking tarato per la profondità da visore e l'inquadratura POV.</li>
+    <li>Output multi-asse a piena qualità, rifinibile sulla timeline.</li>
+    <li>Processa in batch un'intera cartella di scene VR durante la notte.</li>
+  </ul>
+
+  <h2>Riprodurre funscript VR in un visore</h2>
+  <p>
+    Una volta generato, un funscript VR si riproduce come qualsiasi altro. Lo streamer integrato di
+    FunGen più i bridge <strong>HereSphere</strong> e <strong>DeoVR</strong> (e l'integrazione
+    XBVR) sincronizzano lo script con il video nel tuo visore e comandano il tuo dispositivo —
+    <strong>The Handy</strong>, <strong>OSR2 / SR6</strong>, <strong>Autoblow</strong>, o qualsiasi
+    cosa su <strong>Buttplug.io / Intiface</strong> — con compensazione della latenza per restare a
+    tempo.
+  </p>
+
+  <h2>Crea i tuoi funscript VR</h2>
+  <p>
+    Dai in pasto a FunGen una clip VR, lancia un'anteprima gratuita di 20 secondi per verificare il
+    tracking, poi genera la scena completa. Tutto gira in locale sulla tua macchina, quindi la tua
+    libreria VR resta privata. Vedi
+    <a href={`${base}/it/generate-funscripts-from-video`}>la guida completa</a> per il passo passo,
+    o <a href={`${base}/it/`}>scarica FunGen</a> e provalo sul tuo materiale.
+  </p>
+</Article>

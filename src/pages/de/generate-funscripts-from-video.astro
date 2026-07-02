@@ -1,0 +1,120 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = 'Funscript aus Video erstellen mit KI (2D & VR) — so geht’s | FunGen';
+const description =
+  'Verwandle jedes Video mit KI in ein Funscript. Schritt-für-Schritt-Anleitung: Funscripts aus 2D-, POV- und VR-Szenen generieren, verfeinern und auf deinem Gerät abspielen.';
+const canonicalPath = '/de/generate-funscripts-from-video';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'Wie man ein Funscript aus einem Video generiert',
+  description,
+  inLanguage: 'de',
+  mainEntityOfPage: 'https://fungen.app/de/generate-funscripts-from-video',
+  tool: [{ '@type': 'HowToTool', name: 'FunGen' }],
+  step: [
+    {
+      '@type': 'HowToStep',
+      name: 'FunGen herunterladen',
+      text: 'Lade die kostenlose FunGen-Desktop-App für Windows, macOS oder Linux herunter. Ein einziges natives Binary, nichts zu installieren.',
+      url: 'https://fungen.app/de/generate-funscripts-from-video#download',
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Video öffnen',
+      text: 'Zieh ein 2D-, POV- oder VR-Video in FunGen. Das Layout (flach, Fisheye, equirektangular, Side-by-Side, Top/Bottom) erkennt es selbstständig.',
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Mit KI generieren',
+      text: 'Starte eine 20-Sekunden-Vorschau, um das Ergebnis zu prüfen, und generiere dann die ganze Szene. Ein dediziertes KI-Modell liest die Bewegung im Bild und schreibt ein Multi-Achsen-Funscript.',
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Auf der Timeline verfeinern',
+      text: 'Räum auf einer framegenauen Multi-Achsen-Timeline auf — Transformationen, Kapitel und die Doctor-Qualitätsprüfungen beheben die meisten Probleme mit einem Klick.',
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Auf dem Gerät abspielen',
+      text: 'Spiel das Script direkt auf The Handy, OSR2/SR6, Autoblow, Vacuglide oder alles über Buttplug.io / Intiface — mit Latenzbehandlung pro Gerät.',
+    },
+  ],
+};
+const breadcrumbs = [
+  { name: 'Funscripts aus Video generieren', path: '/de/generate-funscripts-from-video' },
+];
+---
+
+<Article
+  {title}
+  {description}
+  heading="Wie du aus jedem Video ein Funscript generierst"
+  lang="de"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    Du musst weder von Hand scripten noch nach einer fertigen Datei suchen. Mit KI verwandelst du
+    fast jedes Video — 2D, POV oder VR — in Minuten in ein vollständiges
+    <a href={`${base}/de/what-is-a-funscript`}>Funscript</a> und verfeinerst es dann nach
+    Geschmack. So funktioniert es in <a href={`${base}/de/`}>FunGen</a>.
+  </p>
+
+  <h2 id="download">1. FunGen herunterladen (kostenlos)</h2>
+  <p>
+    Hol dir die kostenlose Desktop-App für <strong>Windows, macOS oder Linux</strong>. Ein einziges
+    natives Binary — keine Python-Umgebung, kein Bibliotheken-Stapel zum Installieren — und die KI
+    läuft lokal auf deiner eigenen GPU, deine Sammlung verlässt also nie deinen Rechner.
+  </p>
+
+  <h2>2. Video öffnen</h2>
+  <p>
+    Zieh eine beliebige Szene hinein. FunGen liest das Video direkt und erkennt das Layout für dich
+    — flaches 2D und POV, oder VR in Fisheye, equirektangular, Side-by-Side und Top/Bottom. Nichts
+    muss vorher konvertiert werden.
+  </p>
+
+  <h2>3. Mit KI generieren</h2>
+  <p>
+    Starte zuerst eine kostenlose <strong>20-Sekunden-Vorschau</strong> an einer beliebigen Stelle
+    des Clips, um die Qualität zu sehen, und generiere dann die ganze Szene. Ein dediziertes
+    Pro-KI-Modell — eines für 2D/flaches Video, eines für VR — folgt der Bewegung im Bild Frame für
+    Frame und schreibt ein flüssiges Multi-Achsen-Funscript mit vollem Hub. Du kannst einen
+    einzelnen Clip generieren oder über Nacht einen ganzen Ordner im Batch verarbeiten.
+  </p>
+
+  <h2>4. Auf der Timeline verfeinern</h2>
+  <p>
+    Die KI bringt dich fast ans Ziel; der Editor erledigt den Rest. Räum auf einer framegenauen
+    Multi-Achsen-Timeline auf — mit Transformationen (Amplitude, Glättung, Tempolimits, Timing),
+    Kapiteln und dem <strong>Doctor</strong>: einem gerätebewussten Qualitäts-Score von 0 bis 100,
+    der Tempoverstöße, tote Zonen und fehlende Hübe erkennt und die meisten davon mit einem Klick
+    behebt.
+  </p>
+
+  <h2>5. Auf dem Gerät abspielen</h2>
+  <p>
+    Spiel das fertige Script direkt auf deine Hardware — <strong>The Handy</strong>,
+    <strong>OSR2 / SR6 / SSR1</strong>, <strong>Autoblow</strong>, <strong>Vacuglide</strong> oder
+    alles über <strong>Buttplug.io / Intiface</strong> — mit Interpolation und Latenzkompensation
+    pro Gerät. Ein integrierter Streamer kann eine Session auch vom Handy oder VR-Headset aus
+    steuern.
+  </p>
+
+  <h2>Welche Videos lassen sich scripten?</h2>
+  <p>
+    Alles mit rhythmischer Bewegung. Neben klassischen VR- und 2D-/POV-Szenen meistert FunGen auch
+    beat-synchrone <strong>cock hero</strong>- und <strong>PMV</strong>-Edits, <strong>JOI</strong>-
+    und Tease-Videos — generier dein eigenes Script, statt in Foren nach einem fertigen zu suchen.
+  </p>
+
+  <p>
+    Bereit, es auszuprobieren? <a href={`${base}/de/`}>Lade FunGen herunter</a> und dein erstes
+    Funscript ist in wenigen Minuten in Arbeit.
+  </p>
+</Article>

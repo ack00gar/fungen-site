@@ -1,0 +1,80 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = 'JAV・JAVR用funscript：AIで自動生成する方法 — FunGen';
+const description =
+  'JAVR（VR AV）にfunscriptが付属することはほとんどありません。FunGenならフィッシュアイ・エクイレクタングラーのアダルトVRからAIでfunscriptを自動生成。2DのJAVにも対応、すべてローカル処理です。';
+const canonicalPath = '/ja/funscripts-for-jav-and-javr';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'JAV・JAVR用funscript：AIで自動生成する方法',
+  description,
+  inLanguage: 'ja',
+  mainEntityOfPage: 'https://fungen.app/ja/funscripts-for-jav-and-javr',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [
+  { name: 'JAV・JAVR用funscript', path: '/ja/funscripts-for-jav-and-javr' },
+];
+---
+
+<Article
+  {title}
+  {description}
+  heading="JAV・JAVR用funscript"
+  lang="ja"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    <strong>JAVR</strong>（VR AV／アダルトVR）は、funscriptと最高に相性の良いジャンルです。ほぼ全編が<strong>POV（一人称視点）</strong>で撮影され、リズミカルなシーンが長く続く — まさに
+    <a href={`${base}/ja/vr-funscripts`}>VR funscript</a>のトラッキングが得意とする構図です。
+    <a href={`${base}/ja/`}>FunGen</a>ならAIがスクリプトを自動生成するので、手持ちのライブラリのどの作品でもインタラクティブ化できます。
+  </p>
+
+  <h2>問題：スクリプト付きのJAVはほとんどない</h2>
+  <p>
+    一部の海外スタジオと違い、JAV・JAVR作品に公式のfunscriptが付属することはめったにありません。作品ごとにコミュニティ製スクリプトを探し回るのも当たり外れが大きく、人気タイトルの一部はカバーされていても、ライブラリの大半は手つかず、品質もバラバラです。現実的な答えは、探すのをやめて<strong>自分で生成する</strong>こと — 動画をFunGenに読み込ませて、AIにスクリプトを作らせるだけです。
+  </p>
+
+  <h2>FunGenのJAVR対応</h2>
+  <p>
+    JAVRは技術的に手ごわい映像です。各スタジオは<strong>フィッシュアイ</strong>（FISHEYE190／MKX200系レンズ）や<strong>エクイレクタングラー</strong>の投影方式を使い、<strong>8K</strong>収録も珍しくありません。FunGenの<strong>VR専用AIモデル</strong>はレイアウトを自動判別し、GPUでゆがみを補正（アンワープ）しながらPOVのアクションを追跡。数分でフルレングスの多軸funscriptが出来上がります。
+  </p>
+  <ul>
+    <li>フィッシュアイ（FISHEYE190／MKX200系）とエクイレクタングラーのJAVRソースに対応。</li>
+    <li>8K対応のデコードパイプライン。POVの奥行きと構図に合わせてチューニング。</li>
+    <li>フルレングスの多軸出力。必要ならタイムラインで微調整も可能。</li>
+    <li>JAVRシーンのフォルダを丸ごと夜間バッチ処理。</li>
+  </ul>
+
+  <h2>ヘッドセットで再生する</h2>
+  <p>
+    生成してしまえば、再生は他のfunscriptと変わりません。FunGen内蔵のストリーマーに加え、
+    <strong>HereSphere</strong>・<strong>DeoVR</strong>ブリッジ（XBVR連携も）がヘッドセット内でスクリプトを動画に同期し、デバイスを駆動します — <strong>The Handy</strong>、
+    <strong>OSR2 / SR6</strong>、<strong>Autoblow</strong>、あるいは
+    <strong>Buttplug.io / Intiface</strong>対応デバイスまで、レイテンシ補正付きでタイミングを保ちます。
+  </p>
+
+  <h2>2DのJAVもOK</h2>
+  <p>
+    すべてがVRである必要はありません。FunGenには平面映像用の<strong>POV 2Dモデル</strong>も搭載されているので、通常の2D
+    JAVも同じように手軽にスクリプト化できます。ワークフローも多軸出力も対応デバイスも共通です。
+  </p>
+
+  <h2>JAVライブラリをスクリプト化する</h2>
+  <p>
+    作品を読み込み、無料の20秒プレビューでトラッキングを確認したら、動画全体を生成。処理はすべて自分のPC上でローカルに動くため、ライブラリはプライベートなまま。手順は
+    <a href={`${base}/ja/generate-funscripts-from-video`}>生成ガイド</a>を参照するか、
+    <a href={`${base}/ja/#pricing`}>FunGenをダウンロード</a>して手持ちのコレクションで試してみてください。
+  </p>
+</Article>

@@ -1,0 +1,85 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = 'The Handy 专用 funscript — 用 FunGen 生成并播放';
+const description =
+  '用 FunGen 从任意 2D 或 VR 视频为 The Handy 生成 funscript，并通过 HTTPS 或蓝牙 LE 播放，配合延迟补偿保持精准同步。';
+const canonicalPath = '/zh/funscripts-for-the-handy';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: '用 FunGen 为 The Handy 生成 funscript',
+  description,
+  inLanguage: 'zh',
+  mainEntityOfPage: 'https://fungen.app/zh/funscripts-for-the-handy',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'The Handy', path: '/zh/funscripts-for-the-handy' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="The Handy 专用 funscript"
+  lang="zh"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    <a href={`${base}/zh/`}>FunGen</a> 既能为 The Handy <strong>生成</strong> funscript，
+    也能把脚本直接<strong>播放</strong>到设备——拿任意 2D 或 VR 视频，用 AI 打好脚本，
+    再让你的 Handy 同步运动，全部在一个应用里完成。
+  </p>
+
+  <h2>为任意视频生成脚本</h2>
+  <p>
+    The Handy 读取标准的 <a href={`${base}/zh/what-is-a-funscript`}>funscript</a>（上下行程轴）。
+    把 FunGen 指向一段影片——2D、POV 或 VR——专用 AI 模型就会替你写出这条行程轨道。
+    先免费跑一段 20 秒预览，再生成整部影片，或者批量处理整个文件夹。
+    具体步骤见<a href={`${base}/zh/generate-funscripts-from-video`}>完整教程</a>。
+  </p>
+
+  <h2>播放到 The Handy</h2>
+  <p>FunGen 有两种方式连接 The Handy：</p>
+  <ul>
+    <li>
+      <strong>HTTPS（Handy Connect API）</strong>——用你的连接密钥通过互联网驱动，
+      是让脚本与视频保持同步的最稳妥方式。
+    </li>
+    <li>
+      <strong>蓝牙 LE</strong>——本地直连，无需绕经云端，只要 Handy 和电脑在信号范围内即可。
+    </li>
+  </ul>
+  <p>
+    无论哪种方式，FunGen 都会应用<strong>按设备的延迟补偿</strong>，让动作正好踩在节拍上，
+    而不是落后于画面——这对 The Handy 尤为重要，因为它的往返延迟确实存在。
+    如果你的环境需要，还可以手动微调偏移量。
+  </p>
+
+  <h2>沙发上、桌前，或戴着头显</h2>
+  <p>
+    内置的串流功能可以把影片和脚本发送到手机、浏览器或 VR 头显，同时由 FunGen 同步驱动 Handy——
+    看 VR 影片时特别方便：你在头显里观看，设备跟着动。同一份脚本也能在 HereSphere 和 DeoVR
+    等播放器中使用。
+  </p>
+
+  <h2>调出真正舒服的手感</h2>
+  <p>
+    AI 负责动作，编辑器让它更合你意。平滑或锐化行程、把速度限制在 Handy 能轻松达到的范围内，
+    再跑一遍 <strong>Funscript Doctor</strong>——一个针对设备特性的质量评分，会标出超速和死区，
+    并把其中大多数一键修复，让脚本在硬件上真正好用，而不只是时间轴上看着漂亮。
+  </p>
+
+  <p>
+    <a href={`${base}/zh/`}>下载 FunGen</a>——免费试用，在你自己的电脑上运行——
+    为 The Handy 打造你的整个片库脚本。
+  </p>
+</Article>

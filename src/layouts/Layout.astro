@@ -1,0 +1,399 @@
+---
+import { SITE, LINKS, PLAN_META, ANALYTICS, PRICE_LOW, PRICE_HIGH, PRICE_VALID_UNTIL } from '../consts';
+import { t, HTML_LANG, LOCALES, SUB_LOCALES, localeHome, DEFAULT_LOCALE, type Locale } from '../i18n';
+import { latestVersion } from '../version';
+
+const version = await latestVersion();
+
+interface Props {
+  lang?: Locale;
+  title?: string;
+  description?: string;
+  /** 'landing' emits the product/FAQ structured data + the 10-locale hreflang
+   *  set; 'article' is a standalone English content page (own canonical, no
+   *  locale alternates, its own Article/HowTo JSON-LD). */
+  page?: 'landing' | 'article';
+  /** Canonical path for an article (e.g. '/what-is-a-funscript'). */
+  canonicalPath?: string;
+  /** Extra JSON-LD (Article / HowTo) emitted on a content page. */
+  articleLd?: Record<string, unknown>;
+  /** Breadcrumb trail for an article, after the brand root: [{name, path}]. */
+  breadcrumbs?: { name: string; path: string }[];
+}
+const {
+  lang = DEFAULT_LOCALE,
+  page = 'landing',
+  canonicalPath,
+  articleLd,
+  breadcrumbs,
+} = Astro.props;
+const s = t(lang);
+const { title = s.seoTitle, description = s.description } = Astro.props;
+const keywords = s.keywords.join(', ');
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const htmlLang = HTML_LANG[lang];
+const isDefault = lang === DEFAULT_LOCALE;
+const isLanding = page === 'landing';
+const canonical = canonicalPath
+  ? new URL(canonicalPath, SITE.url).href
+  : new URL(localeHome(lang), SITE.url).href;
+const ogImage = `${SITE.url}/screenshot.png`;
+
+// hreflang alternates only on the translated landing; a content page is
+// English-only, so it just points at itself (no fake locale variants).
+const alternates = isLanding
+  ? [
+      ...LOCALES.map((l) => ({ hreflang: HTML_LANG[l], href: new URL(localeHome(l), SITE.url).href })),
+      { hreflang: 'x-default', href: new URL('/', SITE.url).href },
+    ]
+  : [];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: SITE.name,
+  applicationCategory: 'MultimediaApplication',
+  operatingSystem: 'Windows, macOS, Linux',
+  softwareVersion: version,
+  inLanguage: htmlLang,
+  description,
+  keywords,
+  url: canonical,
+  image: `${SITE.url}/icon-512.png`,
+  screenshot: ogImage,
+  downloadUrl: LINKS.releases,
+  featureList: s.features.items.map((f) => f.title),
+  // No aggregateRating: we have no real review data, and inventing it is both
+  // against Google's policy and dishonest. Add it only with genuine numbers.
+  offers: {
+    '@type': 'AggregateOffer',
+    priceCurrency: 'EUR',
+    lowPrice: PRICE_LOW,
+    highPrice: PRICE_HIGH,
+    offerCount: s.pricing.plans.length,
+    availability: 'https://schema.org/InStock',
+    priceValidUntil: PRICE_VALID_UNTIL,
+    offers: s.pricing.plans.map((p, i) => {
+      const m = PLAN_META[i];
+      const offer: Record<string, unknown> = {
+        '@type': 'Offer',
+        name: p.name,
+        price: m.amount,
+        priceCurrency: 'EUR',
+        url: m.href,
+        availability: 'https://schema.org/InStock',
+        priceValidUntil: PRICE_VALID_UNTIL,
+      };
+      // On promo: Offer.price is the sale price; the list price is the
+      // reference ListPrice priceSpecification (Google strike-through pricing).
+      if (m.promoLabel && m.listAmount != null) {
+        offer.priceSpecification = {
+          '@type': 'UnitPriceSpecification',
+          priceType: 'https://schema.org/ListPrice',
+          price: m.listAmount,
+          priceCurrency: 'EUR',
+        };
+      }
+      return offer;
+    }),
+  },
+};
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  inLanguage: htmlLang,
+  mainEntity: s.faq.items.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+
+// Organization + WebSite, with sameAs links to the official channels.
+const orgLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE.name,
+  url: SITE.url,
+  logo: `${SITE.url}/icon-512.png`,
+  sameAs: [LINKS.discord, LINKS.patreon, LINKS.releases],
+};
+
+const websiteLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: SITE.name,
+  url: SITE.url,
+  inLanguage: htmlLang,
+  publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+};
+
+// Breadcrumb: brand root, then either the locale crumb (translated landing) or
+// the article's own trail.
+const crumbTail = isLanding
+  ? isDefault
+    ? []
+    : [{ '@type': 'ListItem', position: 2, name: s.langName, item: canonical }]
+  : (breadcrumbs ?? []).map((b, i) => ({
+      '@type': 'ListItem',
+      position: i + 2,
+      name: b.name,
+      item: new URL(b.path, SITE.url).href,
+    }));
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: SITE.name, item: new URL('/', SITE.url).href },
+    ...crumbTail,
+  ],
+};
+---
+
+<!doctype html>
+<html lang={htmlLang} data-default={isDefault ? 'true' : 'false'}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <link rel="canonical" href={canonical} />
+    {alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+    <meta name="theme-color" content="#0b0f14" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href={`${base}/favicon-32.png`} />
+    <link rel="apple-touch-icon" href={`${base}/icon-256.png`} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={htmlLang.replace('-', '_')} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    {isLanding && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+    {isLanding && <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />}
+    <script type="application/ld+json" set:html={JSON.stringify(orgLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
+    {articleLd && <script type="application/ld+json" set:html={JSON.stringify(articleLd)} />}
+
+    <!-- Umami Cloud: cookieless, privacy-first analytics. -->
+    <script defer src={ANALYTICS.umamiSrc} data-website-id={ANALYTICS.umamiWebsiteId}></script>
+
+    <!-- First-visit locale routing. On the English root only, send a visitor
+         to their browser-language version once (remembered, so no loops). A
+         manual choice in the switcher is stored and always wins. -->
+    <script is:inline define:vars={{ subLocales: SUB_LOCALES }}>
+      (function () {
+        try {
+          document.addEventListener('click', function (e) {
+            var a = e.target.closest && e.target.closest('a[data-locale]');
+            if (a) {
+              try { localStorage.setItem('fg_loc', a.getAttribute('data-locale')); } catch (_) {}
+            }
+          });
+          var html = document.documentElement;
+          if (html.getAttribute('data-default') !== 'true') return;
+          var p = location.pathname.replace(/index\.html$/, '');
+          if (p !== '' && p !== '/') return;
+          var stored = null;
+          try { stored = localStorage.getItem('fg_loc'); } catch (_) {}
+          if (stored === 'en') return;
+          var target = stored;
+          if (!target) {
+            var langs = navigator.languages || [navigator.language || ''];
+            for (var i = 0; i < langs.length; i++) {
+              var code = (langs[i] || '').toLowerCase();
+              var two = code.slice(0, 2);
+              if (code.indexOf('zh') === 0) { target = 'zh'; break; }
+              if (two === 'en') { target = 'en'; break; }
+              if (subLocales.indexOf(two) >= 0) { target = two; break; }
+            }
+          }
+          if (target && target !== 'en' && subLocales.indexOf(target) >= 0) {
+            location.replace('/' + target + '/');
+          }
+        } catch (_) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <slot />
+    <script>
+      const els = document.querySelectorAll('[data-reveal]');
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            e.target.classList.toggle('is-in', e.isIntersecting);
+          }
+        },
+        { threshold: 0.2 }
+      );
+      els.forEach((el) => io.observe(el));
+
+      // Cold deep-link landings only: when the page is opened AT a #hash, lazy
+      // images/video above settle after the initial jump and push the target
+      // down, so re-honor the hash a few times until it stops moving. This does
+      // NOT run on nav clicks (hashchange) - those happen on an already-settled
+      // page, where the browser's native smooth-scroll lands them correctly and
+      // a re-scroll would only fight it. Stops the moment the visitor scrolls.
+      let pinnedY = -1, abort = false;
+      function honorHash() {
+        if (abort || !location.hash) return;
+        const el = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+        if (!el) return;
+        if (pinnedY >= 0 && Math.abs(window.scrollY - pinnedY) > 2) { abort = true; return; }
+        el.scrollIntoView({ block: 'start', behavior: 'instant' });
+        pinnedY = Math.round(window.scrollY);
+      }
+      if (location.hash) {
+        [0, 120, 300, 600, 1000, 1500].forEach((t) => setTimeout(honorHash, t));
+      }
+
+      // Deterministic in-page navigation: handle anchor clicks ourselves so the
+      // nav, hero buttons and footer links always land the target 64px below the
+      // sticky header (scroll-padding-top) regardless of browser anchor quirks,
+      // and update the URL hash without a second jump.
+      document.querySelectorAll('a[href^="#"]').forEach((a) => {
+        a.addEventListener('click', (e) => {
+          const id = decodeURIComponent((a.getAttribute('href') || '').slice(1));
+          if (!id) return;
+          const el = document.getElementById(id);
+          if (!el) return;
+          e.preventDefault();
+          abort = true; // don't let any in-flight cold-load honor fight this
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.pushState(null, '', '#' + id);
+        });
+      });
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --bg: #0b0f14;
+    --bg-soft: #11161d;
+    --card: #141b24;
+    --card-2: #1a222d;
+    --line: #243040;
+    --text: #e8edf2;
+    --muted: #93a1b1;
+    --teal: #22d3ee;
+    --coral: #f08c5a;
+    --brand: linear-gradient(100deg, var(--teal), var(--coral));
+    --radius: 16px;
+    --maxw: 1080px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    /* scroll-padding offsets anchor landings below the 64px sticky nav. (No
+       scroll-snap: proximity snapping fights anchor navigation, and a second
+       64px scroll-margin on sections double-offset the landing.) */
+    scroll-padding-top: 64px;
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+      Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  h1, h2, h3 { line-height: 1.15; letter-spacing: -0.02em; margin: 0; text-wrap: balance; }
+
+  .wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+  .brand-text {
+    background: var(--brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--teal);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.4rem;
+    border-radius: 999px;
+    font-weight: 650;
+    font-size: 0.96rem;
+    border: 1px solid transparent;
+    transition: transform 0.12s ease, box-shadow 0.2s ease, background 0.2s ease;
+    cursor: pointer;
+  }
+  .btn:hover { transform: translateY(-1px); }
+
+  .btn-primary {
+    background: var(--brand);
+    color: #04181c;
+    box-shadow: 0 8px 30px -10px rgba(34, 211, 238, 0.5);
+  }
+  .btn-ghost {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: var(--line);
+    color: var(--text);
+  }
+  .btn-ghost:hover { background: rgba(255, 255, 255, 0.06); }
+
+  section {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 96px 0;
+  }
+
+  .section-head { max-width: 640px; margin-bottom: 48px; }
+  .section-head h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); margin: 12px 0; }
+  .section-head p { color: var(--muted); font-size: 1.05rem; margin: 0; }
+
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  [data-reveal].is-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (max-width: 640px) {
+    section { padding: 72px 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    [data-reveal] { opacity: 1; transform: none; transition: none; }
+  }
+</style>

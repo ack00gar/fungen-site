@@ -1,0 +1,73 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = 'funscriptエディタ — フレーム精度の多軸編集ができるFunGen（無料）';
+const description =
+  'FunGenは本格的なfunscriptエディタ：フレーム精度の多軸タイムライン、変形処理とパイプライン、チャプター、無制限のアンドゥ/リドゥ、Doctorの品質チェックを搭載。無料で使えます。';
+const canonicalPath = '/ja/funscript-editor';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'FunGenのfunscriptエディタ',
+  description,
+  inLanguage: 'ja',
+  mainEntityOfPage: 'https://fungen.app/ja/funscript-editor',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'funscriptエディタ', path: '/ja/funscript-editor' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="FunGenのfunscriptエディタ"
+  lang="ja"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    FunGenはAIジェネレーターであるだけではありません — 本格的な<strong>funscriptエディタ</strong>でもあります。フレーム精度のタイムラインで一からスクリプトを組むのも、AIが生成した結果を仕上げるのも自由。ツールを切り替えることなく、そのままデバイスへ再生できます。エディタは無料で使えます。
+  </p>
+
+  <h2>フレーム精度の多軸タイムライン</h2>
+  <p>
+    動画に合わせてフレーム単位で編集：ポイントの追加・移動・調整はもちろん、数字キーでポイントを正確な高さに設定したり、再生ヘッドに最も近いポイントを引き寄せてキー1つで確定したり。ストロークに加えロール・ピッチ・前後・左右・ツイストの各軸が専用トラックを持ち、軸同士をオーバーレイして位置を合わせることもできます。
+  </p>
+
+  <h2>変形処理・プラグイン・パイプライン</h2>
+  <p>
+    数十種類のワンクリック変形処理とプラグインで、選択範囲でもスクリプト全体でもまとめて整形：振幅、スムージング、速度制限、タイミングなど。お気に入りを
+    <strong>パイプライン</strong>として連結すれば、オートチューン・整形・制限といった一連のクリーンアップがワンクリックで完了します。
+  </p>
+
+  <h2>チャプター、ブックマーク、続きを覚えているワークフロー</h2>
+  <p>
+    長いシーンを名前と色付きのチャプターに分割し、キー1つでブックマークを打ち、前回の続きからすぐに再開。<strong>アンドゥ/リドゥは無制限で、プロジェクトを閉じて開き直しても保持される</strong>ため、編集履歴が失われることはありません。FunGenはWindows・macOS・Linuxで
+    <code>.funscript</code>と<code>.fungen</code>ファイルを直接開けます。
+  </p>
+
+  <h2>Doctor：仕上がりに確信を持てる</h2>
+  <p>
+    スクリプトを世に出す前に、<strong>Funscript Doctor</strong>がデバイスの特性を考慮した0〜100の品質スコアを付けます
+    — 速度超過、フレーム外のポイント、デッドゾーン、ジッター、ストローク抜けを検出し、その多くをワンクリックで修正。タイムライン上で正しく見えるスクリプトと、実機で本当に気持ちいいスクリプトの差は、ここで埋まります。
+  </p>
+
+  <h2>生成してから、磨き上げる</h2>
+  <p>
+    最速のワークフローは両方の合わせ技：AIに
+    <a href={`${base}/ja/generate-funscripts-from-video`}>動画からfunscriptを生成</a>させ、エディタで磨き上げる。フォーマット自体が初めてなら、まず
+    <a href={`${base}/ja/what-is-a-funscript`}>funscriptとは何か</a>から始めましょう。
+  </p>
+
+  <p>
+    <a href={`${base}/ja/`}>FunGenをダウンロード</a> — エディタ・プレイヤー・ライブラリは無料。フルクオリティのAI生成はProのアンロックで利用できます。
+  </p>
+</Article>

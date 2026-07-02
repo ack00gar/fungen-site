@@ -1,0 +1,87 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = 'funscript 是什么？互动脚本格式详解';
+const description =
+  'funscript（互动脚本）是一种记录随时间变化的运动数据的小文件，可让兼容设备与视频同步联动。了解其格式、多轴脚本，以及 funscript 是如何制作的。';
+const canonicalPath = '/zh/what-is-a-funscript';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'funscript 是什么？',
+  description,
+  inLanguage: 'zh',
+  mainEntityOfPage: 'https://fungen.app/zh/what-is-a-funscript',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'funscript 是什么？', path: '/zh/what-is-a-funscript' }];
+---
+
+<Article {title} {description} heading="funscript 是什么？" lang="zh" {canonicalPath} {articleLd} {breadcrumbs}>
+  <p class="lead">
+    <strong>funscript</strong>（互动脚本）是一种记录随时间变化的运动数据的小型文本文件。与视频一起播放时，
+    它会驱动兼容设备逐点同步运动——画面里的动作和设备的动作完全合拍。
+  </p>
+
+  <h2>格式</h2>
+  <p>
+    funscript 本质上是纯 JSON，内含一串<em>动作（actions）</em>：每个动作由一个时间戳（毫秒）和一个
+    <strong>0 到 100</strong> 的位置值组成，0 和 100 分别对应行程的两端。播放器读取这个列表，在点与点之间插值，
+    并将结果实时传送到你的硬件设备。文件扩展名是 <code>.funscript</code>，由于只是文本，体积非常小——
+    一部完整影片的脚本通常只有几百 KB。
+  </p>
+  <p>
+    基础脚本只控制一个轴（上下行程）。<strong>多轴</strong>脚本则为支持的设备添加额外轨道——
+    横滚（roll）、俯仰（pitch）、前后（surge）、左右（sway）、扭转（twist）——每条轨道以独立的配套文件
+    与主脚本一起保存。
+  </p>
+
+  <h2>funscript 是如何制作的</h2>
+  <p>制作方式有两种：</p>
+  <ul>
+    <li>
+      <strong>手工制作</strong>：在 funscript 编辑器里，对照视频在时间轴上逐点放置和调整。精确，但很慢。
+    </li>
+    <li>
+      <strong>AI 生成</strong>：由模型分析视频并自动写出运动数据，之后你可以再手工润色。
+      这正是 <a href={`${base}/zh/`}>FunGen</a> 的做法：指向一段 2D 或 VR 视频，
+      几分钟内就能生成完整的多轴 funscript。
+    </li>
+  </ul>
+
+  <h2>什么可以播放 funscript</h2>
+  <p>
+    funscript 与设备无关。同一个文件可以驱动 <strong>The Handy</strong>、
+    通过 T-Code 连接的 <strong>OSR2 / SR6 / SSR1</strong> 系列、<strong>Autoblow</strong>、
+    <strong>Vacuglide</strong>，以及任何可通过
+    <strong>Buttplug.io / Intiface</strong> 连接的设备。HereSphere、DeoVR 等播放器和桥接工具
+    会替你把脚本与视频同步，在 VR 头显里也一样。
+  </p>
+
+  <h2>哪些视频会被做成脚本</h2>
+  <p>
+    任何带有节奏性动作的视频都适合：<strong>VR 成人影片</strong>和 <strong>2D / POV</strong>
+    场景、JAV（日本AV）及 JAVR、<strong>cock hero</strong>（节奏挑战）和 <strong>PMV</strong>（卡点剪辑）合辑、
+    <strong>JOI</strong>，以及撩拨/边缘控制类视频。社区在 Eroscripts 等论坛分享和讨论脚本；
+    而 FunGen 这样的工具让你可以直接为任意片段生成自己的脚本，不必四处寻找现成的。
+  </p>
+
+  <h2>funscript 与视频本身</h2>
+  <p>
+    funscript 从不包含视频——它只是运动数据，因此以独立的小文件形式分享，由你搭配自己手上的影片使用。
+    正是这种分离让同一个脚本可以在不同播放器和设备之间复用：脚本描述<em>做什么</em>，
+    每台设备自行决定<em>怎么做</em>，各自处理插值和延迟。
+  </p>
+
+  <p>
+    <strong>想自己制作吗？</strong><a href={`${base}/zh/`}>FunGen</a> 使用专用 AI 模型从 2D 和 VR
+    视频生成 funscript，然后在多轴时间轴上编辑，并直接播放到你的设备——免费试用，完全在你自己的电脑上运行。
+  </p>
+</Article>

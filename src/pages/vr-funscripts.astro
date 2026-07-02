@@ -1,0 +1,82 @@
+---
+import Article from '../layouts/Article.astro';
+
+const title = 'VR funscripts: generate and play them in your headset — FunGen';
+const description =
+  'How VR funscripts work and how to make your own. FunGen generates funscripts from fisheye, equirectangular, side-by-side and top/bottom VR video, in POV and non-POV scenes.';
+const canonicalPath = '/vr-funscripts';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'VR funscripts: generate and play them in your headset',
+  description,
+  inLanguage: 'en',
+  mainEntityOfPage: 'https://fungen.app/vr-funscripts',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'VR funscripts', path: '/vr-funscripts' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="VR funscripts"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    A <strong>VR funscript</strong> is the same idea as any other
+    <a href={`${base}/what-is-a-funscript`}>funscript</a> — motion data synced to a video — but made
+    for immersive headset footage, where the camera projection and depth make scripting harder.
+    <a href={`${base}/`}>FunGen</a> generates them automatically, so you can script your own VR
+    library instead of waiting for someone else to.
+  </p>
+
+  <h2>What makes VR different</h2>
+  <p>
+    VR video isn't a flat rectangle. It's warped for the headset — typically
+    <strong>fisheye</strong>, <strong>equirectangular</strong>, <strong>side-by-side</strong> or
+    <strong>top/bottom</strong> stereo — and the action happens in POV depth. A scripting model has
+    to understand that geometry to track the motion correctly, which is why a generic 2D approach
+    falls apart on VR.
+  </p>
+
+  <h2>How FunGen handles VR</h2>
+  <p>
+    FunGen ships a <strong>dedicated VR AI model</strong>, separate from its 2D / flat model. It
+    detects the layout on its own, unwarps the footage on the GPU, and tracks both
+    <strong>POV and non-POV</strong> scenes, so the resulting funscript matches what you actually see
+    in the headset. The output is multi-axis, ready to play or fine-tune.
+  </p>
+  <ul>
+    <li>Auto-detects fisheye, equirectangular, side-by-side and top/bottom.</li>
+    <li>GPU dewarp + tracking tuned for headset depth and POV framing.</li>
+    <li>Full-quality, multi-axis output you can refine on the timeline.</li>
+    <li>Batch a whole folder of VR scenes overnight.</li>
+  </ul>
+
+  <h2>Playing VR funscripts in a headset</h2>
+  <p>
+    Once generated, a VR funscript plays like any other. FunGen's built-in streamer plus
+    <strong>HereSphere</strong> and <strong>DeoVR</strong> bridges (and XBVR integration) sync the
+    script to the video in your headset and drive your device — <strong>The Handy</strong>,
+    <strong>OSR2 / SR6</strong>, <strong>Autoblow</strong>, or anything on
+    <strong>Buttplug.io / Intiface</strong> — with latency compensation so it stays in time.
+  </p>
+
+  <h2>Make your own VR funscripts</h2>
+  <p>
+    Point FunGen at a VR clip, run a free 20-second preview to check the tracking, then generate the
+    full scene. It all runs locally on your own machine, so your VR library stays private. See
+    <a href={`${base}/generate-funscripts-from-video`}>the full how-to</a> for the step-by-step, or
+    <a href={`${base}/`}>download FunGen</a> and try it on your own footage.
+  </p>
+</Article>

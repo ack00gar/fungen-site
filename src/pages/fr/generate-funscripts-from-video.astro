@@ -1,0 +1,121 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = "Comment générer un funscript à partir d'une vidéo (2D et VR) — FunGen";
+const description =
+  "Transformez n'importe quelle vidéo en funscript grâce à l'IA. Guide pas à pas pour générer des funscripts à partir de scènes 2D, POV et VR, puis les affiner et les lire sur votre appareil.";
+const canonicalPath = '/fr/generate-funscripts-from-video';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: "Comment générer un funscript à partir d'une vidéo",
+  description,
+  inLanguage: 'fr',
+  mainEntityOfPage: 'https://fungen.app/fr/generate-funscripts-from-video',
+  tool: [{ '@type': 'HowToTool', name: 'FunGen' }],
+  step: [
+    {
+      '@type': 'HowToStep',
+      name: 'Téléchargez FunGen',
+      text: "Téléchargez l'application de bureau gratuite FunGen pour Windows, macOS ou Linux. C'est un binaire natif unique, rien à installer.",
+      url: 'https://fungen.app/fr/generate-funscripts-from-video#download',
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Ouvrez votre vidéo',
+      text: 'Glissez une vidéo 2D, POV ou VR dans FunGen. Il détecte tout seul le format (plat, fisheye, équirectangulaire, côte à côte, haut/bas).',
+    },
+    {
+      '@type': 'HowToStep',
+      name: "Générez avec l'IA",
+      text: "Lancez un aperçu de 20 secondes pour vérifier le résultat, puis générez la scène complète. Un modèle d'IA dédié lit le mouvement à l'écran et écrit un funscript multi-axes.",
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Affinez sur la timeline',
+      text: "Peaufinez sur une timeline multi-axes précise à l'image près — les transformations, les chapitres et les contrôles qualité du Doctor corrigent la plupart des problèmes en un clic.",
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Lisez sur votre appareil',
+      text: 'Lisez le script directement sur The Handy, OSR2/SR6, Autoblow, Vacuglide ou tout appareil compatible Buttplug.io / Intiface, avec gestion de la latence par appareil.',
+    },
+  ],
+};
+const breadcrumbs = [
+  { name: "Générer des funscripts à partir d'une vidéo", path: '/fr/generate-funscripts-from-video' },
+];
+---
+
+<Article
+  {title}
+  {description}
+  heading="Comment générer un funscript à partir de n'importe quelle vidéo"
+  lang="fr"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    Pas besoin de scripter à la main ni de chercher un fichier existant. Grâce à l'IA, vous pouvez
+    transformer presque n'importe quelle vidéo — 2D, POV ou VR — en
+    <a href={`${base}/fr/what-is-a-funscript`}>funscript</a> complet en quelques minutes, puis
+    l'affiner à votre goût. Voici comment ça marche dans <a href={`${base}/fr/`}>FunGen</a>.
+  </p>
+
+  <h2 id="download">1. Téléchargez FunGen (gratuit)</h2>
+  <p>
+    Récupérez l'application de bureau gratuite pour <strong>Windows, macOS ou Linux</strong>. C'est
+    un seul binaire natif — pas de runtime Python ni de pile de bibliothèques à installer — et l'IA
+    tourne en local sur votre propre GPU : votre bibliothèque ne quitte jamais votre machine.
+  </p>
+
+  <h2>2. Ouvrez votre vidéo</h2>
+  <p>
+    Glissez-y n'importe quelle scène. FunGen lit la vidéo directement et détermine le format pour
+    vous — 2D plat et POV, ou VR en fisheye, équirectangulaire, côte à côte et haut/bas. Rien à
+    pré-convertir.
+  </p>
+
+  <h2>3. Générez avec l'IA</h2>
+  <p>
+    Lancez d'abord un <strong>aperçu gratuit de 20 secondes</strong> sur n'importe quel passage du
+    clip pour juger de la qualité, puis générez la scène entière. Un modèle d'IA Pro dédié — un pour
+    la vidéo 2D / plate, un pour la VR — suit le mouvement à l'écran image par image et écrit un
+    funscript fluide, à pleine amplitude et multi-axes. Vous pouvez générer un seul clip ou traiter
+    un dossier entier pendant la nuit.
+  </p>
+
+  <h2>4. Affinez sur la timeline</h2>
+  <p>
+    L'IA fait l'essentiel du chemin ; l'éditeur fait le reste. Nettoyez sur une timeline multi-axes
+    précise à l'image près, avec les transformations (amplitude, lissage, limites de vitesse,
+    timing), les chapitres et le <strong>Doctor</strong> — un score de qualité de 0 à 100, adapté à
+    votre appareil, qui repère les excès de vitesse, les zones mortes et les courses manquantes et
+    corrige la plupart d'entre eux en un clic.
+  </p>
+
+  <h2>5. Lisez sur votre appareil</h2>
+  <p>
+    Lisez le script terminé directement sur votre matériel — <strong>The Handy</strong>,
+    <strong>OSR2 / SR6 / SSR1</strong>, <strong>Autoblow</strong>, <strong>Vacuglide</strong>, ou
+    tout appareil compatible <strong>Buttplug.io / Intiface</strong> — avec interpolation et
+    compensation de latence par appareil. Un streamer intégré permet aussi de piloter une session
+    depuis un téléphone ou un casque VR.
+  </p>
+
+  <h2>Quels types de vidéos peut-il scripter ?</h2>
+  <p>
+    Tout ce qui a un mouvement rythmé. Au-delà des scènes VR et 2D / POV classiques, FunGen gère les
+    montages <strong>cock hero</strong> et <strong>PMV</strong> synchronisés sur la musique, les
+    vidéos <strong>JOI</strong> et de tease — générez les vôtres au lieu d'écumer les forums à la
+    recherche d'un script existant.
+  </p>
+
+  <p>
+    Prêt à essayer ? <a href={`${base}/fr/`}>Téléchargez FunGen</a> et lancez la génération de votre
+    premier funscript en quelques minutes.
+  </p>
+</Article>

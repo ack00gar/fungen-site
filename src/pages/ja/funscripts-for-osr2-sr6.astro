@@ -1,0 +1,72 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = 'OSR2 / SR6用の多軸funscriptをAIで生成 — FunGen';
+const description =
+  'FunGenでOSR2・SR6・SSR1用の多軸funscriptを生成・編集。AIがストロークに加えてロール・ピッチ・ツイストを書き出し、各軸をT-Code経由でデバイスへ送ります。';
+const canonicalPath = '/ja/funscripts-for-osr2-sr6';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'FunGenで作るOSR2 / SR6用の多軸funscript',
+  description,
+  inLanguage: 'ja',
+  mainEntityOfPage: 'https://fungen.app/ja/funscripts-for-osr2-sr6',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'OSR2 / SR6', path: '/ja/funscripts-for-osr2-sr6' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="OSR2 / SR6用の多軸funscript"
+  lang="ja"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    OSR2とSR6の真価は<strong>多軸</strong>スクリプトで発揮されます — ストロークだけでなく、ロール・ピッチ・ツイストまで。<a href={`${base}/ja/`}>FunGen</a>はその追加軸をAIで生成し、各軸をT-Code経由でデバイスへルーティング。この種のビルドが本来目指しているフルモーションを引き出せます。
+  </p>
+
+  <h2>ストロークだけで終わらないAI</h2>
+  <p>
+    基本の<a href={`${base}/ja/what-is-a-funscript`}>funscript</a>は上下1軸のみ。FunGenのAIは
+    <strong>多軸</strong>の結果を出力します：メインのストロークに加え、サブトラック（ロール、ピッチ、前後、左右、ツイスト）をそれぞれ独立したファイルとして保存します。特にVRシーンでは、この追加モーションこそが、OSR2やSR6を単なるピストンではなく立体的な動きに変える決め手です。
+  </p>
+
+  <h2>T-Codeでのルーティング</h2>
+  <p>
+    FunGenはOSRファミリー — OSR2、SR6、SSR1 — と<strong>T-Code</strong>で通信します。スクリプトの各軸をデバイスの軸（L0ストローク、回転系のR軸など）にマッピングすれば、FunGenがすべてを同期してストリーミング。デバイスごとの補間とレイテンシ補正により、軸同士がバラけることなく連携し続けます。
+  </p>
+  <ul>
+    <li>生成された軸のうちどれを、どのデバイスチャンネルへ送るかを自由に選択。</li>
+    <li>OSR2のストローク＋ロール/ツイストも、SR6のより広い可動域もフルに駆動。</li>
+    <li>デバイスごとのレイテンシ補正で、全軸が揃ったままビートに乗る。</li>
+  </ul>
+
+  <h2>すべての軸を1つのタイムラインで編集</h2>
+  <p>
+    多軸タイムラインには各トラックが積み重なって表示され、ロールやピッチを個別に調整できます —
+    軸同士をオーバーレイして位置を合わせたり、1トラックだけスムージングやスケーリングをかけたり、シーンをチャプター分割したり。
+    <strong>Funscript Doctor</strong>が各軸をお使いのデバイスの限界値と照合し、ほとんどの問題をワンクリックで修正します。
+  </p>
+
+  <h2>手持ちの動画から生成</h2>
+  <p>
+    2D・VRのクリップをFunGenに読み込み、トラッキングをプレビューしてから、完全な多軸スクリプトを生成 —
+    すべてローカル、お使いのマシン上で完結します。ワークフローは<a href={`${base}/ja/generate-funscripts-from-video`}>生成ガイド</a>を、ヘッドセット側の話は<a href={`${base}/ja/vr-funscripts`}>VR funscript</a>のページをご覧ください。
+  </p>
+
+  <p>
+    <a href={`${base}/ja/`}>FunGenをダウンロード</a> — 無料で試せます。OSR2・SR6のための多軸モーションをスクリプト化しましょう。
+  </p>
+</Article>

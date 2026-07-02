@@ -1,0 +1,76 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = 'VR funscriptとは？自動生成してヘッドセットで再生 — FunGen';
+const description =
+  'VR funscriptの仕組みと自作方法。FunGenはフィッシュアイ・エクイレクタングラー・サイドバイサイド・トップ/ボトムのVR動画から、POV・非POVを問わずfunscriptを自動生成します。';
+const canonicalPath = '/ja/vr-funscripts';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'VR funscript：自動生成してヘッドセットで再生',
+  description,
+  inLanguage: 'ja',
+  mainEntityOfPage: 'https://fungen.app/ja/vr-funscripts',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'VR funscript', path: '/ja/vr-funscripts' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="VR funscript"
+  lang="ja"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    <strong>VR funscript</strong>も基本は他の
+    <a href={`${base}/ja/what-is-a-funscript`}>funscript</a>と同じ — 動画に同期したモーションデータです。ただし対象はヘッドセット用の没入映像で、カメラの投影方式と奥行きのせいでスクリプト化の難易度が上がります。
+    <a href={`${base}/ja/`}>FunGen</a>なら自動で生成できるので、誰かがスクリプトを作ってくれるのを待たずに、自分のVRライブラリを丸ごとスクリプト化できます。
+  </p>
+
+  <h2>VRは何が違うのか</h2>
+  <p>
+    VR動画は平らな長方形ではありません。ヘッドセット向けに歪ませた映像 — 典型的には
+    <strong>フィッシュアイ</strong>、<strong>エクイレクタングラー</strong>、<strong>サイドバイサイド</strong>、
+    <strong>トップ/ボトム</strong>のステレオ形式 — で、アクションはPOVの奥行きの中で起こります。動きを正しく追跡するにはモデルがこのジオメトリを理解している必要があり、汎用の2Dアプローチが通用しないのはそのためです。
+  </p>
+
+  <h2>FunGenのVR対応</h2>
+  <p>
+    FunGenには、2D／平面用とは別の<strong>VR専用AIモデル</strong>が搭載されています。レイアウトを自動判別し、GPU上で映像のゆがみを補正（アンワープ）しながら、
+    <strong>POV・非POV</strong>の両方のシーンを追跡するため、生成されるfunscriptはヘッドセットで実際に見える映像とぴったり一致します。JAVR／8KのVR
+    AV作品との相性も抜群です。出力は多軸で、そのまま再生することも微調整することもできます。
+  </p>
+  <ul>
+    <li>フィッシュアイ、エクイレクタングラー、サイドバイサイド、トップ/ボトムを自動判別。</li>
+    <li>ヘッドセットの奥行きとPOV構図に合わせてチューニングされたGPUアンワープ＋トラッキング。</li>
+    <li>フルクオリティの多軸出力。タイムラインでそのまま編集可能。</li>
+    <li>VRシーンのフォルダを丸ごと夜間バッチ処理。</li>
+  </ul>
+
+  <h2>VR funscriptをヘッドセットで再生する</h2>
+  <p>
+    いったん生成してしまえば、VR funscriptの再生は他と変わりません。FunGen内蔵のストリーマーに加え、
+    <strong>HereSphere</strong>・<strong>DeoVR</strong>ブリッジ（XBVR連携も）がヘッドセット内でスクリプトを動画に同期し、デバイスを駆動します — <strong>The Handy</strong>、
+    <strong>OSR2 / SR6</strong>、<strong>Autoblow</strong>、あるいは
+    <strong>Buttplug.io / Intiface</strong>対応デバイスまで、レイテンシ補正付きでタイミングを保ちます。
+  </p>
+
+  <h2>自分のVR funscriptを作る</h2>
+  <p>
+    VRクリップをFunGenに読み込み、無料の20秒プレビューでトラッキングを確認したら、シーン全体を生成。処理はすべてローカルで動くため、VRライブラリはプライベートなまま。手順は
+    <a href={`${base}/ja/generate-funscripts-from-video`}>生成ガイド</a>を参照するか、
+    <a href={`${base}/ja/`}>FunGenをダウンロード</a>して手持ちの映像で試してみてください。
+  </p>
+</Article>

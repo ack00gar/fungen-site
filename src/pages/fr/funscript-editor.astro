@@ -1,0 +1,90 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = "Éditeur de funscript — multi-axes et précis à l'image près, dans FunGen";
+const description =
+  "FunGen est un éditeur de funscript complet : timeline multi-axes précise à l'image près, transformations et pipelines, chapitres, annuler/rétablir illimité et les contrôles qualité du Doctor. Gratuit.";
+const canonicalPath = '/fr/funscript-editor';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: "L'éditeur de funscript de FunGen",
+  description,
+  inLanguage: 'fr',
+  mainEntityOfPage: 'https://fungen.app/fr/funscript-editor',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'Éditeur de funscript', path: '/fr/funscript-editor' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="L'éditeur de funscript dans FunGen"
+  lang="fr"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    FunGen n'est pas qu'un générateur IA — c'est aussi un <strong>éditeur de funscript</strong>
+    complet. Construisez un script à la main sur une timeline précise à l'image près, ou nettoyez ce
+    que l'IA a généré, et lisez-le directement sur votre appareil, sans changer d'outil. L'éditeur
+    est gratuit.
+  </p>
+
+  <h2>Une timeline multi-axes, précise à l'image près</h2>
+  <p>
+    Éditez face à la vidéo image par image : ajoutez, déplacez et ajustez des points, fixez un point
+    à une hauteur exacte avec une touche numérique, ou attirez le point le plus proche vers la tête
+    de lecture et posez-le en une seule frappe. Chaque axe — la course plus le roulis, le tangage,
+    l'avancée, le balancement, la torsion — a sa propre piste, et vous pouvez superposer un axe sur
+    un autre pour les aligner.
+  </p>
+
+  <h2>Transformations, plugins et pipelines</h2>
+  <p>
+    Remodelez toute une sélection ou le script entier avec des dizaines de transformations et de
+    plugins en un clic : amplitude, lissage, limites de vitesse, timing et plus encore. Enchaînez
+    vos favoris dans un <strong>pipeline</strong> et lancez un nettoyage complet en un seul clic —
+    autotune, remodelage, limitation.
+  </p>
+
+  <h2>Chapitres, signets et un workflow qui se souvient</h2>
+  <p>
+    Découpez une longue scène en chapitres nommés et codés par couleur, posez des signets d'une
+    seule touche, et rouvrez exactement là où vous vous étiez arrêté.
+    <strong>Annuler et rétablir sont illimités et survivent à la fermeture et à la réouverture</strong>
+    d'un projet : votre historique d'édition n'est jamais perdu. FunGen ouvre aussi les fichiers
+    <code>.funscript</code> et <code>.fungen</code> directement sous Windows, macOS et Linux.
+  </p>
+
+  <h2>Le Doctor : la certitude que c'est prêt</h2>
+  <p>
+    Avant de publier un script, le <strong>Funscript Doctor</strong> lui attribue un score de
+    qualité de 0 à 100, adapté à l'appareil — il signale les excès de vitesse, les points hors
+    image, les zones mortes, le jitter et les courses manquantes, et corrige la plupart d'entre eux
+    en un clic. C'est la différence entre un script qui a l'air bon sur la timeline et un script qui
+    est vraiment agréable sur le matériel.
+  </p>
+
+  <h2>Générez, puis affinez</h2>
+  <p>
+    Le workflow le plus rapide combine les deux moitiés : laissez l'IA
+    <a href={`${base}/fr/generate-funscripts-from-video`}>générer un funscript à partir de votre vidéo</a>,
+    puis peaufinez-le dans l'éditeur. Le format est nouveau pour vous ? Commencez par
+    <a href={`${base}/fr/what-is-a-funscript`}>ce qu'est un funscript</a>.
+  </p>
+
+  <p>
+    <a href={`${base}/fr/`}>Téléchargez FunGen</a> — l'éditeur, le lecteur et la bibliothèque sont
+    gratuits ; la génération IA pleine qualité est le déblocage Pro.
+  </p>
+</Article>

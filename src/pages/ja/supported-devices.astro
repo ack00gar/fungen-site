@@ -1,0 +1,79 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = 'FunGen対応デバイス一覧（The Handy・OSR2/SR6・Buttplug.io）';
+const description =
+  'FunGenがfunscriptを再生できるハードウェア：The Handy、Autoblow、Vacuglide、T-Code経由のOSR2/SR6/SSR1、そしてButtplug.io / Intiface対応デバイス — レイテンシ補正付き。';
+const canonicalPath = '/ja/supported-devices';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'FunGenの対応デバイス',
+  description,
+  inLanguage: 'ja',
+  mainEntityOfPage: 'https://fungen.app/ja/supported-devices',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: '対応デバイス', path: '/ja/supported-devices' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="FunGenの対応デバイス"
+  lang="ja"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    FunGenは<a href={`${base}/ja/what-is-a-funscript`}>funscript</a>をハードウェアへ直接再生します。デバイスごとの補間とレイテンシ補正により、動きは常に映像と同期。今持っている機材がそのまま使えます：
+  </p>
+
+  <h2>The Handy</h2>
+  <p>
+    <strong>HTTPS（Handy Connect API）</strong>または<strong>Bluetooth LE</strong>で接続し、Handyの往復遅延に合わせたレイテンシ補正を適用。2D・VRを問わず好きな動画からストロークスクリプトを生成し、ソファからでもヘッドセットからでも再生できます。
+    <a href={`${base}/ja/funscripts-for-the-handy`}>FunGen + The Handyの詳細 →</a>
+  </p>
+
+  <h2>OSR2 / SR6 / SSR1</h2>
+  <p>
+    T-Code系ビルドこそ<strong>多軸</strong>の真骨頂。FunGenのAIはストロークに加えロール・ピッチ・ツイストを書き出し、各軸をデバイスへルーティングするので、単なるピストンではないフルモーションが得られます。
+    <a href={`${base}/ja/funscripts-for-osr2-sr6`}>FunGen + OSR2 / SR6の詳細 →</a>
+  </p>
+
+  <h2>Autoblow</h2>
+  <p>
+    <strong>Autoblow Ultra</strong>をストロークトラックから駆動。AIでスクリプトを生成し、タイムラインで仕上げて、同期再生 — 他のどのデバイスとも同じ、アプリ1つのワークフローです。
+  </p>
+
+  <h2>Vacuglide</h2>
+  <p>
+    FunGenは<strong>Vacuglide</strong>にも直接対応。生成したスクリプトも手作業で組んだスクリプトも、他のデバイスと同じ補間・レイテンシ処理で動かせます。
+  </p>
+
+  <h2>Buttplug.io / Intiface</h2>
+  <p>
+    組み込みの連携に加えて、FunGenは<strong>Buttplug.io / Intiface</strong> —
+    数多くの市販トイにつながるオープンなブリッジ — とも通信します。Intifaceで動くデバイスならFunGenからfunscriptで駆動できるため、ネイティブ対応していないハードにとっても実用的な
+    <a href={`${base}/ja/funscript-editor`}>funscriptエディタ兼プレイヤー</a>になります。
+  </p>
+
+  <h2>デバイスが同期し続ける仕組み</h2>
+  <p>
+    どのデバイスでも、FunGenは<strong>デバイスごとの補間</strong>（ハードウェアの性能に合わせてモーションを平滑化）と
+    <strong>レイテンシ補正</strong>（アクションがビートに乗るように）を適用します。内蔵ストリーマーを使えばスマホやVRヘッドセットからセッションを進めながらデバイスを追従させられ、
+    <strong>Funscript Doctor</strong>は再生前に、お使いのデバイスの限界値に照らしてスクリプトを採点します。
+  </p>
+
+  <p>
+    <a href={`${base}/ja/`}>FunGenをダウンロード</a>して、手持ちのデバイスでそのまま再生 — 無料で試せます。
+  </p>
+</Article>

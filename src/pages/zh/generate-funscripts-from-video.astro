@@ -1,0 +1,111 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = '如何用 AI 从视频生成 funscript 互动脚本（2D 和 VR）— FunGen';
+const description =
+  '用 AI 把任意视频变成 funscript。手把手教你从 2D、POV 和 VR 影片生成互动脚本，再进行润色并播放到你的设备。';
+const canonicalPath = '/zh/generate-funscripts-from-video';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: '如何从视频生成 funscript',
+  description,
+  inLanguage: 'zh',
+  mainEntityOfPage: 'https://fungen.app/zh/generate-funscripts-from-video',
+  tool: [{ '@type': 'HowToTool', name: 'FunGen' }],
+  step: [
+    {
+      '@type': 'HowToStep',
+      name: '下载 FunGen',
+      text: '免费下载适用于 Windows、macOS 或 Linux 的 FunGen 桌面应用。它是单个原生程序，无需安装任何依赖。',
+      url: 'https://fungen.app/zh/generate-funscripts-from-video#download',
+    },
+    {
+      '@type': 'HowToStep',
+      name: '打开你的视频',
+      text: '把 2D、POV 或 VR 视频拖进 FunGen。它会自动识别画面布局（平面、鱼眼、等距柱状、左右格式、上下格式）。',
+    },
+    {
+      '@type': 'HowToStep',
+      name: '用 AI 生成',
+      text: '先跑一段 20 秒预览检查效果，再生成整部影片。专用 AI 模型会读取画面中的动作，写出多轴 funscript。',
+    },
+    {
+      '@type': 'HowToStep',
+      name: '在时间轴上润色',
+      text: '在帧级精度的多轴时间轴上收尾——变换、章节，以及 Doctor 质量检查，大多数问题一键修复。',
+    },
+    {
+      '@type': 'HowToStep',
+      name: '播放到你的设备',
+      text: '把脚本直接播放到 The Handy、OSR2/SR6、Autoblow、Vacuglide 或任何 Buttplug.io / Intiface 设备，并按设备补偿延迟。',
+    },
+  ],
+};
+const breadcrumbs = [
+  { name: '从视频生成 funscript', path: '/zh/generate-funscripts-from-video' },
+];
+---
+
+<Article
+  {title}
+  {description}
+  heading="如何从任意视频生成 funscript"
+  lang="zh"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    你不必手工打点，也不必到处找现成文件。借助 AI，几乎任何视频——2D、POV 或 VR——都能在几分钟内
+    变成一份完整的 <a href={`${base}/zh/what-is-a-funscript`}>funscript</a>（互动脚本），再按自己的口味润色。
+    下面是它在 <a href={`${base}/zh/`}>FunGen</a> 里的完整流程。
+  </p>
+
+  <h2 id="download">1. 下载 FunGen（免费）</h2>
+  <p>
+    获取适用于 <strong>Windows、macOS 或 Linux</strong> 的免费桌面应用。它是单个原生程序——
+    不需要 Python 运行时，也不用装一堆库——AI 在你自己的 GPU 上本地运行，你的影片库永远不会离开你的电脑。
+  </p>
+
+  <h2>2. 打开你的视频</h2>
+  <p>
+    拖入任意影片即可。FunGen 直接读取视频并自动判断画面布局——平面 2D 和 POV，或者鱼眼、等距柱状、
+    左右格式和上下格式的 VR。无需任何预转换。
+  </p>
+
+  <h2>3. 用 AI 生成</h2>
+  <p>
+    先在片段的任意位置免费跑一段 <strong>20 秒预览</strong>看看质量，再生成整部影片。
+    专用的 Pro AI 模型——一个针对 2D / 平面视频调校，一个针对 VR——逐帧跟踪画面中的动作，
+    写出平滑、满行程的多轴 funscript。你可以只生成单个片段，也可以整夜批量处理整个文件夹。
+  </p>
+
+  <h2>4. 在时间轴上润色</h2>
+  <p>
+    AI 帮你完成大部分，编辑器负责收尾。在帧级精度的多轴时间轴上清理脚本，配合各种变换
+    （振幅、平滑、限速、时序）、章节，以及 <strong>Doctor</strong>——一个针对设备特性的 0 到 100
+    质量评分，能发现超速、死区和缺漏行程，并把其中大多数一键修复。
+  </p>
+
+  <h2>5. 播放到你的设备</h2>
+  <p>
+    把完成的脚本直接播放到你的硬件——<strong>The Handy</strong>、
+    <strong>OSR2 / SR6 / SSR1</strong>、<strong>Autoblow</strong>、<strong>Vacuglide</strong>，
+    或任何 <strong>Buttplug.io / Intiface</strong> 设备——并按设备做插值和延迟补偿。
+    内置的串流功能还能从手机或 VR 头显发起播放会话。
+  </p>
+
+  <h2>哪些视频可以生成脚本？</h2>
+  <p>
+    任何带节奏性动作的视频都可以。除了常见的 VR 成人影片和 2D / POV 场景、JAV（日本AV）和 JAVR 之外，
+    FunGen 还能处理卡点类的 <strong>cock hero</strong>（节奏挑战）和 <strong>PMV</strong> 剪辑、
+    <strong>JOI</strong> 和撩拨类视频——自己生成，胜过在论坛上苦苦搜寻现成脚本。
+  </p>
+
+  <p>
+    准备好试试了吗？<a href={`${base}/zh/`}>下载 FunGen</a>，几分钟后你的第一份 funscript 就在生成中了。
+  </p>
+</Article>

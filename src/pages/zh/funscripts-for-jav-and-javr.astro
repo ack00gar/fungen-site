@@ -1,0 +1,88 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = 'JAV / JAVR funscript：用 AI 为日本AV生成互动脚本 — FunGen';
+const description =
+  '极少有 JAV（日本AV）和 JAVR 作品自带 funscript。FunGen 用 AI 从鱼眼、等距柱状的 VR成人影片生成互动脚本——2D JAV 同样支持，全部在本地运行。';
+const canonicalPath = '/zh/funscripts-for-jav-and-javr';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'JAV / JAVR funscript：用 AI 为日本AV生成互动脚本',
+  description,
+  inLanguage: 'zh',
+  mainEntityOfPage: 'https://fungen.app/zh/funscripts-for-jav-and-javr',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [
+  { name: 'JAV / JAVR funscript', path: '/zh/funscripts-for-jav-and-javr' },
+];
+---
+
+<Article
+  {title}
+  {description}
+  heading="JAV / JAVR funscript"
+  lang="zh"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    <strong>JAV（日本AV）</strong>的 VR 分支就是 <strong>JAVR</strong>——它可以说是最适合 funscript
+    的素材。JAVR 几乎全程采用 <strong>POV 第一人称构图</strong>，场景节奏感强、时间长，
+    正是 <a href={`${base}/zh/vr-funscripts`}>VR funscript</a> 跟踪起来最拿手的画面。
+    <a href={`${base}/zh/`}>FunGen</a> 用 AI 自动生成互动脚本，让你片库里的任何一部作品都能变成可互动的。
+  </p>
+
+  <h2>问题：几乎没有 JAV 自带脚本</h2>
+  <p>
+    与部分欧美厂商不同，JAV 和 JAVR 作品极少附带官方 funscript。逐部去找社区脚本又全凭运气：
+    少数热门作品有人做过，片库里的大多数则无人问津，质量也参差不齐。
+    务实的做法是别再搜了，<strong>自己生成</strong>——把视频交给 FunGen，让 AI 来打脚本。
+  </p>
+
+  <h2>FunGen 如何处理 JAVR</h2>
+  <p>
+    JAVR 在技术上并不好啃：各家厂商既用<strong>鱼眼</strong>投影（FISHEYE190 / MKX200 一类镜头），
+    也用<strong>等距柱状</strong>格式，而且常以 <strong>8K</strong> 发行。FunGen 的
+    <strong>专用 VR AI 模型</strong>会自动识别布局，在 GPU 上展开畸变画面并跟踪 POV 动作，
+    几分钟内产出完整的多轴 funscript。
+  </p>
+  <ul>
+    <li>支持鱼眼（FISHEYE190 / MKX200 一类）与等距柱状格式的 JAVR 片源。</li>
+    <li>解码管线支持 8K，针对 POV 景深和构图调校。</li>
+    <li>全片长、多轴输出，想润色时可在时间轴上继续编辑。</li>
+    <li>整夜批量处理一整个文件夹的 JAVR 影片。</li>
+  </ul>
+
+  <h2>在头显里播放</h2>
+  <p>
+    生成之后，播放方式与其他 funscript 无异。FunGen 内置的串流功能，加上
+    <strong>HereSphere</strong> 和 <strong>DeoVR</strong> 桥接（以及 XBVR 集成），
+    会在头显里把脚本与视频同步，并驱动你的设备——<strong>The Handy</strong>、
+    <strong>OSR2 / SR6</strong>、<strong>Autoblow</strong>，或任何
+    <strong>Buttplug.io / Intiface</strong> 设备——延迟补偿确保动作不掉拍。
+  </p>
+
+  <h2>2D JAV 同样支持</h2>
+  <p>
+    不是所有片子都是 VR，这也没关系：FunGen 还内置了面向平面影片的 <strong>POV 2D 模型</strong>，
+    传统的 2D JAV 场景同样轻松出脚本。工作流程、多轴输出、支持的设备全都一样。
+  </p>
+
+  <h2>为你的 JAV 片库打脚本</h2>
+  <p>
+    载入一部作品，免费跑一段 20 秒预览检查跟踪效果，再生成整部影片。
+    一切都在你自己的电脑上本地运行，片库始终保持私密。
+    分步操作见<a href={`${base}/zh/generate-funscripts-from-video`}>完整教程</a>，
+    或者<a href={`${base}/zh/#pricing`}>下载 FunGen</a>，用你自己的收藏试一试。
+  </p>
+</Article>

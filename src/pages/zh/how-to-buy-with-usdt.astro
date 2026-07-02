@@ -1,0 +1,89 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = '如何用 USDT 购买 FunGen Pro（无需 PayPal，三步完成）';
+const description =
+  '在中国大陆无法使用 PayPal？通过 USDT（TRC-20）三步购买 FunGen Pro：交易所购买 USDT、转账到收款地址、发送 TXID 到支持邮箱，签名的 Pass 通过邮件发回。';
+const canonicalPath = '/zh/how-to-buy-with-usdt';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: '如何用 USDT 购买 FunGen Pro',
+  description,
+  inLanguage: 'zh',
+  mainEntityOfPage: 'https://fungen.app/zh/how-to-buy-with-usdt',
+  step: [
+    {
+      '@type': 'HowToStep',
+      name: '获取 USDT（TRC-20）',
+      text: '在欧易 OKX、币安 Binance、Gate 等交易所购买 USDT，提币时选择 TRON（TRC-20）网络。',
+    },
+    {
+      '@type': 'HowToStep',
+      name: '按价目表转账',
+      text: '在价格区的 USDT 付款板块复制收款地址，按所选套餐的 USDT 金额转账。',
+    },
+    {
+      '@type': 'HowToStep',
+      name: '发送 TXID，收取 Pass',
+      text: '把交易 ID（TXID）和接收 Pass 的邮箱发到支持邮箱，签名的 .fgpass 通过邮件发回，导入 FunGen 即解锁。',
+    },
+  ],
+};
+const breadcrumbs = [{ name: '用 USDT 购买', path: '/zh/how-to-buy-with-usdt' }];
+---
+
+<Article {title} {description} heading="如何用 USDT 购买 FunGen Pro" lang="zh" {canonicalPath} {articleLd} {breadcrumbs}>
+  <p class="lead">
+    在中国大陆等无法使用 PayPal 或国际信用卡的地区，可以直接用
+    <strong>USDT（泰达币，TRC-20 网络）</strong>购买 FunGen 的 Pro Pass。整个流程三步完成，
+    通常几分钟到账；促销期间价目表中的 USDT 金额<strong>已按促销价换算</strong>，无需自己折算。
+  </p>
+
+  <h2>第一步：获取 USDT（选择 TRC-20 网络）</h2>
+  <p>
+    在你常用的交易所购买 USDT，例如欧易（OKX）、币安（Binance）或 Gate。购买后在"提币 /
+    提现"里选择 <strong>TRON（TRC-20）网络</strong> — 这一点很重要：只有 TRC-20 网络的转账才能被确认，
+    而且手续费最低（通常 1 USDT 左右）。如果你已经持有 USDT，确认它在 TRON 链上即可。
+  </p>
+
+  <h2>第二步：按价目表金额转账</h2>
+  <p>
+    回到<a href={`${base}/zh/#pricing`}>价格页面</a>，展开"使用 USDT 付款"板块：里面列有每个套餐的
+    USDT 价格和收款地址（有一键复制按钮）。按你选择的套餐金额转账即可 —
+    金额请<strong>不要少于</strong>价目表数字，稍多一点没有问题。
+  </p>
+  <ul>
+    <li>转账前请再次核对地址开头和结尾的字符；</li>
+    <li>提币手续费由交易所另收，请确保<em>到账金额</em>不低于套餐价格；</li>
+    <li>转账完成后，在交易所的提币记录里可以找到<strong>交易 ID（TXID / 交易哈希）</strong>。</li>
+  </ul>
+
+  <h2>第三步：发送 TXID，几分钟后收 Pass</h2>
+  <p>
+    把 <strong>TXID</strong> 和你想用来接收 Pass 的<strong>邮箱地址</strong>发送到价格区显示的支持邮箱，
+    并注明购买的套餐。我们在链上确认到账后，会把签名的 <code>.fgpass</code> 文件发到你的邮箱 —
+    在 FunGen 里导入它即可解锁 Pro。Pass 与邮箱绑定、离线验证，<strong>不需要联网登录</strong>。
+  </p>
+
+  <h2>常见问题</h2>
+  <p>
+    <strong>多久到账？</strong> TRC-20 转账通常几分钟内确认；Pass 在人工核对后发出，一般当天内送达。
+  </p>
+  <p>
+    <strong>转错金额 / 网络怎么办？</strong> 金额不足可以补一笔并把两个 TXID 一起发来；
+    如果误用了其他网络（如 ERC-20），请先邮件联系支持，不要重复转账。
+  </p>
+  <p>
+    <strong>隐私如何？</strong> 购买只需要一个能收 Pass 的邮箱；软件本地运行、离线验证，
+    不上传你的视频或使用数据。
+  </p>
+
+  <p>
+    还没安装？<a href={`${base}/zh/`}>先免费下载 FunGen</a> 试用 —
+    也可以先阅读<a href={`${base}/zh/what-is-a-funscript`}>什么是 funscript</a>
+    和<a href={`${base}/zh/funscripts-for-jav-and-javr`}>JAV / JAVR 互动脚本指南</a>。
+  </p>
+</Article>

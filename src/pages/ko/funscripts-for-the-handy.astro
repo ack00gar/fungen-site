@@ -1,0 +1,89 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = 'The Handy용 funscript — FunGen으로 생성하고 재생하기';
+const description =
+  'FunGen으로 어떤 2D·VR 동영상에서든 The Handy용 funscript를 생성하고, 레이턴시 보정과 함께 HTTPS 또는 Bluetooth LE로 싱크가 어긋나지 않게 재생하세요.';
+const canonicalPath = '/ko/funscripts-for-the-handy';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'FunGen으로 만드는 The Handy용 funscript',
+  description,
+  inLanguage: 'ko',
+  mainEntityOfPage: 'https://fungen.app/ko/funscripts-for-the-handy',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'The Handy', path: '/ko/funscripts-for-the-handy' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="The Handy용 funscript"
+  lang="ko"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    <a href={`${base}/ko/`}>FunGen</a>은 The Handy용 funscript를 <strong>생성</strong>하고 기기로
+    바로 <strong>재생</strong>까지 해 줍니다 — 어떤 2D·VR 동영상이든 AI로 스크립트를 만들고,
+    앱 하나로 Handy를 영상에 맞춰 구동할 수 있습니다.
+  </p>
+
+  <h2>어떤 동영상이든 스크립트로</h2>
+  <p>
+    The Handy는 표준 <a href={`${base}/ko/what-is-a-funscript`}>funscript</a>(상하 스트로크 축)를
+    읽습니다. 2D, POV, VR 클립을 FunGen에 지정하면 전용 AI 모델이 그 스트로크 트랙을 대신
+    작성해 줍니다. 먼저 무료 20초 미리보기를 돌려 보고 전체 씬을 생성하거나 폴더 전체를 일괄
+    처리하세요. 자세한 단계는 <a href={`${base}/ko/generate-funscripts-from-video`}>전체 가이드</a>를
+    참고하세요.
+  </p>
+
+  <h2>The Handy로 재생</h2>
+  <p>FunGen은 The Handy에 두 가지 방식으로 연결됩니다:</p>
+  <ul>
+    <li>
+      <strong>HTTPS (Handy Connect API)</strong> — 연결 키를 이용해 인터넷으로 구동하는 방식으로,
+      영상에 맞춰 스크립트를 스트리밍할 때 가장 안정적인 경로입니다.
+    </li>
+    <li>
+      <strong>Bluetooth LE</strong> — Handy와 컴퓨터가 서로 가까이 있을 때 클라우드를 거치지 않는
+      직접 로컬 연결입니다.
+    </li>
+  </ul>
+  <p>
+    어느 쪽이든 FunGen은 <strong>기기별 레이턴시 보정</strong>을 적용해 움직임이 영상보다 늦지
+    않고 박자에 정확히 떨어지게 합니다 — 왕복 지연이 실제로 존재하는 The Handy에서는 특히
+    중요한 부분입니다. 환경에 따라 오프셋을 미세 조정할 수도 있습니다.
+  </p>
+
+  <h2>소파에서도, 책상에서도, 헤드셋에서도</h2>
+  <p>
+    내장 스트리머로 영상과 스크립트를 휴대폰, 브라우저, VR 헤드셋으로 보내는 동안 FunGen이
+    Handy를 싱크에 맞춰 구동합니다 — 헤드셋으로 보면서 기기가 따라오는 VR 씬에 특히
+    유용합니다. 같은 스크립트는 HereSphere, DeoVR 같은 플레이어에서도 그대로 작동합니다.
+  </p>
+
+  <h2>느낌까지 제대로</h2>
+  <p>
+    움직임은 AI가 잡고, 느낌은 편집기로 완성합니다. 스트로크를 부드럽게 하거나 날카롭게 다듬고,
+    Handy가 무리 없이 소화할 수 있는 수준으로 속도를 제한하고, <strong>Funscript Doctor</strong>를
+    돌려 보세요 — 기기 특성을 반영한 품질 점수가 속도 위반과 데드 존을 짚어 내고 대부분을
+    클릭 한 번에 고쳐 주므로, 타임라인에서만 그럴듯한 스크립트가 아니라 실제 하드웨어에서
+    좋게 느껴지는 스크립트가 됩니다.
+  </p>
+
+  <p>
+    <a href={`${base}/ko/`}>FunGen을 다운로드</a>하고 — 무료로 시작할 수 있고 내 컴퓨터에서 실행됩니다 —
+    The Handy용으로 라이브러리를 스크립트화해 보세요.
+  </p>
+</Article>

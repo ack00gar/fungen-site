@@ -1,0 +1,82 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = 'OSR2 / SR6용 다축 funscript — FunGen으로 생성하기';
+const description =
+  'FunGen으로 OSR2, SR6, SSR1용 다축 funscript를 생성하고 편집하세요. AI가 스트로크에 롤·피치·트위스트까지 작성하고, FunGen이 각 축을 T-Code로 전송합니다.';
+const canonicalPath = '/ko/funscripts-for-osr2-sr6';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'FunGen으로 만드는 OSR2 / SR6용 다축 funscript',
+  description,
+  inLanguage: 'ko',
+  mainEntityOfPage: 'https://fungen.app/ko/funscripts-for-osr2-sr6',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'OSR2 / SR6', path: '/ko/funscripts-for-osr2-sr6' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="OSR2 / SR6용 다축 funscript"
+  lang="ko"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    OSR2와 SR6는 <strong>다축</strong> 스크립트에서 진가를 발휘합니다 — 스트로크만이 아니라 롤,
+    피치, 트위스트까지. <a href={`${base}/ko/`}>FunGen</a>은 그 추가 축들을 AI로 생성하고 각 축을
+    T-Code로 기기에 전송하므로, 이 장비들이 본래 설계된 풀 모션을 그대로 누릴 수 있습니다.
+  </p>
+
+  <h2>스트로크 그 이상을 쓰는 AI</h2>
+  <p>
+    기본 <a href={`${base}/ko/what-is-a-funscript`}>funscript</a>는 상하 한 축뿐입니다. FunGen의
+    AI는 <strong>다축</strong> 결과물을 만들어 냅니다: 메인 스트로크에 보조 트랙(롤,
+    피치, 서지, 스웨이, 트위스트)이 더해지고, 각 트랙은 별도의 동반 파일로 저장됩니다. 특히 VR
+    씬에서는 이 추가 모션이 OSR2와 SR6를 단순한 피스톤이 아닌 입체적인 기기로 만들어 줍니다.
+  </p>
+
+  <h2>T-Code로 전송</h2>
+  <p>
+    FunGen은 OSR 계열 — OSR2, SR6, SSR1 — 과 <strong>T-Code</strong>로 통신합니다. 스크립트의 각
+    축을 기기 축(L0 스트로크, 회전용 R축 등)에 매핑하면 FunGen이 모두 함께 싱크에 맞춰
+    스트리밍합니다. 기기별 보간과 레이턴시 보정이 축들이 서로 어긋나지 않고 조화롭게 움직이도록
+    잡아 줍니다.
+  </p>
+  <ul>
+    <li>생성된 축 중 어떤 것을 어느 기기 채널로 보낼지 직접 선택할 수 있습니다.</li>
+    <li>OSR2의 스트로크 + 롤/트위스트도, SR6의 더 풍부한 가동 범위도 구동합니다.</li>
+    <li>기기별 레이턴시 보정으로 축들이 함께, 박자에 맞게 움직입니다.</li>
+  </ul>
+
+  <h2>모든 축을 한 타임라인에서 편집</h2>
+  <p>
+    다축 타임라인에는 각 트랙이 층층이 표시되어 롤이나 피치를 독립적으로 다듬을 수 있습니다 —
+    한 축을 다른 축 위에 겹쳐 보고, 단일 트랙만 스무딩하거나 스케일링하고, 씬을 챕터로 나눠 보세요.
+    <strong>Funscript Doctor</strong>가 각 축을 기기 한계에 대조해 검사하고 대부분의 문제를
+    클릭 한 번에 고칩니다.
+  </p>
+
+  <h2>내 영상에서 직접 생성</h2>
+  <p>
+    2D나 VR 클립을 FunGen에 지정하고 트래킹을 미리 확인한 뒤 완전한 다축 스크립트를 생성하세요 —
+    전부 내 컴퓨터에서 로컬로 처리됩니다. 워크플로는 <a href={`${base}/ko/generate-funscripts-from-video`}>생성 가이드</a>
+    를, 헤드셋 쪽은 <a href={`${base}/ko/vr-funscripts`}>VR funscript</a>를 참고하세요.
+  </p>
+
+  <p>
+    <a href={`${base}/ko/`}>FunGen을 다운로드</a>하고 — 무료로 시작 — OSR2와 SR6를 위한 다축
+    모션을 스크립트로 만들어 보세요.
+  </p>
+</Article>

@@ -1,0 +1,87 @@
+---
+import Article from '../layouts/Article.astro';
+
+const title = 'Funscripts for The Handy — generate and play with FunGen';
+const description =
+  'Generate funscripts for The Handy from any 2D or VR video with FunGen, and play them over HTTPS or Bluetooth LE with latency compensation so they stay in sync.';
+const canonicalPath = '/funscripts-for-the-handy';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Funscripts for The Handy with FunGen',
+  description,
+  inLanguage: 'en',
+  mainEntityOfPage: 'https://fungen.app/funscripts-for-the-handy',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'The Handy', path: '/funscripts-for-the-handy' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="Funscripts for The Handy"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    <a href={`${base}/`}>FunGen</a> both <strong>generates</strong> funscripts for The Handy and
+    <strong>plays</strong> them straight to it — so you can take any 2D or VR video, script it with
+    AI, and drive your Handy in sync, all from one app.
+  </p>
+
+  <h2>Generate a script for any video</h2>
+  <p>
+    The Handy reads a standard <a href={`${base}/what-is-a-funscript`}>funscript</a> (the up/down
+    stroke axis). Point FunGen at a clip — 2D, POV or VR — and a dedicated AI model writes that
+    stroke track for you. Run a free 20-second preview first, then generate the full scene, or batch
+    a whole folder. See <a href={`${base}/generate-funscripts-from-video`}>the full how-to</a> for
+    the steps.
+  </p>
+
+  <h2>Play to The Handy</h2>
+  <p>FunGen connects to The Handy two ways:</p>
+  <ul>
+    <li>
+      <strong>HTTPS (Handy Connect API)</strong> — drive it over the internet with your connection
+      key, the most reliable path for streaming a script in time with the video.
+    </li>
+    <li>
+      <strong>Bluetooth LE</strong> — a direct local connection, no cloud round-trip, when your
+      Handy and computer are in range.
+    </li>
+  </ul>
+  <p>
+    Either way, FunGen applies <strong>per-device latency compensation</strong> so the motion lands
+    on the beat rather than trailing the video — important for The Handy, where round-trip latency is
+    real. You can fine-tune the offset if your setup needs it.
+  </p>
+
+  <h2>From the couch, the desk, or a headset</h2>
+  <p>
+    A built-in streamer lets you send the movie and its script to a phone, browser or VR headset
+    while FunGen drives the Handy in sync — handy for VR scenes, where you watch in the headset and
+    the device follows. The same script also works in players like HereSphere and DeoVR.
+  </p>
+
+  <h2>Make it feel right</h2>
+  <p>
+    The AI gets the motion; the editor makes it yours. Smooth or sharpen strokes, cap speed to what
+    the Handy can comfortably hit, and run the <strong>Funscript Doctor</strong> — a device-aware
+    quality score that flags speed violations and dead zones and fixes most of them in one click, so
+    a script actually feels good on the hardware instead of just looking right on the timeline.
+  </p>
+
+  <p>
+    <a href={`${base}/`}>Download FunGen</a> — free to try, runs on your own machine — and script your
+    library for The Handy.
+  </p>
+</Article>

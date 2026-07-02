@@ -1,0 +1,87 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = '支持的设备 — FunGen 可驱动的硬件（Handy、OSR2/SR6、Buttplug）';
+const description =
+  'FunGen 能把 funscript 播放到这些硬件：The Handy、Autoblow、Vacuglide、通过 T-Code 连接的 OSR2/SR6/SSR1，以及任何 Buttplug.io / Intiface 设备——均带延迟补偿。';
+const canonicalPath = '/zh/supported-devices';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'FunGen 支持的设备',
+  description,
+  inLanguage: 'zh',
+  mainEntityOfPage: 'https://fungen.app/zh/supported-devices',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: '支持的设备', path: '/zh/supported-devices' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="FunGen 支持的设备"
+  lang="zh"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    FunGen 把 <a href={`${base}/zh/what-is-a-funscript`}>funscript</a> 直接播放到你的硬件，
+    并按设备做插值和延迟补偿，让动作始终与视频合拍。它兼容你手上已有的这些装备：
+  </p>
+
+  <h2>The Handy</h2>
+  <p>
+    通过 <strong>HTTPS（Handy Connect API）</strong>或<strong>蓝牙 LE</strong> 连接，
+    延迟补偿针对 Handy 的往返延迟专门调校。为任意 2D 或 VR 视频生成行程脚本，
+    在沙发上或头显里播放。
+    <a href={`${base}/zh/funscripts-for-the-handy`}>更多关于 FunGen + The Handy →</a>
+  </p>
+
+  <h2>OSR2 / SR6 / SSR1</h2>
+  <p>
+    T-Code 机型是<strong>多轴</strong>大放异彩的地方。FunGen 的 AI 写出行程外加横滚、俯仰和扭转，
+    并把每个轴分发到你的设备，带来完整的立体运动，而不只是活塞式往复。
+    <a href={`${base}/zh/funscripts-for-osr2-sr6`}>更多关于 FunGen + OSR2 / SR6 →</a>
+  </p>
+
+  <h2>Autoblow</h2>
+  <p>
+    用行程轨道驱动 <strong>Autoblow Ultra</strong>。用 AI 生成脚本，在时间轴上润色，
+    再同步播放——和其他设备一样的一站式工作流。
+  </p>
+
+  <h2>Vacuglide</h2>
+  <p>
+    FunGen 直接支持 <strong>Vacuglide</strong>，无论生成的还是手工制作的脚本，
+    都能以同样的插值和延迟处理来驱动它。
+  </p>
+
+  <h2>Buttplug.io / Intiface</h2>
+  <p>
+    在内置集成之外，FunGen 还能对接 <strong>Buttplug.io / Intiface</strong>——
+    一个连接大量消费级玩具的开放桥梁。只要你的设备兼容 Intiface，FunGen 就能用 funscript 驱动它，
+    这让它成为那些没有原生集成的硬件的实用
+    <a href={`${base}/zh/funscript-editor`}>funscript 编辑器和播放器</a>。
+  </p>
+
+  <h2>设备如何保持同步</h2>
+  <p>
+    无论什么设备，FunGen 都会应用<strong>按设备的插值</strong>（把运动平滑到硬件能力范围内）
+    和<strong>延迟补偿</strong>（让动作正好踩在节拍上）。内置的串流功能可以从手机或 VR 头显
+    发起播放会话并让设备跟随，<strong>Funscript Doctor</strong> 则会在播放前
+    对照你这台设备的极限给脚本打分。
+  </p>
+
+  <p>
+    <a href={`${base}/zh/`}>下载 FunGen</a>，用你已有的设备开始播放——免费试用。
+  </p>
+</Article>

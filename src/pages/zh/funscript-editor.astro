@@ -1,0 +1,82 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = 'funscript 编辑器 — FunGen 内置帧级精度多轴编辑器';
+const description =
+  'FunGen 是一款完整的 funscript 编辑器：帧级精度的多轴时间轴、变换与流水线、章节、无限撤销/重做，以及 Doctor 质量检查。免费使用。';
+const canonicalPath = '/zh/funscript-editor';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'FunGen 的 funscript 编辑器',
+  description,
+  inLanguage: 'zh',
+  mainEntityOfPage: 'https://fungen.app/zh/funscript-editor',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'funscript 编辑器', path: '/zh/funscript-editor' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="FunGen 内置的 funscript 编辑器"
+  lang="zh"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    FunGen 不只是 AI 生成器——它也是一款完整的 <strong>funscript 编辑器</strong>。
+    在帧级精度的时间轴上手工打点，或清理 AI 生成的结果，然后直接播放到你的设备，
+    全程不用切换工具。编辑器免费使用。
+  </p>
+
+  <h2>帧级精度的多轴时间轴</h2>
+  <p>
+    对照视频逐帧编辑：添加、移动和微调点位，用数字键把点设到精确高度，
+    或者一键把最近的点拉到播放头并落位。每个轴——行程外加横滚、俯仰、前后、左右、扭转——
+    都有自己的轨道，还可以把一个轴叠加在另一个轴上进行对齐。
+  </p>
+
+  <h2>变换、插件与流水线</h2>
+  <p>
+    用几十种一键式变换和插件重塑整段选区或整个脚本：振幅、平滑、限速、时序等等。
+    把常用操作串成一条<strong>流水线</strong>，一次点击就完成整套清理——自动调优、重塑、限幅。
+  </p>
+
+  <h2>章节、书签，以及记得住的工作流</h2>
+  <p>
+    把长影片切分成带名字、带颜色的章节，一键放置书签，再次打开时正好回到上次停下的位置。
+    <strong>撤销和重做次数无限，而且在关闭并重新打开项目后依然保留</strong>，
+    你的编辑历史永远不会丢。FunGen 还能在 Windows、macOS 和 Linux 上直接打开
+    <code>.funscript</code> 和 <code>.fungen</code> 文件。
+  </p>
+
+  <h2>Doctor：确认它已就绪</h2>
+  <p>
+    在发布脚本之前，<strong>Funscript Doctor</strong> 会给出一个针对设备特性的 0 到 100 质量评分——
+    标出超速、偏帧点、死区、抖动和缺漏行程，并把其中大多数一键修复。
+    这就是"时间轴上看着对"和"硬件上用着爽"之间的差别。
+  </p>
+
+  <h2>先生成，再润色</h2>
+  <p>
+    最快的工作流是两者兼用：先让 AI
+    <a href={`${base}/zh/generate-funscripts-from-video`}>从视频生成 funscript</a>，
+    再到编辑器里打磨。刚接触这种格式？先看看
+    <a href={`${base}/zh/what-is-a-funscript`}>funscript 是什么</a>。
+  </p>
+
+  <p>
+    <a href={`${base}/zh/`}>下载 FunGen</a>——编辑器、播放器和片库管理免费；
+    全质量 AI 生成是 Pro 解锁内容。
+  </p>
+</Article>

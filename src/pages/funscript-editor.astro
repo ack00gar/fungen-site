@@ -1,0 +1,84 @@
+---
+import Article from '../layouts/Article.astro';
+
+const title = 'Funscript editor — a frame-accurate, multi-axis editor in FunGen';
+const description =
+  'FunGen is a full funscript editor: a frame-accurate multi-axis timeline, transforms and pipelines, chapters, unlimited undo/redo, and the Doctor quality checks. Free to use.';
+const canonicalPath = '/funscript-editor';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'The FunGen funscript editor',
+  description,
+  inLanguage: 'en',
+  mainEntityOfPage: 'https://fungen.app/funscript-editor',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'Funscript editor', path: '/funscript-editor' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="The funscript editor in FunGen"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    FunGen isn't only an AI generator — it's a full <strong>funscript editor</strong>. Build a script
+    by hand on a frame-accurate timeline, or clean up what the AI generated, and play it straight to
+    your device, without switching tools. The editor is free to use.
+  </p>
+
+  <h2>A frame-accurate, multi-axis timeline</h2>
+  <p>
+    Edit against the video frame by frame: add, move and tune points, set a point to an exact height
+    with a number key, or pull the nearest point to the playhead and set it in one keystroke. Every
+    axis — stroke plus roll, pitch, surge, sway, twist — gets its own track, and you can overlay one
+    axis on another to line them up.
+  </p>
+
+  <h2>Transforms, plugins and pipelines</h2>
+  <p>
+    Reshape a whole selection or the entire script with dozens of one-click transforms and plugins:
+    amplitude, smoothing, speed limits, timing, and more. Chain your favourites into a
+    <strong>pipeline</strong> and run a full cleanup in a single click — autotune, reshape, limit.
+  </p>
+
+  <h2>Chapters, bookmarks and a workflow that remembers</h2>
+  <p>
+    Split a long scene into named, colour-coded chapters, drop bookmarks with one key, and reopen
+    right where you left off. <strong>Undo and redo are unlimited and survive closing and reopening</strong>
+    a project, so your edit history is never lost. FunGen also opens <code>.funscript</code> and
+    <code>.fungen</code> files directly on Windows, macOS and Linux.
+  </p>
+
+  <h2>The Doctor: know it's ready</h2>
+  <p>
+    Before you ship a script, the <strong>Funscript Doctor</strong> gives it a device-aware quality
+    score from 0 to 100 — flagging speed violations, off-frame points, dead zones, jitter and missing
+    strokes, and fixing most of them in one click. It's the difference between a script that looks
+    right on the timeline and one that actually feels right on the hardware.
+  </p>
+
+  <h2>Generate, then refine</h2>
+  <p>
+    The fastest workflow is both halves together: let the AI
+    <a href={`${base}/generate-funscripts-from-video`}>generate a funscript from your video</a>, then
+    polish it in the editor. New to the format? Start with
+    <a href={`${base}/what-is-a-funscript`}>what a funscript is</a>.
+  </p>
+
+  <p>
+    <a href={`${base}/`}>Download FunGen</a> — the editor, player and library are free; full-quality AI
+    generation is the Pro unlock.
+  </p>
+</Article>

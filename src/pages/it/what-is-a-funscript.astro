@@ -1,0 +1,96 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = 'Cos\'è un funscript? Il formato per i video interattivi spiegato';
+const description =
+  'Un funscript è un piccolo file che registra il movimento nel tempo e comanda un dispositivo compatibile in sincronia con un video. Scopri il formato, gli script multi-asse e come si creano i funscript.';
+const canonicalPath = '/it/what-is-a-funscript';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Cos\'è un funscript?',
+  description,
+  inLanguage: 'it',
+  mainEntityOfPage: 'https://fungen.app/it/what-is-a-funscript',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'Cos\'è un funscript?', path: '/it/what-is-a-funscript' }];
+---
+
+<Article {title} {description} heading="Cos'è un funscript?" lang="it" {canonicalPath} {articleLd} {breadcrumbs}>
+  <p class="lead">
+    Un <strong>funscript</strong> è un piccolo file di testo che registra il movimento nel tempo.
+    Riprodotto insieme a un video, comanda un dispositivo compatibile in sincronia — posizione per
+    posizione — così l'azione sullo schermo e il dispositivo si muovono all'unisono.
+  </p>
+
+  <h2>Il formato</h2>
+  <p>
+    Un funscript è semplice JSON con una lista di <em>azioni</em>: ogni azione è un timestamp (in
+    millisecondi) e una posizione da <strong>0 a 100</strong>, dove 0 e 100 sono i due estremi
+    della corsa. Un player legge la lista, interpola tra i punti e trasmette il risultato al tuo
+    hardware in tempo reale. L'estensione del file è <code>.funscript</code>, e trattandosi di puro
+    testo è minuscolo — una scena completa di solito occupa solo qualche centinaio di kilobyte.
+  </p>
+  <p>
+    Uno script di base controlla un solo asse (la corsa su/giù). Gli script
+    <strong>multi-asse</strong> aggiungono tracce extra — roll, pitch, surge, sway, twist — per i
+    dispositivi che le supportano, ognuna salvata come file complementare accanto a quello
+    principale.
+  </p>
+
+  <h2>Come si creano i funscript</h2>
+  <p>Ci sono due modi per crearne uno:</p>
+  <ul>
+    <li>
+      <strong>A mano</strong>, in un editor di funscript — piazzando e regolando i punti su una
+      timeline seguendo il video. Preciso, ma lento.
+    </li>
+    <li>
+      <strong>Con l'IA</strong> — un modello guarda il video e scrive il movimento in automatico,
+      che puoi poi rifinire a mano. È quello che fa <a href={`${base}/it/`}>FunGen</a>: dagli in
+      pasto un video 2D o VR e genera un funscript multi-asse completo in pochi minuti.
+    </li>
+  </ul>
+
+  <h2>Cosa riproduce un funscript</h2>
+  <p>
+    I funscript sono indipendenti dal dispositivo. Lo stesso file comanda <strong>The Handy</strong>,
+    la famiglia <strong>OSR2 / SR6 / SSR1</strong> via T-Code, <strong>Autoblow</strong>,
+    <strong>Vacuglide</strong> e qualsiasi cosa raggiungibile tramite
+    <strong>Buttplug.io / Intiface</strong>. Player e bridge come HereSphere e DeoVR sincronizzano
+    lo script con il video al posto tuo, anche nei visori VR.
+  </p>
+
+  <h2>Cosa si scripta</h2>
+  <p>
+    Qualsiasi video con movimento ritmico è un candidato: scene <strong>VR</strong> e
+    <strong>2D / POV</strong>, compilation <strong>cock hero</strong> e <strong>PMV</strong>
+    (sincronizzate sul beat), <strong>JOI</strong> e video tease/edging. La community condivide e
+    discute gli script su forum come Eroscripts; strumenti come FunGen ti permettono di generare i
+    tuoi da qualsiasi clip invece di andare a caccia di uno già esistente.
+  </p>
+
+  <h2>Funscript vs. video</h2>
+  <p>
+    Un funscript non contiene mai il video — sono solo dati di movimento, quindi viene condiviso
+    come piccolo file separato da abbinare alla tua copia della scena. Questa separazione è anche
+    il motivo per cui uno stesso script è riutilizzabile su player e dispositivi diversi: lo script
+    descrive <em>cosa fare</em>, e ogni dispositivo decide <em>come</em>, con la propria
+    interpolazione e gestione della latenza.
+  </p>
+
+  <p>
+    <strong>Vuoi crearne uno tuo?</strong> <a href={`${base}/it/`}>FunGen</a> genera funscript da
+    video 2D e VR con modelli IA dedicati, poi ti lascia modificarli su una timeline multi-asse e
+    riprodurli direttamente sul tuo dispositivo — gratis da provare, e gira interamente sulla tua
+    macchina.
+  </p>
+</Article>
