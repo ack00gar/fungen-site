@@ -92,24 +92,14 @@ const promoUntil = (() => {
   return `${PROMO!.label} · ${until[lang] ?? until.en}`;
 })();
 
-// AI-section live demo: a real capture of the VR model tracking a scene
-// (content pixelated for the storefront; logo, script timeline and the live
-// position gauge untouched). Caption localized for the lever locales.
-const AI_DEMO_TEXT: Record<string, { caption: string; alt: string }> = {
-  en: {
-    caption: 'Actual output of the VR model.',
-    alt: 'FunGen VR model live-tracking demo (pixelated): script timeline and device position gauge moving in real time',
-  },
-  zh: {
-    caption: 'VR 模型的真实输出。',
-    alt: 'FunGen VR 模型实时追踪演示（已打码）：脚本时间轴与设备位置实时联动',
-  },
-  ja: {
-    caption: 'VRモデルの実際の出力。',
-    alt: 'FunGen VRモデルのライブトラッキングデモ（モザイク処理済み）：スクリプトタイムラインとポジションゲージがリアルタイムに動作',
-  },
+// AI-section live demo: a real capture of the VR model tracking a scene.
+// No visible caption (operator choice); the alt text stays for a11y/SEO.
+const AI_DEMO_ALT: Record<string, string> = {
+  en: 'FunGen VR model live-tracking demo (pixelated): script timeline and device position gauge moving in real time',
+  zh: 'FunGen VR 模型实时追踪演示（已打码）：脚本时间轴与设备位置实时联动',
+  ja: 'FunGen VRモデルのライブトラッキングデモ（モザイク処理済み）：スクリプトタイムラインとポジションゲージがリアルタイムに動作',
 };
-const aiDemo = AI_DEMO_TEXT[lang] ?? AI_DEMO_TEXT.en;
+const aiDemoAlt = AI_DEMO_ALT[lang] ?? AI_DEMO_ALT.en;
 
 // Alternating feature deep-dives: copy from the showcase dict, image filenames
 // (in public/shots/) are structural. Optional inset floats over the main image.
@@ -190,11 +180,10 @@ const DIVES = [
         ))}
       </div>
       <figure class="ai-demo">
-        <video width="720" height="720" poster={`${base}/shots/live-vr-poster.webp`} autoplay muted loop playsinline preload="metadata" aria-label={aiDemo.alt}>
+        <video width="720" height="720" poster={`${base}/shots/live-vr-poster.webp`} autoplay muted loop playsinline preload="metadata" aria-label={aiDemoAlt}>
           <source src={`${base}/shots/live-vr.webm`} type="video/webm" />
           <source src={`${base}/shots/live-vr.mp4`} type="video/mp4" />
         </video>
-        <figcaption>{aiDemo.caption}</figcaption>
       </figure>
     </div>
   </section>
@@ -644,10 +633,6 @@ const DIVES = [
   .ai-demo video {
     width: 100%; height: auto; display: block;
     border-radius: 16px; border: 1px solid var(--line);
-  }
-  .ai-demo figcaption {
-    color: var(--muted); font-size: 0.82rem; line-height: 1.55;
-    text-align: center; margin-top: 12px;
   }
 
   /* FEATURE SHOWCASE */
