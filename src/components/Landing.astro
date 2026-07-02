@@ -280,12 +280,7 @@ const DIVES = [
             : {};
           return (
             <article class={`plan${meta.featured ? ' plan-featured' : ''}${onPromo ? ' plan-promo' : ''}`} {...promoData}>
-              {(plan.badge || onPromo) && (
-                <div class="plan-badges">
-                  {plan.badge && <span class="plan-badge">{plan.badge}</span>}
-                  {onPromo && <span class="plan-badge plan-badge--promo" data-promo-badge>{meta.promoLabel}</span>}
-                </div>
-              )}
+              {plan.badge && <span class="plan-badge">{plan.badge}</span>}
               <h3>{plan.name}</h3>
               <div class="plan-price">
                 <span class="brand-text" data-price>{meta.price}</span>
@@ -736,17 +731,14 @@ const DIVES = [
     border-radius: var(--radius); padding: 28px 24px; display: flex; flex-direction: column; height: 100%;
   }
   .plan-featured { border-color: var(--teal); box-shadow: 0 0 0 1px var(--teal), 0 20px 60px -30px rgba(34, 211, 238, 0.6); }
-  /* One flex rail for every badge: two badges share the top edge with a gap
-     instead of the old left/right absolutes that collided on narrow cards. */
-  .plan-badges {
-    position: absolute; top: -11px; left: 24px; right: 24px;
-    display: flex; justify-content: space-between; gap: 8px; pointer-events: none;
-  }
+  /* One identity badge per card (MOST POPULAR / BEST VALUE). The sale itself
+     is communicated by the struck price + the deadline line under the header
+     - a per-card SUMMER SALE badge next to these read as clutter. */
   .plan-badge {
-    background: var(--brand); color: #04181c; white-space: nowrap;
+    position: absolute; top: -11px; left: 24px; background: var(--brand); color: #04181c;
+    white-space: nowrap;
     font-size: 0.7rem; font-weight: 750; padding: 3px 10px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.05em;
   }
-  .plan-badge--promo { background: var(--coral); color: #1a0d06; margin-left: auto; }
   .promo-until { color: var(--coral); font-weight: 700; font-size: 0.95rem; margin-top: 6px; }
   .plan h3 { font-size: 1.2rem; margin-bottom: 10px; }
   .plan-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; }
