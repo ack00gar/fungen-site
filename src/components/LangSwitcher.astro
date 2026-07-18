@@ -1,0 +1,46 @@
+---
+import { LOCALES, STRINGS, localeHome, type Locale } from '../i18n';
+interface Props { current: Locale }
+const { current } = Astro.props;
+---
+<details class="lang">
+  <summary aria-label="Language">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18M12 3c2.5 2.5 3.8 5.7 3.8 9S14.5 18.5 12 21c-2.5-2.5-3.8-5.7-3.8-9S9.5 5.5 12 3Z" />
+    </svg>
+    <span>{STRINGS[current].langName}</span>
+  </summary>
+  <ul>
+    {LOCALES.map((l) => (
+      <li>
+        <a href={localeHome(l)} data-locale={l} class={l === current ? 'is-current' : ''}>
+          {STRINGS[l].langName}
+        </a>
+      </li>
+    ))}
+  </ul>
+</details>
+
+<style>
+  .lang { position: relative; }
+  .lang summary {
+    list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 7px;
+    color: var(--muted); font-size: 0.9rem; padding: 6px 8px; border-radius: 8px;
+  }
+  .lang summary::-webkit-details-marker { display: none; }
+  .lang summary:hover { color: var(--text); }
+  .lang summary svg { flex: none; }
+  .lang ul {
+    position: absolute; right: 0; top: calc(100% + 8px); z-index: 60;
+    list-style: none; margin: 0; padding: 6px; min-width: 168px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    box-shadow: 0 20px 50px -24px rgba(0, 0, 0, 0.9);
+    max-height: 60vh; overflow: auto;
+  }
+  .lang a {
+    display: block; padding: 8px 12px; border-radius: 8px; font-size: 0.92rem; color: var(--muted);
+  }
+  .lang a:hover { background: rgba(255, 255, 255, 0.05); color: var(--text); }
+  .lang a.is-current { color: var(--teal); font-weight: 650; }
+</style>

@@ -1,0 +1,80 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = 'OSR2 / SR6 多轴 funscript - 用 FunGen 生成';
+const description =
+  '用 FunGen 为 OSR2、SR6 和 SSR1 生成并编辑多轴 funscript。AI 写出行程外加横滚、俯仰和扭转；FunGen 通过 T-Code 分发每个轴。';
+const canonicalPath = '/zh/funscripts-for-osr2-sr6';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: '用 FunGen 为 OSR2 / SR6 生成多轴 funscript',
+  description,
+  inLanguage: 'zh',
+  dateModified: '2026-07-17',
+  mainEntityOfPage: 'https://fungen.app/zh/funscripts-for-osr2-sr6',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'OSR2 / SR6', path: '/zh/funscripts-for-osr2-sr6' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="OSR2 / SR6 多轴 funscript"
+  lang="zh"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    OSR2 和 SR6 的精髓在于<strong>多轴</strong>脚本-不只是行程，还有横滚、俯仰和扭转。
+    <a href={`${base}/zh/`}>FunGen</a> 用 AI 生成这些额外的轴，并通过 T-Code 把每个轴
+    分发到你的设备，让这些机器发挥出它们真正的全方位运动。
+  </p>
+
+  <h2>AI 写的不只是行程</h2>
+  <p>
+    基础的 <a href={`${base}/zh/what-is-a-funscript/`}>funscript</a> 只有一个轴-上下运动。
+    FunGen 的 AI 产出的是<strong>多轴</strong>结果：主行程外加多条副轨道（横滚、俯仰、前后、左右、扭转），
+    每条以独立的配套文件保存。尤其在 VR 影片上，正是这些额外的运动让 OSR2 或 SR6
+    有了立体感，而不是一台单纯的活塞机。
+  </p>
+
+  <h2>通过 T-Code 分发</h2>
+  <p>
+    FunGen 使用 <strong>T-Code</strong> 与 OSR 系列-OSR2、SR6 和 SSR1-通信。
+    你把每条脚本轴映射到设备轴（L0 行程、R 轴负责旋转等等），FunGen 就会把它们同步串流。
+    按设备的插值和延迟补偿让各轴协调一致，不会渐渐错位。
+  </p>
+  <ul>
+    <li>自由选择要分发哪些生成的轴，以及对应到哪个设备通道。</li>
+    <li>驱动 OSR2 的行程 + 横滚/扭转，或 SR6 更完整的运动范围。</li>
+    <li>按设备的延迟补偿，让各轴步调一致、踩准节拍。</li>
+  </ul>
+
+  <h2>在同一条时间轴上编辑每个轴</h2>
+  <p>
+    多轴时间轴把每条轨道层叠显示，你可以独立润色横滚或俯仰-把一个轴叠加在另一个轴上对齐、
+    单独平滑或缩放某条轨道、为影片划分章节。<strong>Funscript Doctor</strong>
+    会对照你设备的极限逐轴检查，并把大多数问题一键修复。
+  </p>
+
+  <h2>用你自己的影片生成</h2>
+  <p>
+    把 FunGen 指向一段 2D 或 VR 影片，预览跟踪效果，再生成完整的多轴脚本-
+    全程在你自己的电脑上本地运行。工作流程见<a href={`${base}/zh/generate-funscripts-from-video/`}>操作教程</a>，
+    头显那一侧则见 <a href={`${base}/zh/vr-funscripts/`}>VR funscript</a>。
+  </p>
+
+  <p>
+    <a href={`${base}/zh/`}>下载 FunGen</a>-免费试用-为你的 OSR2 或 SR6 生成多轴运动脚本。
+  </p>
+</Article>

@@ -1,0 +1,305 @@
+---
+// The pricing section: plan cards + the crypto (USDT/BTC) payment block.
+// Extracted from Landing.astro so it can render both inline on the homepage
+// (`#pricing` anchor) AND standalone on the dedicated `/pricing` page - one
+// source of truth, no copy fork between the two.
+import { LINKS, PLAN_META, PROMO, PROMO_ACTIVE, PROMO_ENDS, CRYPTO } from '../consts';
+import { t, type Locale } from '../i18n';
+
+interface Props {
+  lang: Locale;
+  /** Heading level for the section title: 'h1' on the dedicated page (it IS
+   *  the page subject), 'h2' inline on the homepage (a section of it). */
+  headingTag?: 'h1' | 'h2';
+  /** True when embedded on the dedicated /pricing page rather than inline
+   *  on the homepage scroll. Opts out of the global `section` rule's
+   *  `min-height: 100vh` + vertical centering (built for the homepage's
+   *  one-section-per-screen rhythm) - inside a short article it just
+   *  leaves a huge empty gap above the cards. */
+  standalone?: boolean;
+}
+const { lang, headingTag = 'h2', standalone = false } = Astro.props;
+const s = t(lang);
+const Heading = headingTag;
+
+// Crypto-block strings. The USDT path exists FOR the no-PayPal regions (China
+// above all: ~1/3 of traffic, ~2% of buyers), so it must read natively there -
+// zh/ja localized here, everything else falls back to English. On zh the
+// <details> also renders OPEN and links a step-by-step tutorial page.
+const CRYPTO_TEXT: Record<string, {
+  eyebrow: string; hint: string; sub: string; chain: string; copy: string;
+  how1: string; how2: string; how3: string; tutorial?: string;
+  btcChain: string; btcNote: string;
+}> = {
+  en: {
+    eyebrow: 'Pay with crypto',
+    hint: "for regions where cards or PayPal aren't supported",
+    sub: 'Paid in USDT on the TRON (TRC-20) network.',
+    chain: 'Send to this TRON (TRC-20) address',
+    copy: 'Copy',
+    how1: 'Then email your ',
+    how2: ' and the email for your pass to ',
+    how3: ' Your signed pass comes back by email.',
+    btcChain: 'Or pay in Bitcoin (on-chain) to this address',
+    btcNote: 'Send the EUR amount in BTC at the current rate. One confirmation (~10-60 min); the network fee is yours. Then email the TXID as above.',
+  },
+  zh: {
+    eyebrow: '使用 USDT 付款',
+    hint: '无法使用 PayPal 或信用卡？推荐中国大陆用户使用此方式',
+    sub: '通过 TRON（TRC-20）网络支付 USDT，价格如下（促销期间已按促销价换算）。',
+    chain: '转账到这个 TRON（TRC-20）收款地址',
+    copy: '复制',
+    how1: '转账后，把',
+    how2: '和接收 Pass 的邮箱发送至 ',
+    how3: ' 签名后的 Pass 会通过邮件发回，导入 FunGen 即可解锁。',
+    tutorial: '第一次用 USDT 购买？查看图文教程',
+    btcChain: '或将比特币（链上）转账到这个地址',
+    btcNote: '按当前汇率发送等值于欧元价格的 BTC。需要 1 个确认（约 10-60 分钟），矿工费自理。然后同样把 TXID 发邮件给我们。',
+  },
+  ja: {
+    eyebrow: '暗号資産（USDT）で支払う',
+    hint: 'カードやPayPalが使えない地域向けのお支払い方法',
+    sub: 'TRON（TRC-20）ネットワークのUSDTでお支払いください。',
+    chain: 'このTRON（TRC-20）アドレスに送金',
+    copy: 'コピー',
+    how1: '送金後、',
+    how2: 'とPassを受け取るメールアドレスを次の宛先へ: ',
+    how3: ' 署名済みのPassをメールでお送りします。',
+    btcChain: 'またはビットコイン（オンチェーン）をこのアドレスへ',
+    btcNote: '現在のレートでユーロ価格相当のBTCを送金してください。1承認（約10〜60分）が必要で、ネットワーク手数料はご負担ください。その後、同様にTXIDをメールでお送りください。',
+  },
+};
+const cx = CRYPTO_TEXT[lang] ?? CRYPTO_TEXT.en;
+const txidLabel = lang === 'zh' ? '交易 ID（TXID）' : lang === 'ja' ? 'トランザクションID（TXID）' : 'transaction ID';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+// Visible sale deadline under the pricing header ("nothing said until when").
+// The label comes from pricing.json; only the "until <date>" part localizes.
+const promoUntil = (() => {
+  if (!PROMO_ACTIVE || !PROMO_ENDS) return null;
+  const [, m, d] = PROMO_ENDS.split('-').map((x) => parseInt(x, 10));
+  const EN_MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const until: Record<string, string> = {
+    en: `until ${EN_MONTHS[m - 1]} ${d}`,
+    de: `bis ${d}.${m}.`,
+    es: `hasta el ${d}/${m}`,
+    fr: `jusqu'au ${d}/${m}`,
+    it: `fino al ${d}/${m}`,
+    ja: `${m}月${d}日まで`,
+    ko: `${m}월 ${d}일까지`,
+    pt: `até ${d}/${m}`,
+    ru: `до ${d}.${String(m).padStart(2, '0')}`,
+    zh: `截止 ${m} 月 ${d} 日`,
+  };
+  return `${PROMO!.label} · ${until[lang] ?? until.en}`;
+})();
+---
+
+<section id="pricing" class={standalone ? 'section-standalone' : ''}>
+  <div class="wrap" data-reveal>
+    <div class="section-head">
+      <p class="eyebrow">{s.pricing.eyebrow}</p>
+      <Heading>{s.pricing.title}</Heading>
+      {s.pricing.body.split('\n').map((line) => <p>{line}</p>)}
+      {promoUntil && <p class="promo-until" data-promo-until>{promoUntil}</p>}
+    </div>
+    <div class="plans">
+      {s.pricing.plans.map((plan, i) => {
+        const meta = PLAN_META[i];
+        const onPromo = !!meta.promoLabel;
+        // Revert target if the promo lapses between static rebuilds: the list
+        // price, its PayPal URL, and the umami event without the -promo suffix.
+        const promoData = onPromo
+          ? {
+              'data-promo-ends': PROMO_ENDS,
+              'data-list-price': meta.listPrice,
+              'data-list-href': `${LINKS.buy}/${meta.listAmount}`,
+              'data-base-event': meta.event.replace(/-promo$/, ''),
+            }
+          : {};
+        return (
+          <article class={`plan${meta.featured ? ' plan-featured' : ''}${onPromo ? ' plan-promo' : ''}`} {...promoData}>
+            {plan.badge && <span class="plan-badge">{plan.badge}</span>}
+            <h3>{plan.name}</h3>
+            <div class="plan-price">
+              <span class={`brand-text${onPromo ? ' plan-sale' : ''}`} data-price>{meta.price}</span>
+            </div>
+            <p class="plan-cadence">{plan.cadence}</p>
+            <p class="plan-blurb">{plan.blurb}</p>
+            <ul>
+              {plan.perks.map((perk) => <li>{perk}</li>)}
+            </ul>
+            <a class={`btn ${meta.featured ? 'btn-primary' : 'btn-ghost'} plan-cta`} data-cta href={meta.href} target="_blank" rel="noopener" data-umami-event={meta.event}>
+              {plan.cta}
+            </a>
+          </article>
+        );
+      })}
+    </div>
+    {s.pricing.note.split('\n').map((line) => <p class="pricing-note">{line}</p>)}
+
+    {CRYPTO.usdtAddress && (
+      <details class="crypto-pay" id="crypto" data-reveal open={lang === 'zh'}>
+        <summary class="crypto-summary">
+          <span class="crypto-eyebrow">{cx.eyebrow}</span>
+          <span class="crypto-summary-hint">{cx.hint}</span>
+        </summary>
+        <div class="crypto-body">
+          <p class="crypto-sub">{cx.sub}</p>
+          <div class="crypto-prices">
+            {CRYPTO.prices.map((p) => (
+              <div class="crypto-price">
+                <span class="crypto-price-tier">{p.label}</span>
+                <span class="crypto-price-amt">{p.usdt}<small>USDT</small></span>
+              </div>
+            ))}
+          </div>
+          <div class="crypto-addr">
+            <span class="crypto-chain">{cx.chain}</span>
+            <div class="crypto-copyrow">
+              <code>{CRYPTO.usdtAddress}</code>
+              <button type="button" class="crypto-copy" data-copy={CRYPTO.usdtAddress} data-umami-event="crypto-usdt">{cx.copy}</button>
+            </div>
+          </div>
+          {CRYPTO.btcAddress && (
+            <div class="crypto-addr">
+              <span class="crypto-chain">{cx.btcChain}</span>
+              <div class="crypto-copyrow">
+                <code>{CRYPTO.btcAddress}</code>
+                <button type="button" class="crypto-copy" data-copy={CRYPTO.btcAddress} data-umami-event="crypto-btc">{cx.copy}</button>
+              </div>
+              <p class="crypto-sub">{cx.btcNote}</p>
+            </div>
+          )}
+          <p class="crypto-how">
+            {cx.how1}<b>{txidLabel}</b>{cx.how2}
+            <a href={`mailto:${CRYPTO.support}`}>{CRYPTO.support}</a>.{cx.how3}
+          </p>
+          {cx.tutorial && (
+            <p class="crypto-how">
+              <a href={`${base}/zh/how-to-buy-with-usdt/`} data-umami-event="crypto-tutorial">{cx.tutorial} →</a>
+            </p>
+          )}
+        </div>
+      </details>
+    )}
+  </div>
+</section>
+
+<script>
+  // ── Promo expiry guard ────────────────────────────────────────────────────
+  // A promo is server-rendered only while live, but a static build can outlast
+  // the promo window. If today is past a card's data-promo-ends, revert it to
+  // the list price/URL and strip the promo visuals so an expired sale never shows.
+  // (Pair with a daily GitHub Actions cron rebuild so promos also auto-START.)
+  (function () {
+    var today = new Date().toISOString().slice(0, 10);
+    document.querySelectorAll('.plan-promo[data-promo-ends]').forEach(function (card) {
+      if (card.getAttribute('data-promo-ends') >= today) return;
+      card.classList.remove('plan-promo');
+      var badge = card.querySelector('[data-promo-badge]'); if (badge) badge.remove();
+      document.querySelectorAll('[data-promo-until]').forEach(function (el) { el.remove(); });
+      var price = card.querySelector('[data-price]');
+      var listPrice = card.getAttribute('data-list-price');
+      if (price && listPrice) price.textContent = listPrice;
+      if (price) price.classList.remove('plan-sale'); // back to the brand ink
+      var cta = card.querySelector('[data-cta]');
+      var listHref = card.getAttribute('data-list-href');
+      var baseEvent = card.getAttribute('data-base-event');
+      if (cta && listHref) cta.setAttribute('href', listHref);
+      if (cta && baseEvent) cta.setAttribute('data-umami-event', baseEvent);
+    });
+  })();
+
+  // One-click copy for the crypto address.
+  document.querySelectorAll('.crypto-copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var addr = btn.getAttribute('data-copy');
+      var done = function () {
+        var prev = btn.textContent;
+        btn.textContent = 'Copied';
+        btn.classList.add('copied');
+        setTimeout(function () { btn.textContent = prev; btn.classList.remove('copied'); }, 1500);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(addr).then(done).catch(function () {});
+      } else {
+        var t = document.createElement('textarea');
+        t.value = addr; document.body.appendChild(t); t.select();
+        try { document.execCommand('copy'); done(); } catch (e) {}
+        document.body.removeChild(t);
+      }
+    });
+  });
+</script>
+
+<style>
+  /* Opt out of the homepage's one-section-per-screen rhythm (see the
+     `standalone` prop doc above) - natural content height, modest
+     top/bottom padding instead of a forced full-viewport centered box. */
+  .section-standalone { min-height: 0; display: block; padding: 8px 0 60px; }
+  /* The intro spans the full content width here (the global 640px cap left it
+     cramped in a narrow left column); the paragraph keeps a readable line. */
+  #pricing .section-head { max-width: none; }
+  #pricing .section-head p { max-width: 90ch; }
+  .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: start; }
+  .plan {
+    position: relative; background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 28px 24px; display: flex; flex-direction: column; height: 100%;
+  }
+  .plan-featured { border-color: var(--teal); box-shadow: 0 0 0 1px var(--teal), 0 20px 60px -30px rgba(34, 211, 238, 0.6); }
+  /* One identity badge per card (MOST POPULAR / BEST VALUE). The sale itself
+     is communicated by the struck price + the deadline line under the header
+     - a per-card SUMMER SALE badge next to these read as clutter. */
+  .plan-badge {
+    position: absolute; top: -11px; left: 24px; background: var(--brand); color: #04181c;
+    white-space: nowrap;
+    font-size: 0.7rem; font-weight: 750; padding: 3px 10px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .promo-until { color: var(--coral); font-weight: 700; font-size: 0.95rem; margin-top: 6px; }
+  .plan h3 { font-size: 1.2rem; margin-bottom: 10px; }
+  .plan-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; }
+  .plan-price span { font-size: 2rem; font-weight: 800; }
+  /* Sale price takes the theme coral (orange) - no struck "was" price
+     beside it: that compared against today's config base price, not what
+     a viewer was ever actually charged, and read as a false discount. */
+  .plan-sale { color: var(--coral); }
+  .plan-cadence {
+    color: var(--muted); font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em;
+    margin: 4px 0 0;
+  }
+  .plan-blurb { color: var(--muted); font-size: 0.92rem; min-height: 42px; margin: 6px 0 16px; }
+  .plan ul { list-style: none; margin: 0 0 22px; padding: 0; display: grid; gap: 9px; flex: 1; }
+  .plan ul li { font-size: 0.9rem; padding-left: 22px; position: relative; }
+  .plan ul li::before { content: '✓'; position: absolute; left: 0; color: var(--teal); font-weight: 700; }
+  .plan-cta { width: 100%; justify-content: center; }
+  .pricing-note { text-align: center; color: var(--muted); margin-top: 28px; font-size: 0.95rem; }
+  .pricing-note a { color: var(--teal); }
+  .crypto-pay { max-width: 600px; margin: 40px auto 0; padding: 30px 32px; border: 1px solid #1E2A38; border-radius: 16px; background: linear-gradient(180deg, #141d28, #0F161E); text-align: center; }
+  .crypto-eyebrow { display: inline-block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); border: 1px solid rgba(34,211,238,0.30); border-radius: 999px; padding: 4px 13px; margin-bottom: 14px; }
+  .crypto-pay > summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .crypto-pay > summary::-webkit-details-marker { display: none; }
+  .crypto-pay > summary .crypto-eyebrow { margin: 0; }
+  .crypto-summary-hint { color: var(--muted); font-size: 0.9rem; }
+  .crypto-summary::after { content: "▾"; color: var(--teal); font-size: 0.9rem; transition: transform .2s ease; }
+  .crypto-pay[open] .crypto-summary::after { transform: rotate(180deg); }
+  .crypto-body { margin-top: 22px; }
+  .crypto-sub { color: var(--muted); margin: 0 auto 24px; font-size: 0.94rem; max-width: 430px; line-height: 1.5; }
+  .crypto-prices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 24px; }
+  .crypto-price { background: #0B131B; border: 1px solid #1A2531; border-radius: 12px; padding: 14px 8px; display: flex; flex-direction: column; gap: 6px; }
+  .crypto-price-tier { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+  .crypto-price-amt { font-size: 1.35rem; font-weight: 800; color: #EAF0F6; display: flex; align-items: baseline; justify-content: center; gap: 4px; }
+  .crypto-price-amt small { font-size: 0.62rem; font-weight: 600; color: var(--teal); letter-spacing: 0.05em; }
+  .crypto-addr { text-align: left; margin-bottom: 18px; }
+  .crypto-chain { display: block; font-size: 0.78rem; color: var(--teal); margin-bottom: 7px; letter-spacing: .03em; }
+  .crypto-copyrow { display: flex; align-items: stretch; gap: 8px; }
+  .crypto-copyrow code { flex: 1 1 auto; min-width: 0; display: block; white-space: nowrap; overflow-x: auto; padding: 11px 12px; border-radius: 8px; background: #0B1219; border: 1px solid #1A2531; font-size: 0.85rem; color: #E7EDF3; font-family: ui-monospace, monospace; }
+  .crypto-copy { flex: 0 0 auto; padding: 0 18px; border-radius: 8px; border: 1px solid #22d3ee; background: transparent; color: #22d3ee; font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: background .12s, color .12s; }
+  .crypto-copy:hover { background: rgba(34,211,238,0.12); }
+  .crypto-copy.copied { background: #22d3ee; color: #04222a; border-color: #22d3ee; }
+  .crypto-how { color: var(--muted); margin: 0; font-size: 0.92rem; }
+  .crypto-how a { color: var(--teal); }
+  @media (max-width: 980px) { .plans { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .plans { grid-template-columns: 1fr; } }
+</style>

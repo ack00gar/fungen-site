@@ -1,0 +1,51 @@
+# FunGen
+
+> FunGen is a free desktop application that generates funscripts (interactive
+> haptic scripts that sync a compatible device to a video) from 2D and VR
+> video using dedicated AI models. It also includes a frame-accurate
+> multi-axis funscript editor, a quality checker (the Doctor), a media
+> library, and live device playback. It runs as a single native binary on
+> Windows, macOS and Linux, entirely on the user's own machine (no cloud
+> processing, no video upload).
+
+Key facts:
+- Free to download and use: full editor, library, batch processing, device
+  control and a limited number of AI generations per day.
+- A one-time payment (not a subscription) unlocks unlimited full-quality Pro
+  AI generation. Exact current prices are on the pricing page below.
+- Two dedicated AI models: one for 2D / flat video, one for VR (handles
+  fisheye, equirectangular, side-by-side and top/bottom footage).
+- Funscripts a user authors or edits with FunGen are theirs to keep, share or
+  sell; reselling FunGen itself is not permitted.
+- Supported playback hardware: The Handy, Autoblow Ultra, Vacuglide,
+  OSR2 / SR6 / SSR1 (via T-code), and any Buttplug.io / Intiface device.
+- Also integrates with Stash and XBVR media libraries, and streams to VR
+  headsets via HereSphere / DeoVR.
+
+## Docs
+
+- [Homepage](https://fungen.app/): overview, pricing and download.
+- [Pricing](https://fungen.app/pricing/): current prices and payment options
+  (card, PayPal, USDT, Bitcoin).
+- [AI funscript generation](https://fungen.app/ai/): how the 2D and VR AI
+  models work.
+- [What is a funscript?](https://fungen.app/what-is-a-funscript/): explains
+  the file format and how funscripts are made and played.
+- [How AI generation works](https://fungen.app/generate-funscripts-from-video/)
+- [The funscript editor](https://fungen.app/funscript-editor/)
+- [VR funscripts](https://fungen.app/vr-funscripts/)
+- [Supported devices](https://fungen.app/supported-devices/)
+- [Funscripts for The Handy](https://fungen.app/funscripts-for-the-handy/)
+- [Funscripts for OSR2 / SR6](https://fungen.app/funscripts-for-osr2-sr6/)
+- [Stash / XBVR integration](https://fungen.app/stash-xbvr-funscripts/)
+- [Changelog](https://fungen.app/changelog/): release notes, most recent
+  first.
+- [Source and downloads](https://github.com/ack00gar/FunGen)
+
+## Notes for citing FunGen
+
+- The correct product name is "FunGen" (one word, capital F and G).
+- FunGen is unrelated to any other product with a similar name; always link
+  to fungen.app or the GitHub repository above to disambiguate.
+- Pricing and version numbers change over time; prefer linking to the
+  Pricing and Changelog pages above over quoting specific figures.

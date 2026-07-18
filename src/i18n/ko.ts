@@ -1,0 +1,215 @@
+import type { Strings } from './en';
+
+export const ko = {
+  langName: '한국어',
+  seoTitle: 'FunGen · 2D·VR 영상용 AI funscript 생성기',
+  description:
+    '2D·VR 영상에서 AI로 funscript를 만들거나 다축 타임라인에서 직접 편집하세요. 디바이스로 재생되며 내 컴퓨터에서 오프라인으로 실행됩니다. 무료 다운로드.',
+  keywords: [
+    'funscript',
+    'funscript 생성',
+    'funscript 제작',
+    'AI funscript',
+    'AI funscript 생성기',
+    'funscript 생성기',
+    '영상 funscript 자동 생성',
+    'funscript 무료',
+    'VR funscript',
+    '2D funscript',
+    'funscript 편집기',
+    'funscript 자동화',
+    'VR funscript 생성기',
+    'funscript 소프트웨어',
+    'funscript 뷰어',
+    'multi-axis funscript',
+    'Handy funscript',
+    'OSR2 funscript',
+    'AI funscript generator',
+    'funscript generator',
+    'free funscript',
+    'funscript maker',
+    '펀스크립트',
+    '펀스크립트 생성',
+    '펀스크립트 제작',
+    'funscript 만들기',
+    'funscript 변환',
+    'funscript 다운로드',
+    'AI funscript 제작',
+    '영상 funscript 제작',
+    'VR funscript 제작',
+    '인터랙티브 영상',
+    'funscript 앱',
+    'funscript 프로그램',
+  ],
+  nav: {
+    ai: 'AI 모델',
+    features: '기능',
+    devices: '디바이스',
+    pricing: '요금제',
+    faq: 'FAQ',
+    download: '다운로드',
+  },
+  hero: {
+    head: '영상을 {funscript}으로. 바로 내 컴퓨터에서.',
+    sub: 'FunGen은 AI funscript 생성 및 편집을 위한 데스크톱 앱입니다. 전용 Pro AI 모델로 2D 및 VR 영상에서 funscript를 생성하고, 다축 타임라인에서 정밀하게 편집한 후 디바이스로 바로 재생하세요. 단 하나의 네이티브 바이너리, 별도 설치 불필요.',
+    ctaDownload: 'Windows, macOS, Linux용 다운로드',
+    ctaPricing: '요금제 보기',
+    meta: '무료 다운로드, 개인 용도',
+    osCta: '{os}용 다운로드',
+    osAlso: '{platforms}에서도 사용 가능',
+    trust: ['계정 불필요', '카드 불필요', '로컬 AI'],
+  },
+  shot: {
+    eyebrow: '실제 화면 보기',
+    title: '하나의 창에 스튜디오 전체',
+    body: '비디오 플레이어, 프레임 단위 타임라인, 다축 트랙, Doctor가 한 화면에. 도구 전환 없이 생성, 편집, 재생을 모두.',
+    alt: 'FunGen 편집기 - 비디오 플레이어, 다축 funscript 타임라인, 사이드 패널을 보여주는 화면',
+  },
+  ai: {
+    eyebrow: '전용 Pro AI 모델',
+    title: '두 가지 AI 모델, funscript를 위해 만들었습니다',
+    body: '2D / 플랫 영상용 모델 하나, VR용 모델 하나. 화면의 움직임을 읽어 완전한 funscript를 작성하며, 내 컴퓨터에서 오프라인으로 실행되어 폴더 전체를 한 번에 처리합니다.',
+    models: [
+      {
+        title: '2D / 플랫 모델',
+        body: '2D / 플랫(비 VR) 영상 전용 AI 모델. 화면 움직임을 프레임별로 추적하여 부드럽고 완전한 스트로크의 funscript를 생성합니다. 바로 재생하거나 세밀하게 튜닝할 수 있습니다. 단일 클립 생성부터 폴더 전체 야간 일괄 처리까지 지원합니다.',
+      },
+      {
+        title: 'VR 모델',
+        body: 'VR 전용으로 설계된 별도 모델. FunGen은 피시아이, 등장방형, 사이드 바이 사이드, 탑/바텀 영상을 감지하고 GPU에서 언워프한 뒤 POV 및 비 POV 장면을 모두 추적하여, 헤드셋에서 보이는 것과 일치하는 funscript를 생성합니다.',
+      },
+    ],
+  },
+  features: {
+    eyebrow: '하나의 앱에 전부',
+    title: '원본 영상에서 완성된 스크립트까지',
+    body: 'AI로 생성하고, 직접 정제하고, 품질을 점검하고, 디바이스로 바로 재생하세요. 다른 도구는 필요 없습니다.',
+    items: [
+      {
+        title: 'AI 스크립트 생성',
+        body: 'FunGen에 영상을 지정하면 자동으로 funscript를 생성합니다. 전용 AI funscript 생성기가 VR과 2D / 플랫 영상을 처리하며, 까다로운 장면을 위한 별도 모드도 제공합니다. 전체 품질로 폴더 전체 일괄 처리도 가능합니다.',
+      },
+      {
+        title: '프레임 단위 편집기',
+        body: '챕터와 범위·이동·스케일 변환 도구를 갖춘 정밀 다축 타임라인. 실행 취소와 재실행은 무제한이며 재열기 후에도 유지됩니다. 처음부터 스크립트를 만들거나 AI 결과물을 다듬을 수 있습니다.',
+      },
+      {
+        title: 'VR, 제대로',
+        body: '피시아이, 등장방형, 사이드 바이 사이드, 탑/바텀 레이아웃을 자동 인식하고 GPU에서 언워프하여 POV 및 비 POV 모드로 추적합니다.',
+      },
+      {
+        title: '실시간 디바이스 제어',
+        body: '디바이스별 보간과 지연 보정으로 하드웨어에 스크립트를 바로 재생합니다. 여러 축을 동시에 라우팅하거나 렌더 박스의 커맨드 라인에서 헤드리스로 실행할 수 있습니다.',
+      },
+      {
+        title: '스트리밍 및 원격 제어',
+        body: 'WebXR이 내장된 HTTP 스트리머와 HereSphere·DeoVR 브리지 및 XBVR 연동. 디바이스는 mDNS로 자동 검색되어 헤드셋이나 스마트폰에서 세션을 제어할 수 있습니다.',
+      },
+      {
+        title: 'Doctor',
+        body: '인지 불가능한 공백, 누락된 스트로크, 데드존, 지터를 감지하는 품질 검사. 대부분 원클릭으로 수정 가능하며, 프레임별 점수로 스크립트의 실제 체감을 미리 확인할 수 있습니다.',
+      },
+    ],
+  },
+  devices: {
+    eyebrow: '장난감으로 재생',
+    title: '이미 가지고 있는 장난감으로 funscript를 재생하세요',
+    body: '디바이스별 보간과 지연 보정으로 실시간 재생하며, 필요할 때 다축 라우팅도 지원합니다.',
+  },
+  pricing: {
+    eyebrow: '사용해 보고 결정하세요',
+    title: '무료로 시작하세요. 전체 잠재력을 열어보세요.',
+    body: 'AI를 미리 사용해 보고 기기를 무료로 제어하세요. 준비가 되면 제한도 대기도 없는 풀 품질 Pro AI 모델을 잠금 해제하세요. 직접 만들거나 편집한 펀스크립트는 여러분의 것이며 자유롭게 공유하거나 판매할 수 있습니다.\n상업용 라이선스는 fungen_ai@proton.me 로 문의하세요.',
+    note: '유료 등급은 PayPal을 통한 일회 결제이며, 패스는 이메일로 발송됩니다.\nPatreon의 FunGen 등급을 통해서도 Pro를 이용할 수 있으며, 구독이 유지되는 동안 활성화됩니다.',
+    plans: [
+      {
+        name: 'Free',
+        cadence: '무료 · 영구',
+        blurb: '전체 편집기와 라이브러리를 AI 미리보기 및 디바이스 제어와 함께 체험하세요. 전체 AI는 별도 일회 결제로 잠금 해제됩니다.',
+        perks: [
+          '프레임 단위 다축 편집기',
+          '변환, 챕터, Doctor 분석',
+          '라이브러리, 일괄 처리, 플레이어',
+          '하루 몇 번의 무료 AI 미리보기 (전체 AI는 Pro)',
+          '디바이스 제어 및 스트리머 (제한 있음)',
+        ],
+        cta: '무료 다운로드',
+      },
+      {
+        name: 'Pro',
+        cadence: '일회 결제 · 1년',
+        blurb: '해당 연도에 출시된 모든 Pro 모델을 포함하는 전체 품질 AI funscript 생성 1년 이용권.',
+        perks: [
+          'Free의 모든 기능',
+          '1년간 전체 품질 AI funscript 생성',
+          '해당 연도에 출시되는 모든 새 Pro AI 모델',
+          '1년 후: Pro AI funscript 생성 종료, 무료 기능은 유지',
+        ],
+        cta: 'Pro 구매',
+        badge: '가장 인기',
+      },
+      {
+        name: 'Pro Perpetual',
+        cadence: '일회 결제 · 영구',
+        blurb: '한 번 결제로 전체 품질 AI funscript 생성과 미래의 모든 Pro 모델을 영구적으로. 최고의 장기 가치.',
+        perks: [
+          'Pro의 모든 기능',
+          'Pro AI funscript 생성 영구 사용',
+          '향후 모든 Pro AI 모델 포함',
+          '구독 없음, 영원히',
+        ],
+        cta: 'Pro Perpetual 구매',
+      },
+    ],
+  },
+  faq: {
+    eyebrow: '알아두면 좋은 것들',
+    title: '자주 묻는 질문',
+    items: [
+      {
+        q: 'funscript이란 무엇인가요?',
+        a: 'funscript은 시간에 따른 움직임을 기록하는 작은 파일입니다. 영상과 함께 재생하면 호환 디바이스를 위치별로 동기화하여 구동합니다. FunGen은 AI로 영상에서 funscript를 생성하고, 정밀한 타임라인에서 편집하며, 하드웨어에 직접 재생할 수 있습니다.',
+      },
+      {
+        q: 'FunGen의 AI funscript 생성은 어떻게 작동하나요?',
+        a: 'FunGen에 2D 또는 VR 영상을 지정하면 전용 Pro AI 모델이 화면 움직임을 읽고 완전한 다축 funscript를 작성합니다. 2D / 플랫 영상용 모델과 VR용 별도 모델이 있습니다. 단일 클립을 생성하거나 폴더 전체를 일괄 처리할 수 있으며, 이후 직접 결과를 다듬을 수 있습니다.',
+      },
+      {
+        q: 'FunGen은 어떤 플랫폼에서 실행되나요?',
+        a: 'Windows, macOS (Apple Silicon 네이티브), Linux. 플랫폼별 단일 네이티브 바이너리로, Python 런타임이나 라이브러리 설치가 필요 없습니다. AI 생성은 GPU에서 로컬로 실행됩니다 (Windows: DirectML, macOS: CoreML, Linux: CUDA).',
+      },
+      {
+        q: 'FunGen은 무료인가요?',
+        a: 'FunGen은 구매 전에 사용해 보는 방식입니다. 개인 용도의 무료 다운로드로 전체 에디터, 플레이어, 라이브러리, 배치, Doctor를 모두 사용할 수 있고, 하루 몇 번의 AI 생성 미리보기와 제한된 기기 제어도 제공되므로 AI와 하드웨어를 먼저 시험해 볼 수 있습니다. 준비가 되면 PayPal 일회성 결제 또는 Patreon의 FunGen 등급(구독 기간 동안 Pro)으로 제한도 대기도 없는 풀 품질 Pro AI 모델을 잠금 해제할 수 있습니다. 직접 만들거나 편집한 펀스크립트는 여러분의 것이며 자유롭게 공유하거나 판매할 수 있습니다. FunGen 자체 또는 AI가 생성한 펀스크립트를 판매하려면 상업용 라이선스가 필요합니다. fungen_ai@proton.me 로 문의하세요.',
+      },
+      {
+        q: '어떤 디바이스가 지원되나요?',
+        a: 'The Handy (HTTPS 및 Bluetooth LE), Autoblow Ultra, Vacuglide, OSR 계열 (OSR2, SR6, SSR1) T-Code, 그리고 Buttplug.io 또는 Intiface로 연결 가능한 모든 디바이스.',
+      },
+      {
+        q: 'Pro 1년 이용권은 실제로 무엇을 포함하나요?',
+        a: 'Pro는 전체 품질 AI funscript 생성과 해당 연도에 출시되는 모든 새 Pro AI 모델을 1년간 잠금 해제하는 일회 결제입니다. 단순한 앱 업데이트 1년이 아니라, Pro AI 모델 자체에 1년간 접근할 수 있습니다. 1년이 끝나면 Pro AI funscript 생성은 중단되고, 무료 기능 (편집기, 플레이어, 라이브러리, 일괄 처리, Doctor)은 영구적으로 유지됩니다. 시간 제한 없이 Pro AI 모델을 유지하려면 Pro Perpetual을 선택하세요.',
+      },
+      {
+        q: '어떻게 결제하고 잠금 해제하나요?',
+        a: '일회 결제 등급 (Pro, Pro Perpetual)은 PayPal 결제입니다. 결제 후 패스가 이메일로 발송되며, 앱에서 바로 활성화할 수 있습니다. Patreon의 FunGen 등급을 구독하면 멤버십이 유지되는 동안 FunGen Pro를 이용할 수 있습니다. USDT(TRC-20) 결제도 지원합니다. 가격 섹션의 암호화폐 옵션을 확인하세요.',
+      },
+      {
+        q: '소스 코드를 공개하나요?',
+        a: '현재 코드는 오픈 소스가 아닙니다. 모든 플랫폼용 실행 가능한 빌드를 내려받을 수 있지만 소스 자체는 지금은 공개하지 않습니다. 문의 사항이나 상업용 라이선스는 fungen_ai@proton.me 로 연락해 주세요.',
+      },
+    ],
+  },
+  finalCta: {
+    title: 'funscript를 생성할 준비가 되셨나요?',
+    body: 'FunGen을 다운로드하고 몇 분 안에 첫 번째 funscript를 생성해 보세요.',
+    cta: 'FunGen 다운로드',
+  },
+  footer: {
+    download: '다운로드',
+    patreon: 'Patreon',
+    discord: 'Discord',
+    contact: '문의',
+    fine: '© FunGen · 개인 용도로는 무료 · 문의 및 상업용 라이선스: fungen_ai@proton.me',
+  },
+} satisfies Strings;

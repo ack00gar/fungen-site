@@ -1,0 +1,87 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = 'Funscripts VR : les générer et les lire dans votre casque - FunGen';
+const description =
+  'Comment fonctionnent les funscripts VR et comment créer les vôtres. FunGen génère des funscripts à partir de vidéos VR fisheye, équirectangulaires, côte à côte et haut/bas, en POV comme en non-POV.';
+const canonicalPath = '/fr/vr-funscripts';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Funscripts VR : les générer et les lire dans votre casque',
+  description,
+  inLanguage: 'fr',
+  dateModified: '2026-07-17',
+  mainEntityOfPage: 'https://fungen.app/fr/vr-funscripts',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'Funscripts VR', path: '/fr/vr-funscripts' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="Funscripts VR"
+  lang="fr"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    Un <strong>funscript VR</strong> repose sur la même idée que n'importe quel autre
+    <a href={`${base}/fr/what-is-a-funscript/`}>funscript</a> - des données de mouvement
+    synchronisées à une vidéo - mais pensé pour les vidéos immersives en casque, où la projection de
+    la caméra et la profondeur rendent le scripting plus difficile.
+    <a href={`${base}/fr/`}>FunGen</a> les génère automatiquement, pour scripter votre propre
+    bibliothèque VR au lieu d'attendre que quelqu'un d'autre le fasse.
+  </p>
+
+  <h2>Ce qui rend la VR différente</h2>
+  <p>
+    Une vidéo VR n'est pas un rectangle plat. Elle est déformée pour le casque - typiquement
+    <strong>fisheye</strong>, <strong>équirectangulaire</strong>, en stéréo <strong>côte à côte</strong> ou
+    <strong>haut/bas</strong> - et l'action se joue dans la profondeur du POV. Un modèle de
+    scripting doit comprendre cette géométrie pour suivre le mouvement correctement ; c'est pourquoi
+    une approche 2D générique s'écroule sur la VR.
+  </p>
+
+  <h2>Comment FunGen gère la VR</h2>
+  <p>
+    FunGen embarque un <strong>modèle d'IA dédié à la VR</strong>, distinct de son modèle 2D / plat.
+    Il détecte le format tout seul, redresse l'image sur le GPU et suit les scènes
+    <strong>POV comme non-POV</strong>, pour que le funscript obtenu corresponde à ce que vous voyez
+    réellement dans le casque. La sortie est multi-axes, prête à lire ou à peaufiner.
+  </p>
+  <ul>
+    <li>Détection automatique du fisheye, de l'équirectangulaire, du côte à côte et du haut/bas.</li>
+    <li>Dewarp GPU + tracking réglés pour la profondeur du casque et le cadrage POV.</li>
+    <li>Sortie multi-axes pleine qualité, à affiner sur la timeline.</li>
+    <li>Traitez un dossier entier de scènes VR pendant la nuit.</li>
+  </ul>
+
+  <h2>Lire des funscripts VR dans un casque</h2>
+  <p>
+    Une fois généré, un funscript VR se lit comme n'importe quel autre. Le streamer intégré de
+    FunGen plus les passerelles <strong>HereSphere</strong> et <strong>DeoVR</strong> (et
+    l'intégration XBVR) synchronisent le script avec la vidéo dans votre casque et pilotent votre
+    appareil - <strong>The Handy</strong>, <strong>OSR2 / SR6</strong>, <strong>Autoblow</strong>,
+    ou tout appareil compatible <strong>Buttplug.io / Intiface</strong> - avec compensation de
+    latence pour rester en rythme.
+  </p>
+
+  <h2>Créez vos propres funscripts VR</h2>
+  <p>
+    Donnez un clip VR à FunGen, lancez un aperçu gratuit de 20 secondes pour vérifier le tracking,
+    puis générez la scène complète. Tout tourne en local sur votre propre machine : votre
+    bibliothèque VR reste privée. Consultez
+    <a href={`${base}/fr/generate-funscripts-from-video/`}>le guide complet</a> pour le pas-à-pas, ou
+    <a href={`${base}/fr/`}>téléchargez FunGen</a> et essayez-le sur vos propres vidéos.
+  </p>
+</Article>

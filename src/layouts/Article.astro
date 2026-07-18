@@ -1,0 +1,131 @@
+---
+// Standalone content page (guides / explainers) for SEO ranking surface, in
+// any locale. Wraps Layout in `page="article"` mode (own canonical, no landing
+// FAQ/Software JSON-LD) and adds a sticky nav back to the (locale) landing, a
+// prose container, a download CTA, and a slim footer. Reuses the global
+// .btn / .wrap / :root styles defined in Layout.
+import Layout from './Layout.astro';
+import Wordmark from '../components/Wordmark.astro';
+import { LINKS } from '../consts';
+import { DEFAULT_LOCALE, t, type Locale } from '../i18n';
+
+interface Props {
+  title: string;
+  description: string;
+  heading: string;
+  canonicalPath: string;
+  /** Locale of this article's content; drives <html lang>, the chrome
+   *  strings, and where the nav/footer links point ('/', '/ja/', ...). */
+  lang?: Locale;
+  articleLd?: Record<string, unknown>;
+  breadcrumbs?: { name: string; path: string }[];
+  /** Skip the bottom "Download / See pricing" CTA row - for a page (like
+   *  /pricing or /ai) where that CTA would be redundant or point back at
+   *  itself. */
+  hideCtaRow?: boolean;
+}
+const {
+  title,
+  description,
+  heading,
+  canonicalPath,
+  lang = DEFAULT_LOCALE,
+  articleLd,
+  breadcrumbs,
+  hideCtaRow = false,
+} = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+// The locale's landing page: nav anchors + the footer link point there.
+const home = lang === DEFAULT_LOCALE ? `${base}/` : `${base}/${lang}/`;
+const nav = t(lang).nav;
+// Article-only chrome strings (not part of the landing dictionaries).
+const CHROME: Record<Locale, { dl: string; pricing: string; foot: string }> = {
+  en: { dl: 'Download FunGen - free', pricing: 'See pricing', foot: 'Free download, for personal use' },
+  de: { dl: 'FunGen herunterladen - kostenlos', pricing: 'Preise ansehen', foot: 'Kostenloser Download, für die private Nutzung' },
+  es: { dl: 'Descargar FunGen - gratis', pricing: 'Ver precios', foot: 'Descarga gratuita, para uso personal' },
+  fr: { dl: 'Télécharger FunGen - gratuit', pricing: 'Voir les tarifs', foot: 'Téléchargement gratuit, pour un usage personnel' },
+  it: { dl: 'Scarica FunGen - gratis', pricing: 'Vedi i prezzi', foot: 'Download gratuito, per uso personale' },
+  ja: { dl: 'FunGenをダウンロード - 無料', pricing: '料金を見る', foot: '無料ダウンロード、個人利用向け' },
+  ko: { dl: 'FunGen 다운로드 - 무료', pricing: '가격 보기', foot: '무료 다운로드, 개인 용도' },
+  pt: { dl: 'Baixar FunGen - grátis', pricing: 'Ver preços', foot: 'Download gratuito, para uso pessoal' },
+  ru: { dl: 'Скачать FunGen - бесплатно', pricing: 'Посмотреть цены', foot: 'Бесплатная загрузка, для личного использования' },
+  zh: { dl: '下载 FunGen - 免费', pricing: '查看价格', foot: '免费下载，供个人使用' },
+};
+const chrome = CHROME[lang];
+---
+
+<Layout {lang} {title} {description} page="article" {canonicalPath} {articleLd} {breadcrumbs}>
+  <header class="doc-nav">
+    <div class="wrap doc-nav-inner">
+      <a class="doc-logo" href={home}>
+        <img src={`${base}/icon-256.png`} alt="FunGen logo" width="28" height="28" />
+        <span><Wordmark /></span>
+      </a>
+      <nav class="doc-links">
+        <a href={`${home}#ai`}>{nav.ai}</a>
+        <a href={`${home}#features`}>{nav.features}</a>
+        <a href={`${home}#pricing`}>{nav.pricing}</a>
+      </nav>
+      <a class="btn btn-primary" href={LINKS.releases} target="_blank" rel="noopener" data-umami-event="download-doc">{nav.download}</a>
+    </div>
+  </header>
+
+  <main class="doc">
+    <article class="wrap doc-prose">
+      <h1>{heading}</h1>
+      <slot />
+      {!hideCtaRow && (
+        <div class="doc-cta">
+          <a class="btn btn-primary" href={LINKS.releases} target="_blank" rel="noopener" data-umami-event="download-doc-cta">{chrome.dl}</a>
+          <a class="btn btn-ghost" href={`${home}#pricing`}>{chrome.pricing}</a>
+        </div>
+      )}
+    </article>
+    <!-- Full-width slot, OUTSIDE the 760px prose column: for a page that
+         embeds a landing-style section (pricing cards, the AI model grid)
+         rather than pure reading text - `.doc-prose`'s narrow column and
+         `is:global` paragraph styling would otherwise squeeze/restyle it. -->
+    <slot name="full" />
+  </main>
+
+  <footer class="doc-foot">
+    <div class="wrap">© FunGen · <a href={home}>fungen.app</a> · {chrome.foot}</div>
+  </footer>
+</Layout>
+
+<style is:global>
+  .doc-nav {
+    position: sticky; top: 0; z-index: 20;
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    backdrop-filter: saturate(140%) blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .doc-nav-inner { display: flex; align-items: center; gap: 18px; height: 64px; }
+  .doc-logo { display: flex; align-items: center; gap: 8px; font-weight: 800; color: var(--text); }
+  .doc-links { display: flex; gap: 18px; color: var(--muted); font-size: 0.95rem; }
+  .doc-links a:hover { color: var(--text); }
+  .doc-nav .btn { margin-left: auto; }
+  .doc { padding: 44px 0 56px; }
+  .doc-prose { max-width: 760px; }
+  .doc-prose h1 { font-size: clamp(2rem, 5vw, 2.7rem); letter-spacing: -0.02em; margin: 0 0 20px; }
+  .doc-prose h2 { font-size: 1.55rem; letter-spacing: -0.01em; margin: 38px 0 12px; }
+  .doc-prose h3 { font-size: 1.15rem; margin: 26px 0 8px; }
+  .doc-prose p, .doc-prose li { color: var(--muted); font-size: 1.06rem; line-height: 1.72; }
+  .doc-prose p { margin: 0 0 16px; }
+  .doc-prose ul { margin: 0 0 18px; padding-left: 22px; }
+  .doc-prose li { margin: 7px 0; }
+  /* :not(.btn) so a .btn-primary/.btn-ghost inside the prose column (the
+     .doc-cta row) keeps ITS OWN color instead of this rule's higher
+     specificity (class+tag beats .btn-primary's single class) overriding
+     it - that bug painted the primary button's text the same teal as its
+     teal background, i.e. invisible. */
+  .doc-prose a:not(.btn) { color: var(--teal); }
+  .doc-prose a:not(.btn):hover { text-decoration: underline; }
+  .doc-prose strong { color: var(--text); font-weight: 650; }
+  .doc-prose .lead { font-size: 1.18rem; color: var(--text); }
+  .doc-cta { display: flex; flex-wrap: wrap; gap: 12px; margin: 40px 0 0; padding-top: 28px; border-top: 1px solid var(--line); }
+  .doc-foot { border-top: 1px solid var(--line); padding: 26px 0; color: var(--muted); font-size: 0.9rem; }
+  .doc-foot a { color: var(--muted); }
+  .doc-foot a:hover { color: var(--text); }
+  @media (max-width: 620px) { .doc-links { display: none; } }
+</style>

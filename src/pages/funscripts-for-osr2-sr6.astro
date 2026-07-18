@@ -1,0 +1,82 @@
+---
+import Article from '../layouts/Article.astro';
+
+const title = 'Multi-axis funscripts for OSR2 / SR6 - generate with FunGen';
+const description =
+  'Generate and edit multi-axis funscripts for the OSR2, SR6 and SSR1 with FunGen. AI writes stroke plus roll, pitch and twist; FunGen routes each axis over T-Code.';
+const canonicalPath = '/funscripts-for-osr2-sr6';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Multi-axis funscripts for OSR2 / SR6 with FunGen',
+  description,
+  inLanguage: 'en',
+  dateModified: '2026-07-17',
+  mainEntityOfPage: 'https://fungen.app/funscripts-for-osr2-sr6',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'OSR2 / SR6', path: '/funscripts-for-osr2-sr6' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="Multi-axis funscripts for OSR2 / SR6"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    The OSR2 and SR6 shine on <strong>multi-axis</strong> scripts - not just stroke, but roll, pitch
+    and twist. <a href={`${base}/`}>FunGen</a> generates those extra axes with AI and routes each one
+    to your device over T-Code, so you get the full motion these builds were made for.
+  </p>
+
+  <h2>AI that writes more than the stroke</h2>
+  <p>
+    A basic <a href={`${base}/what-is-a-funscript/`}>funscript</a> is one axis - up and down. FunGen's
+    AI produces a <strong>multi-axis</strong> result: the main stroke plus secondary tracks (roll,
+    pitch, surge, sway, twist), each stored as its own companion file. On VR scenes especially, that
+    extra motion is what makes an OSR2 or SR6 feel three-dimensional instead of a piston.
+  </p>
+
+  <h2>Routing over T-Code</h2>
+  <p>
+    FunGen speaks <strong>T-Code</strong> to the OSR family - OSR2, SR6 and SSR1. You map each script
+    axis to a device axis (L0 stroke, R-axes for rotation, and so on), and FunGen streams them
+    together in sync. Per-device interpolation and latency compensation keep the axes coordinated
+    rather than drifting apart.
+  </p>
+  <ul>
+    <li>Pick which generated axes to route, and to which device channel.</li>
+    <li>Drive the OSR2's stroke + roll/twist, or the SR6's fuller range of motion.</li>
+    <li>Latency compensation per device so the axes stay together and on the beat.</li>
+  </ul>
+
+  <h2>Edit every axis on one timeline</h2>
+  <p>
+    The multi-axis timeline shows each track stacked, so you can refine roll or pitch independently -
+    overlay one axis on another, smooth or scale a single track, and chapter the scene. The
+    <strong>Funscript Doctor</strong> checks each axis against your device's limits and fixes most
+    issues in one click.
+  </p>
+
+  <h2>Generate from your own footage</h2>
+  <p>
+    Point FunGen at a 2D or VR clip, preview the tracking, then generate the full multi-axis script -
+    locally, on your own machine. See <a href={`${base}/generate-funscripts-from-video/`}>the how-to</a>
+    for the workflow, or <a href={`${base}/vr-funscripts/`}>VR funscripts</a> for the headset side.
+  </p>
+
+  <p>
+    <a href={`${base}/`}>Download FunGen</a> - free to try - and script multi-axis motion for your
+    OSR2 or SR6.
+  </p>
+</Article>

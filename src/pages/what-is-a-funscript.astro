@@ -1,0 +1,94 @@
+---
+import Article from '../layouts/Article.astro';
+
+const title = 'What is a funscript? The interactive video format explained';
+const description =
+  'A funscript is a small file that records motion over time and drives a compatible device in sync with a video. Learn the format, multi-axis scripts, and how funscripts are made.';
+const canonicalPath = '/what-is-a-funscript';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'What is a funscript?',
+  description,
+  inLanguage: 'en',
+  dateModified: '2026-07-17',
+  mainEntityOfPage: 'https://fungen.app/what-is-a-funscript',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'What is a funscript?', path: '/what-is-a-funscript' }];
+---
+
+<Article {title} {description} heading="What is a funscript?" {canonicalPath} {articleLd} {breadcrumbs}>
+  <p class="lead">
+    A <strong>funscript</strong> is a small text file that records motion over time. Played
+    alongside a video, it drives a compatible device in sync - position by position - so the
+    on-screen action and the device move together.
+  </p>
+
+  <h2>The format</h2>
+  <p>
+    A funscript is plain JSON with a list of <em>actions</em>: each action is a timestamp (in
+    milliseconds) and a position from <strong>0 to 100</strong>, where 0 and 100 are the two ends
+    of the stroke. A player reads the list, interpolates between points, and streams the result to
+    your hardware in real time. The file extension is <code>.funscript</code>, and because it is
+    just text it is tiny - a full-length scene is usually only a few hundred kilobytes.
+  </p>
+  <p>
+    A basic script controls one axis (up/down stroke). <strong>Multi-axis</strong> scripts add
+    extra tracks - roll, pitch, surge, sway, twist - for devices that support them, each stored as
+    its own companion file alongside the main one.
+  </p>
+
+  <h2>How funscripts are made</h2>
+  <p>There are two ways to create one:</p>
+  <ul>
+    <li>
+      <strong>By hand</strong>, in a funscript editor - placing and tuning points on a timeline
+      against the video. Precise, but slow.
+    </li>
+    <li>
+      <strong>With AI</strong> - a model watches the video and writes the motion automatically,
+      which you can then refine by hand. This is what <a href={`${base}/`}>FunGen</a> does: point it
+      at a 2D or VR video and it generates a full, multi-axis funscript in minutes.
+    </li>
+  </ul>
+
+  <h2>What plays a funscript</h2>
+  <p>
+    Funscripts are device-agnostic. The same file drives <strong>The Handy</strong>,
+    the <strong>OSR2 / SR6 / SSR1</strong> family over T-Code, <strong>Autoblow</strong>,
+    <strong>Vacuglide</strong>, and anything reachable through
+    <strong>Buttplug.io / Intiface</strong>. Players and bridges like HereSphere and DeoVR sync the
+    script to the video for you, including in VR headsets.
+  </p>
+
+  <h2>What gets scripted</h2>
+  <p>
+    Any video with rhythmic motion is a candidate: <strong>VR</strong> and <strong>2D / POV</strong>
+    scenes, <strong>cock hero</strong> and <strong>PMV</strong> (beat-synced) compilations,
+    <strong>JOI</strong>, and tease/edging videos. The community shares and discusses scripts on
+    forums like Eroscripts; tools like FunGen let you generate your own from any clip instead of
+    hunting for an existing one.
+  </p>
+
+  <h2>Funscript vs. the video</h2>
+  <p>
+    A funscript never contains video - it is only motion data, so it is shared as a separate small
+    file you pair with your own copy of the scene. That separation is also why one script can be
+    reused across players and devices: the script describes <em>what to do</em>, and each device
+    decides <em>how</em>, with its own interpolation and latency handling.
+  </p>
+
+  <p>
+    <strong>Want to make your own?</strong> <a href={`${base}/`}>FunGen</a> generates funscripts from
+    2D and VR video with dedicated AI models, then lets you edit them on a multi-axis timeline and
+    play straight to your device - free to try, and it runs entirely on your own machine.
+  </p>
+</Article>

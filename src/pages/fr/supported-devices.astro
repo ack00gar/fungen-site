@@ -1,0 +1,95 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = 'Appareils compatibles - ce que FunGen pilote (Handy, OSR2/SR6, Buttplug)';
+const description =
+  'Le matériel sur lequel FunGen lit les funscripts : The Handy, Autoblow, Vacuglide, les OSR2/SR6/SSR1 via T-Code, et tout appareil Buttplug.io / Intiface - avec compensation de latence.';
+const canonicalPath = '/fr/supported-devices';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Les appareils compatibles avec FunGen',
+  description,
+  inLanguage: 'fr',
+  dateModified: '2026-07-17',
+  mainEntityOfPage: 'https://fungen.app/fr/supported-devices',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'Appareils compatibles', path: '/fr/supported-devices' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="Les appareils compatibles avec FunGen"
+  lang="fr"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    FunGen lit les <a href={`${base}/fr/what-is-a-funscript/`}>funscripts</a> directement sur votre
+    matériel, avec interpolation et compensation de latence par appareil pour que le mouvement reste
+    en rythme avec la vidéo. Il fonctionne avec l'équipement que vous possédez déjà :
+  </p>
+
+  <h2>The Handy</h2>
+  <p>
+    Connexion en <strong>HTTPS (API Handy Connect)</strong> ou <strong>Bluetooth LE</strong>, avec
+    une compensation de latence réglée pour l'aller-retour du Handy. Générez un script de course
+    pour n'importe quelle vidéo 2D ou VR et lisez-le depuis le canapé ou un casque.
+    <a href={`${base}/fr/funscripts-for-the-handy/`}>En savoir plus sur FunGen + The Handy →</a>
+  </p>
+
+  <h2>OSR2 / SR6 / SSR1</h2>
+  <p>
+    Les machines T-Code sont là où le <strong>multi-axes</strong> brille. L'IA de FunGen écrit la
+    course plus le roulis, le tangage et la torsion, et route chaque axe vers votre appareil pour un
+    mouvement complet, pas juste un piston.
+    <a href={`${base}/fr/funscripts-for-osr2-sr6/`}>En savoir plus sur FunGen + OSR2 / SR6 →</a>
+  </p>
+
+  <h2>Autoblow</h2>
+  <p>
+    Pilotez l'<strong>Autoblow Ultra</strong> depuis sa piste de course. Générez le script avec
+    l'IA, affinez-le sur la timeline et lisez-le en synchro - le même workflow tout-en-un que pour
+    chaque autre appareil.
+  </p>
+
+  <h2>Vacuglide</h2>
+  <p>
+    FunGen prend en charge le <strong>Vacuglide</strong> directement : un script généré ou fait main
+    le pilote avec la même interpolation et la même gestion de latence que le reste.
+  </p>
+
+  <h2>Buttplug.io / Intiface</h2>
+  <p>
+    Au-delà des intégrations natives, FunGen parle à <strong>Buttplug.io / Intiface</strong> - la
+    passerelle ouverte vers une longue liste de sextoys grand public. Si votre appareil fonctionne
+    avec Intiface, FunGen peut le piloter depuis un funscript, ce qui en fait un
+    <a href={`${base}/fr/funscript-editor/`}>éditeur et lecteur de funscript</a> pratique pour le
+    matériel qu'il n'intègre pas nativement.
+  </p>
+
+  <h2>Comment les appareils restent synchronisés</h2>
+  <p>
+    Quel que soit l'appareil, FunGen applique une <strong>interpolation par appareil</strong> (le
+    mouvement est lissé selon ce que le matériel sait faire) et une
+    <strong>compensation de latence</strong> (pour que l'action tombe sur le rythme). Un streamer
+    intégré peut piloter une session depuis un téléphone ou un casque VR pendant que l'appareil
+    suit, et le <strong>Funscript Doctor</strong> note un script par rapport aux limites de votre
+    appareil précis avant la lecture.
+  </p>
+
+  <p>
+    <a href={`${base}/fr/`}>Téléchargez FunGen</a> et lisez sur l'appareil que vous possédez déjà -
+    gratuit à l'essai.
+  </p>
+</Article>

@@ -1,0 +1,85 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = 'VR funscript: 생성부터 헤드셋 재생까지 - FunGen';
+const description =
+  'VR funscript의 원리와 직접 만드는 방법. FunGen은 어안·등장방형·좌우 분할·상하 분할 VR 영상에서 POV·비POV 씬 모두 funscript를 생성합니다.';
+const canonicalPath = '/ko/vr-funscripts';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'VR funscript: 생성부터 헤드셋 재생까지',
+  description,
+  inLanguage: 'ko',
+  dateModified: '2026-07-17',
+  mainEntityOfPage: 'https://fungen.app/ko/vr-funscripts',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'VR funscript', path: '/ko/vr-funscripts' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="VR funscript"
+  lang="ko"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    <strong>VR funscript</strong>도 개념은 다른
+    <a href={`${base}/ko/what-is-a-funscript/`}>funscript</a>와 같습니다 - 영상에 동기화된 모션
+    데이터죠. 다만 카메라 프로젝션과 깊이 때문에 스크립트 작업이 훨씬 까다로운 몰입형 헤드셋
+    영상을 위한 것입니다. <a href={`${base}/ko/`}>FunGen</a>은 이를 자동으로 생성해 주므로, 누군가
+    만들어 주길 기다리는 대신 내 VR 라이브러리를 직접 스크립트로 만들 수 있습니다.
+  </p>
+
+  <h2>VR은 무엇이 다른가</h2>
+  <p>
+    VR 영상은 평평한 직사각형이 아닙니다. 헤드셋에 맞게 왜곡되어 있고 - 보통
+    <strong>어안(fisheye)</strong>, <strong>등장방형(equirectangular)</strong>, <strong>좌우 분할(side-by-side)</strong>
+    또는 <strong>상하 분할(top/bottom)</strong> 스테레오 - 동작은 POV 깊이 속에서 일어납니다.
+    스크립트 모델이 이 기하 구조를 이해해야 움직임을 제대로 추적할 수 있으며, 범용 2D 접근이
+    VR에서 무너지는 이유가 바로 이것입니다.
+  </p>
+
+  <h2>FunGen의 VR 처리 방식</h2>
+  <p>
+    FunGen에는 2D/플랫 모델과 별개인 <strong>VR 전용 AI 모델</strong>이 탑재되어 있습니다.
+    레이아웃을 스스로 감지하고, GPU에서 영상 왜곡을 펴고,
+    <strong>POV와 비POV</strong> 씬을 모두 추적하므로, 생성된 funscript가 헤드셋에서 실제로
+    보이는 장면과 일치합니다. 결과물은 다축이며, 바로 재생하거나 미세 조정할 수 있습니다.
+  </p>
+  <ul>
+    <li>어안, 등장방형, 좌우 분할, 상하 분할을 자동 감지합니다.</li>
+    <li>헤드셋 깊이와 POV 구도에 맞춰 튜닝된 GPU 디워프 + 트래킹.</li>
+    <li>타임라인에서 다듬을 수 있는 풀 퀄리티 다축 출력.</li>
+    <li>VR 씬이 담긴 폴더 전체를 밤새 일괄 처리.</li>
+  </ul>
+
+  <h2>헤드셋에서 VR funscript 재생하기</h2>
+  <p>
+    한 번 생성되면 VR funscript도 여느 스크립트처럼 재생됩니다. FunGen의 내장 스트리머와
+    <strong>HereSphere</strong>·<strong>DeoVR</strong> 브리지(그리고 XBVR 연동)가 헤드셋 안에서
+    스크립트를 영상에 동기화하고 기기를 구동합니다 - <strong>The Handy</strong>,
+    <strong>OSR2 / SR6</strong>, <strong>Autoblow</strong>, 그리고
+    <strong>Buttplug.io / Intiface</strong>의 모든 기기 - 레이턴시 보정이 적용되어 싱크가
+    어긋나지 않습니다.
+  </p>
+
+  <h2>나만의 VR funscript 만들기</h2>
+  <p>
+    VR 클립을 FunGen에 지정하고 무료 20초 미리보기로 트래킹을 확인한 뒤 전체 씬을 생성하세요.
+    모든 처리가 내 컴퓨터에서 로컬로 이루어지므로 VR 라이브러리는 온전히 사적인 영역에 남습니다.
+    단계별 안내는 <a href={`${base}/ko/generate-funscripts-from-video/`}>전체 가이드</a>를 참고하거나,
+    <a href={`${base}/ko/`}>FunGen을 다운로드</a>해 직접 소장한 영상으로 시험해 보세요.
+  </p>
+</Article>

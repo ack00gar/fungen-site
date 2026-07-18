@@ -1,0 +1,60 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  # Daily rebuild so time-boxed promos (gated on today's date at build time)
+  # auto-START and auto-expire without a manual push. 06:17 UTC, off the hour.
+  schedule:
+    - cron: '17 6 * * *'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment, cancel in-progress runs.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install, build, upload
+        uses: withastro/action@v3
+        # withastro/action runs npm ci + astro build and uploads the artifact.
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+      - name: Ping IndexNow (Bing / Yandex)
+        # Tells Bing + Yandex to re-crawl now instead of waiting for their own
+        # schedule. Re-submitting unchanged URLs is harmless per the protocol,
+        # so this just re-lists everything in the sitemap on every deploy - no
+        # diffing needed. Key file lives at public/<key>.txt (ownership proof);
+        # continue-on-error so a transient IndexNow outage never fails the
+        # Pages deploy itself.
+        continue-on-error: true
+        run: |
+          key="43d071a5cd3fdc1e9b0a0bb0904ebdd1"
+          host="fungen.app"
+          urls=$(curl -fsSL "https://${host}/sitemap-index.xml" \
+            | grep -oE '<loc>[^<]+</loc>' | sed -E 's#</?loc>##g' \
+            | xargs -I{} curl -fsSL {} \
+            | grep -oE '<loc>[^<]+</loc>' | sed -E 's#</?loc>##g' \
+            | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          curl -fsSL -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d "{\"host\":\"${host}\",\"key\":\"${key}\",\"keyLocation\":\"https://${host}/${key}.txt\",\"urlList\":${urls}}"

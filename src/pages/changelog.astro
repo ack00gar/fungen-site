@@ -1,0 +1,140 @@
+---
+import Article from '../layouts/Article.astro';
+import { LINKS } from '../consts';
+
+const title = 'FunGen changelog - what is new in each release';
+const description =
+  'Release notes for FunGen, the AI funscript generator. Direct GPU video decode, new Pro AI models, the Funscript Doctor, multi-timelines and more - version by version.';
+const canonicalPath = '/changelog';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'FunGen changelog',
+  description,
+  inLanguage: 'en',
+  dateModified: '2026-07-17',
+  mainEntityOfPage: 'https://fungen.app/changelog',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'Changelog', path: '/changelog' }];
+
+// Curated highlights per release; full notes live on the GitHub release page.
+const releases = [
+  {
+    v: '2.4.1-beta',
+    date: 'July 12, 2026',
+    items: [
+      'Fixed the free Endpoints tracker and a bug where hidden points could get erased.',
+      'New preference for the full macro box; fixed a digit leak during alternating inserts.',
+      'Fixed marquee selection catching stray point drags; added a Delete Axis action.',
+    ],
+  },
+  {
+    v: '2.4.0-beta',
+    date: 'July 11, 2026',
+    items: [
+      'New 2D and VR Pro AI models: sharper, better timed.',
+      'Network libraries: browse and open scenes straight from Stash, XBVR and DLNA.',
+      'Record Screen: capture the app window to a WebM under 10 MB with a one-click toolbar button.',
+      'Generate hub: one dialog for AI, FunGenerate and Procedural generation.',
+      'Endpoint snap: stroke ends snap to the computed reversal, on by default.',
+      'Simpler Preferences, a per-axis range slider with a live meter, and a slimmer selection bar.',
+      'Fixes: T-code device handling, dropped points on Cloud Handy, a virtual SR6 stroke that ran short, and mid-stroke tracker notches.',
+    ],
+  },
+  {
+    v: '2.2.7-beta',
+    date: 'June 23, 2026',
+    items: [
+      'In-app prices now refresh from the live pricing automatically, so About and Welcome stay current.',
+      'Round of fixes and refinements.',
+    ],
+  },
+  {
+    v: '2.2.6-beta',
+    date: 'June 20, 2026',
+    items: ['Multiple timelines: load and compare several scripts side by side.', 'Fixes.'],
+  },
+  {
+    v: '2.2.3-beta',
+    date: 'June 16, 2026',
+    items: [
+      'New 2D Pro AI model, plus a live preview of what the 2D tracker actually sees.',
+      'Projects save in a new compact format with automatic backups; undo/redo and full edit history survive closing and reopening.',
+      'Frame-perfect scrubbing with background pre-loading.',
+      'Press a number key to set selected points to that height; new variance knob for more natural strokes.',
+    ],
+  },
+  {
+    v: '2.2.2-beta',
+    date: 'June 14, 2026',
+    items: [
+      'Funscript Doctor reorganised into Diagnosis / Differential tiers, with a new missing-strokes check and one-click rhythm fill, plus Pro AI gap-fill.',
+      'Toolbar regrouped and collapses cleanly on small screens.',
+      'Import as new script; projects reopen where you left off; digit-row shortcuts work on AZERTY / QWERTZ.',
+    ],
+  },
+  {
+    v: '2.2.1-beta',
+    date: 'June 13, 2026',
+    items: [
+      'Open .funscript and .fungen files directly with FunGen on macOS, Windows and Linux.',
+      'Zoom and pan the 2D video; "magnet and set" with Shift + a digit.',
+      'Hardware decode for AV1 and VP9; multi-GPU black-screen fix with a manual GPU picker.',
+      'Safer file handling: FunGen never silently overwrites a funscript it did not create.',
+    ],
+  },
+  {
+    v: '2.2.0-beta',
+    date: 'June 12, 2026',
+    items: [
+      'FunGen now decodes video itself, directly on your GPU - no embedded player in the middle.',
+      'Hardware decode for H.264, H.265 and AV1, including 10-bit and 8K VR.',
+      'A status pill shows which engine your video runs on; Windows and Linux moved to the new engine.',
+    ],
+  },
+];
+---
+
+<Article {title} {description} heading="Changelog" {canonicalPath} {articleLd} {breadcrumbs}>
+  <p class="lead">
+    FunGen is in active development, with frequent beta releases. Here are the highlights of recent
+    versions - the full notes and downloads for every platform are on the
+    <a href={LINKS.releases} target="_blank" rel="noopener">GitHub releases page</a>.
+  </p>
+
+  {
+    releases.map((r) => (
+      <section class="rel">
+        <h2>
+          {r.v} <span class="rel-date">· {r.date}</span>
+        </h2>
+        <ul>
+          {r.items.map((it) => (
+            <li>{it}</li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+
+  <p>
+    Older releases and the complete notes are on
+    <a href={LINKS.releases} target="_blank" rel="noopener">GitHub</a>. New to FunGen? See
+    <a href={`${base}/what-is-a-funscript/`}>what a funscript is</a> or
+    <a href={`${base}/generate-funscripts-from-video/`}>how to generate one from any video</a>.
+  </p>
+
+  <style>
+    .rel { margin: 0 0 8px; }
+    .rel h2 { margin-top: 30px; }
+    .rel-date { color: var(--muted); font-weight: 400; font-size: 1rem; }
+  </style>
+</Article>

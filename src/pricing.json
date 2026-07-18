@@ -1,0 +1,18 @@
+{
+  "_comment": "Generated mirror of FunGen_2/pricing.json, written by the FunGen Admin app. Do not edit by hand - change prices in the admin app.",
+  "enthusiast_eur": 30,
+  "pro_1year_eur": 75,
+  "pro_perpetual_eur": 250,
+  "pro_perpetual_upgrade_eur": 225,
+  "usdt_enthusiast": 35,
+  "usdt_pro_1year": 90,
+  "usdt_pro_perpetual": 290,
+  "usdt_pro_perpetual_upgrade": 260,
+  "promo": {
+    "active": false,
+    "label": "Summer sale",
+    "starts": "2026-07-15",
+    "ends": "2026-08-31",
+    "prices": { "pro_perpetual_eur": 250 }
+  }
+}
