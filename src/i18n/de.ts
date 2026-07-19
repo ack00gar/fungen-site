@@ -168,7 +168,7 @@ export const de = {
       },
       {
         q: 'Ist FunGen kostenlos?',
-        a: 'FunGen ist erst testen, dann kaufen. Der kostenlose Download für die private Nutzung gibt dir den vollen Editor, Player, die Bibliothek, die Stapelverarbeitung und den Doctor, dazu ein paar KI-Generierungen pro Tag als Vorschau und limitierte Gerätesteuerung – so kannst du die KI und deine Hardware zuerst ausprobieren. Wenn du so weit bist, schaltet eine einmalige PayPal-Zahlung oder die FunGen-Stufe auf Patreon (Pro, solange dein Abo läuft) die Pro-KI-Modelle in voller Qualität frei, ohne Limits und ohne Wartezeiten. Funscripts, die du selbst erstellst oder bearbeitest, gehören dir: Du darfst sie teilen und verkaufen. Der Verkauf von FunGen selbst oder der von seiner KI erzeugten Funscripts erfordert eine kommerzielle Lizenz: wende dich an fungen_ai@proton.me.',
+        a: 'FunGen ist erst testen, dann kaufen. Der kostenlose Download für die private Nutzung gibt dir den vollen Editor, Player, die Bibliothek, die Stapelverarbeitung und den Doctor, dazu ein paar KI-Generierungen pro Tag als Vorschau und limitierte Gerätesteuerung – so kannst du die KI und deine Hardware zuerst ausprobieren. Wenn du so weit bist, schaltet eine einmalige PayPal-Zahlung oder die FunGen-Stufe auf Patreon (Pro, solange dein Abo läuft) die Pro-KI-Modelle in voller Qualität frei, ohne Limits und ohne Wartezeiten. Funscripts, die du selbst erstellst oder bearbeitest, gehören dir: Du darfst sie teilen und verkaufen. Der Verkauf von mit der Pro-KI erstellten Funscripts erfordert eine kommerzielle Lizenz; FunGen selbst darf nicht weiterverkauft oder weitergegeben werden. Wende dich an fungen_ai@proton.me.',
       },
       {
         q: 'Welche Geräte werden unterstützt?',

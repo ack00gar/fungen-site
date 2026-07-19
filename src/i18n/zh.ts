@@ -178,7 +178,7 @@ export const zh = {
       },
       {
         q: 'FunGen 是否免费？',
-        a: 'FunGen 是先试后买。免费下载供个人使用，提供完整的编辑器、播放器、媒体库、批处理和 Doctor，另有每天数次的 AI 生成预览和受限的设备控制，让你先测试 AI 和自己的硬件。准备就绪后，通过 PayPal 一次性付款，或订阅 Patreon 的 FunGen 等级（订阅期间享有 Pro），即可解锁全品质 Pro AI 模型，没有限制，无需等待。你自己制作或编辑的 funscript 归你所有，可自由分享或出售。出售 FunGen 本身，或其 AI 生成的 funscript，需要商业许可：请联系 fungen_ai@proton.me。',
+        a: 'FunGen 是先试后买。免费下载供个人使用，提供完整的编辑器、播放器、媒体库、批处理和 Doctor，另有每天数次的 AI 生成预览和受限的设备控制，让你先测试 AI 和自己的硬件。准备就绪后，通过 PayPal 一次性付款，或订阅 Patreon 的 FunGen 等级（订阅期间享有 Pro），即可解锁全品质 Pro AI 模型，没有限制，无需等待。你自己制作或编辑的 funscript 归你所有，可自由分享或出售。出售使用 Pro AI 生成的 funscript 需要商业许可；FunGen 本身不得转售或再分发。请联系 fungen_ai@proton.me。',
       },
       {
         q: '支持哪些设备？',

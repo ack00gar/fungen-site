@@ -218,7 +218,7 @@ export const en = {
       },
       {
         q: 'Is FunGen free?',
-        a: 'FunGen is try before you buy. The free download, for personal use, gives you the full editor, player, library, batch and Doctor, plus a few AI generation previews a day and metered device control, so you can test the AI and your hardware first. When you are ready, a one-time payment on PayPal, or the FunGen tier on Patreon (Pro for as long as you stay subscribed), unlocks the full-quality Pro AI models with no limits and no waits. Funscripts you author or edit are yours to share or sell. Selling FunGen itself, or the funscripts its AI generates, needs a commercial licence: enquire at fungen_ai@proton.me.',
+        a: 'FunGen is try before you buy. The free download, for personal use, gives you the full editor, player, library, batch and Doctor, plus a few AI generation previews a day and metered device control, so you can test the AI and your hardware first. When you are ready, a one-time payment on PayPal, or the FunGen tier on Patreon (Pro for as long as you stay subscribed), unlocks the full-quality Pro AI models with no limits and no waits. Funscripts you author or edit are yours to share or sell. Selling funscripts made with the Pro AI needs a commercial licence; FunGen itself may not be resold or redistributed. Enquire at fungen_ai@proton.me.',
       },
       {
         q: 'Which devices are supported?',

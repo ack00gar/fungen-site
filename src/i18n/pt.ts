@@ -166,7 +166,7 @@ export const pt = {
       },
       {
         q: 'O FunGen é gratuito?',
-        a: 'O FunGen é experimentar antes de comprar. O download gratuito, para uso pessoal, dá-lhe o editor completo, o player, a biblioteca, o lote e o Doctor, além de algumas pré-visualizações de geração por IA por dia e controlo de dispositivo limitado, para testar primeiro a IA e o seu hardware. Quando estiver pronto, um pagamento único no PayPal, ou o nível FunGen no Patreon (Pro enquanto mantiver a subscrição), desbloqueia os modelos Pro de IA com qualidade total, sem limites e sem esperas. Os funscripts que você cria ou edita são seus: partilhe-os ou venda-os. Vender o próprio FunGen, ou os funscripts gerados pela sua IA, exige uma licença comercial: escreva para fungen_ai@proton.me.',
+        a: 'O FunGen é experimentar antes de comprar. O download gratuito, para uso pessoal, dá-lhe o editor completo, o player, a biblioteca, o lote e o Doctor, além de algumas pré-visualizações de geração por IA por dia e controlo de dispositivo limitado, para testar primeiro a IA e o seu hardware. Quando estiver pronto, um pagamento único no PayPal, ou o nível FunGen no Patreon (Pro enquanto mantiver a subscrição), desbloqueia os modelos Pro de IA com qualidade total, sem limites e sem esperas. Os funscripts que você cria ou edita são seus: partilhe-os ou venda-os. Vender funscripts criados com a IA Pro exige uma licença comercial; o próprio FunGen não pode ser revendido nem redistribuído. Escreva para fungen_ai@proton.me.',
       },
       {
         q: 'Quais os dispositivos suportados?',
