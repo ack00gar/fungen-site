@@ -12,6 +12,7 @@ import { ko } from './showcase-ko';
 import { pt } from './showcase-pt';
 import { ru } from './showcase-ru';
 import { zh } from './showcase-zh';
+import { zhHant } from './showcase-zh-hant';
 
 export type ShowItem = {
   eyebrow: string;
@@ -114,4 +115,5 @@ export const SHOWCASE: Record<Locale, ShowcaseStrings> = {
   pt,
   ru,
   zh,
+  'zh-hant': zhHant,
 };

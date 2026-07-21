@@ -229,7 +229,15 @@ const breadcrumbLd = {
             for (var i = 0; i < langs.length; i++) {
               var code = (langs[i] || '').toLowerCase();
               var two = code.slice(0, 2);
-              if (code.indexOf('zh') === 0) { target = 'zh'; break; }
+              // Chinese splits by SCRIPT, not just language. Taiwan, Hong Kong
+              // and Macau (and any explicit Hant subtag) get Traditional;
+              // zh / zh-cn / zh-sg / zh-hans stay Simplified. Before this,
+              // every zh-* browser was sent to /zh/, so TW and HK - the two
+              // highest-CTR Chinese markets - landed on the wrong script.
+              if (code.indexOf('zh') === 0) {
+                target = /(^|-)(hant|tw|hk|mo)(-|$)/.test(code) ? 'zh-hant' : 'zh';
+                break;
+              }
               if (two === 'en') { target = 'en'; break; }
               if (subLocales.indexOf(two) >= 0) { target = two; break; }
             }

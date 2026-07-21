@@ -11,20 +11,49 @@ import { ko } from './ko';
 import { pt } from './pt';
 import { ru } from './ru';
 import { zh } from './zh';
+import { zhHant } from './zh-hant';
 
 export type { Strings };
 
-export type Locale = 'en' | 'de' | 'es' | 'fr' | 'it' | 'ja' | 'ko' | 'pt' | 'ru' | 'zh';
+export type Locale =
+  | 'en'
+  | 'de'
+  | 'es'
+  | 'fr'
+  | 'it'
+  | 'ja'
+  | 'ko'
+  | 'pt'
+  | 'ru'
+  | 'zh'
+  | 'zh-hant';
 
 export const DEFAULT_LOCALE: Locale = 'en';
 
 // Render order for the switcher (default first, then alphabetical by code).
-export const LOCALES: Locale[] = ['en', 'de', 'es', 'fr', 'it', 'ja', 'ko', 'pt', 'ru', 'zh'];
+export const LOCALES: Locale[] = [
+  'en',
+  'de',
+  'es',
+  'fr',
+  'it',
+  'ja',
+  'ko',
+  'pt',
+  'ru',
+  'zh',
+  'zh-hant',
+];
 
 // The non-default locales, used by getStaticPaths for the /[lang]/ routes.
 export const SUB_LOCALES: Locale[] = LOCALES.filter((l) => l !== DEFAULT_LOCALE);
 
-// BCP-47 codes for <html lang> and hreflang. zh ships as Simplified.
+// BCP-47 codes for <html lang> and hreflang. The two Chinese locales are
+// distinguished by SCRIPT, not region: `zh-Hans` (mainland, Simplified) and
+// `zh-Hant` (Traditional). Script-based targeting means one Traditional page
+// serves TW, HK and MO rather than needing a locale each. The URL segment
+// stays lowercase (`/zh-hant/`) so nothing depends on path casing; this map
+// is the only place the canonical BCP-47 casing matters.
 export const HTML_LANG: Record<Locale, string> = {
   en: 'en',
   de: 'de',
@@ -36,9 +65,22 @@ export const HTML_LANG: Record<Locale, string> = {
   pt: 'pt',
   ru: 'ru',
   zh: 'zh-Hans',
+  'zh-hant': 'zh-Hant',
 };
 
-export const STRINGS: Record<Locale, Strings> = { en, de, es, fr, it, ja, ko, pt, ru, zh };
+export const STRINGS: Record<Locale, Strings> = {
+  en,
+  de,
+  es,
+  fr,
+  it,
+  ja,
+  ko,
+  pt,
+  ru,
+  zh,
+  'zh-hant': zhHant,
+};
 
 export function t(locale: Locale): Strings {
   return STRINGS[locale] ?? en;
