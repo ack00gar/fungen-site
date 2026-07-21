@@ -46,9 +46,9 @@ export type Strings = {
 
 export const en = {
   langName: 'English',
-  seoTitle: 'FunGen · AI Funscript Generator for 2D and VR',
+  seoTitle: 'FunGen · AI Funscript Generator for 2D & VR, Runs Offline',
   description:
-    'Make funscripts from 2D and VR video with AI, or edit them by hand on a multi-axis timeline. Plays to your device and runs offline on your own machine. Free to download.',
+    'Generate funscripts from 2D and VR video with AI - entirely on your own machine, nothing uploaded. Frame-accurate multi-axis editor included. Free.',
   keywords: [
     'funscript',
     'funscripts',

@@ -2,9 +2,9 @@ import type { Strings } from './en';
 
 export const de = {
   langName: 'Deutsch',
-  seoTitle: 'FunGen · KI-Funscript-Generator für 2D und VR',
+  seoTitle: 'FunGen · KI-Funscript-Generator für 2D & VR, offline',
   description:
-    'Erstelle funscripts aus 2D- und VR-Video mit KI, oder bearbeite sie von Hand auf einer Multi-Achsen-Timeline. Spielt auf deinem Gerät ab und läuft offline auf deinem eigenen Rechner. Kostenloser Download.',
+    'Erstelle funscripts aus 2D- und VR-Video mit KI - komplett auf deinem eigenen Rechner, nichts wird hochgeladen. Bildgenauer Multi-Achsen-Editor inklusive. Kostenlos.',
   keywords: [
     'funscript erstellen',
     'funscript generator',

@@ -2,9 +2,9 @@ import type { Strings } from './en';
 
 export const zh = {
   langName: '简体中文',
-  seoTitle: 'FunGen · AI funscript 生成器，支持 2D 与 VR 视频',
+  seoTitle: 'FunGen · AI funscript 生成器｜2D 与 VR，全程离线',
   description:
-    '用 AI 从 2D 与 VR 视频生成 funscript，或在多轴时间轴上手动编辑。可播放至你的设备，全程离线运行在你自己的电脑上。免费下载。',
+    '用 AI 从 2D 与 VR 视频生成 funscript，全程在你自己的电脑上运行，不上传任何文件。内置逐帧多轴编辑器。免费。',
   keywords: [
     'funscript',
     'funscript 生成器',

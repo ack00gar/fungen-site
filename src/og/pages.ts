@@ -22,6 +22,9 @@ export const OG_PAGES: Record<string, OgPage> = {
     title: 'Multi-axis funscripts for OSR2 / SR6',
   },
   'funscripts-for-the-handy': { eyebrow: 'THE HANDY', title: 'Funscripts for The Handy' },
+  'cock-hero-funscripts': { eyebrow: 'COCK HERO', title: 'Script the beat, not the footage' },
+  'pmv-funscripts': { eyebrow: 'PMV', title: 'Funscripts that ride the music' },
+  'joi-funscripts': { eyebrow: 'JOI', title: 'Funscripts for instruction scenes' },
   'supported-devices': { eyebrow: 'DEVICES', title: 'Every device FunGen drives' },
   'stash-xbvr-funscripts': {
     eyebrow: 'STASH / XBVR',

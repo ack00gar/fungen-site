@@ -1,0 +1,95 @@
+---
+import Article from '../layouts/Article.astro';
+
+const title = 'PMV funscripts: script music-video edits with AI - FunGen';
+const description =
+  'PMVs cut fast and run on the music. FunGen scripts them from the audio track with beat detection and BPM stroke generation, then lets you tighten every cut by hand. Runs offline.';
+const canonicalPath = '/pmv-funscripts';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'PMV funscripts: script music-video edits with AI',
+  description,
+  inLanguage: 'en',
+  dateModified: '2026-07-21',
+  mainEntityOfPage: 'https://fungen.app/pmv-funscripts',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'PMV funscripts', path: '/pmv-funscripts' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="Funscripts for PMVs"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    A <strong>PMV</strong> - porn music video - is an edit cut to a track. The pacing comes from the
+    <strong>music</strong>, the footage changes every few seconds, and a good script rides the song
+    rather than the scene. <a href={`${base}/`}>FunGen</a> scripts PMVs from the
+    <strong>audio</strong>, then hands you a frame-accurate timeline to finish the job.
+  </p>
+
+  <h2>Why a motion tracker struggles with a PMV</h2>
+  <p>
+    <a href={`${base}/generate-funscripts-from-video/`}>AI motion tracking</a> follows movement from
+    one frame to the next. A PMV breaks that assumption on purpose: hard cuts every few seconds,
+    changing performers, speed ramps, overlays and transitions. Tracked faithfully, the output is
+    a script that lurches at every cut and ignores the beat everyone is actually feeling.
+  </p>
+  <p>
+    For this format the honest answer is that the <strong>audio</strong> is the score, so FunGen
+    reads that instead.
+  </p>
+
+  <h2>Beat detection does the timing</h2>
+  <p>
+    FunGen analyses the track for <strong>onsets</strong> and places keyframes on the beat. Choose
+    <strong>alternate top/bottom</strong> for a steady stroke, or a <strong>fixed</strong> pattern
+    for a hit on each beat, and set the <strong>top and bottom positions</strong> to pick the range.
+    A <strong>sensitivity</strong> control decides whether you follow just the kick or every hat -
+    which is what separates a lazy PMV script from one that feels edited.
+  </p>
+
+  <h2>Cuts become structure, not noise</h2>
+  <p>
+    The cut pattern is useful information once you stop fighting it. Use
+    <strong>chapters</strong> to mark each section of the song - intro, verse, drop, outro - and
+    give each one its own stroke range and rate. A build that opens shallow and slow and finishes
+    deep and fast is a few chapter edits, not a manual re-script.
+  </p>
+
+  <h2>Finish it on the timeline</h2>
+  <p>
+    <strong>Snap-to-beat</strong> keeps every hand edit on the grid. <strong>BPM stroke
+    generation</strong> fills any range at an exact rate, or fits an exact number of strokes into a
+    span - useful when a fill has to land precisely on the next drop. The
+    <a href={`${base}/studio/`}>Doctor</a> then scores the finished script and flags gaps, missing
+    strokes and device speed limits before you ever play it.
+  </p>
+
+  <h2>Multi-axis, if you want it</h2>
+  <p>
+    PMVs suit multi-axis scripting well: the beat drives the stroke while surge, sway or twist carry
+    the groove. FunGen's <a href={`${base}/funscript-editor/`}>editor</a> opens every axis as its
+    own lane, so you can build the extra motion over a stroke track you already like - and drive it
+    on an <a href={`${base}/funscripts-for-osr2-sr6/`}>OSR2 or SR6</a>.
+  </p>
+
+  <h2>Script your own</h2>
+  <p>
+    Load the PMV, let FunGen read the audio, pick a pattern, then shape it chapter by chapter. It
+    all runs locally on your own machine - nothing is uploaded.
+    <a href={`${base}/#pricing`}>Download FunGen</a> and try it on an edit you already have.
+  </p>
+</Article>

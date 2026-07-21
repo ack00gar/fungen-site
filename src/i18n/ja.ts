@@ -2,9 +2,9 @@ import type { Strings } from './en';
 
 export const ja = {
   langName: '日本語',
-  seoTitle: 'FunGen · AIで動画からfunscriptを自動生成｜2D・VR対応',
+  seoTitle: 'FunGen · AIで動画からfunscriptを自動生成｜2D・VR・完全オフライン',
   description:
-    '2D・VR動画からAIでfunscriptを作成、またはマルチ軸タイムラインで手動編集。デバイスに再生でき、すべてオフラインであなたのマシン上で動作します。無料ダウンロード。',
+    '2D・VR動画からAIでfunscriptを生成。すべてあなたのマシン上で完結し、アップロードは一切ありません。フレーム単位のマルチ軸エディタ付き。無料。',
   keywords: [
     'funscript',
     'funscript 生成',

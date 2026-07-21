@@ -2,9 +2,9 @@ import type { Strings } from './en';
 
 export const fr = {
   langName: 'Français',
-  seoTitle: 'FunGen · Générateur de funscript IA pour la 2D et la VR',
+  seoTitle: 'FunGen · Générateur de funscript IA, 2D et VR, hors ligne',
   description:
-    'Créez des funscripts depuis des vidéos 2D et VR par IA, ou éditez-les à la main sur une timeline multi-axes. Lecture sur votre appareil, hors ligne sur votre propre machine. Téléchargement gratuit.',
+    'Générez des funscripts depuis des vidéos 2D et VR par IA - entièrement sur votre machine, aucun envoi de fichier. Éditeur multi-axes à la frame inclus. Gratuit.',
   keywords: [
     'funscript',
     'funscripts',

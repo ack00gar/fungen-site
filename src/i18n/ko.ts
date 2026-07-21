@@ -2,9 +2,9 @@ import type { Strings } from './en';
 
 export const ko = {
   langName: '한국어',
-  seoTitle: 'FunGen · 2D·VR 영상용 AI funscript 생성기',
+  seoTitle: 'FunGen · 2D·VR AI funscript 생성기｜완전 오프라인',
   description:
-    '2D·VR 영상에서 AI로 funscript를 만들거나 다축 타임라인에서 직접 편집하세요. 디바이스로 재생되며 내 컴퓨터에서 오프라인으로 실행됩니다. 무료 다운로드.',
+    '2D·VR 영상에서 AI로 funscript를 생성합니다. 모든 처리가 내 컴퓨터에서 이뤄지며 업로드가 없습니다. 프레임 단위 다축 에디터 포함. 무료.',
   keywords: [
     'funscript',
     'funscript 생성',
