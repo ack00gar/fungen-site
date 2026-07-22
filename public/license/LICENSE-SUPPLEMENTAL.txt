@@ -58,8 +58,6 @@ reminder, not a new restriction).
 
 ## 3. The funscripts you make
 
-This is the part most users care about, so it is stated plainly.
-
 **Scripts you author or edit yourself are yours.** Funscripts you create by
 hand in FunGen's editor, or that you have made your own through your own
 editing work, belong to you. The licensor claims no ownership of them and no
