@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy to Cloudflare Pages
 
 on:
   push:
@@ -11,41 +11,38 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
-# Allow one concurrent deployment, cancel in-progress runs.
 concurrency:
-  group: pages
+  group: pages-deploy
   cancel-in-progress: true
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Install, build, upload
-        uses: withastro/action@v3
-        # withastro/action runs npm ci + astro build and uploads the artifact.
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install + build
+        run: |
+          npm ci
+          npm run build
+      - name: Deploy to Cloudflare Pages
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx --yes wrangler@4 pages deploy dist --project-name=fungen-site --branch=main --commit-dirty=true
       - name: Ping IndexNow (Bing / Yandex)
         # Tells Bing + Yandex to re-crawl now instead of waiting for their own
         # schedule. Re-submitting unchanged URLs is harmless per the protocol,
         # so this just re-lists everything in the sitemap on every deploy - no
         # diffing needed. Key file lives at public/<key>.txt (ownership proof);
         # continue-on-error so a transient IndexNow outage never fails the
-        # Pages deploy itself.
+        # deploy itself.
         continue-on-error: true
         run: |
           key="43d071a5cd3fdc1e9b0a0bb0904ebdd1"
