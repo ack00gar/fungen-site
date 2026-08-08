@@ -1,0 +1,103 @@
+---
+import Article from '../layouts/Article.astro';
+
+const title = 'Cock Hero funscripts: script beat-driven edits with AI - FunGen';
+const description =
+  'Cock Hero edits follow the music, not the on-screen action. FunGen scripts them from the audio track - beat detection, snap-to-beat and BPM stroke generation - on your own machine.';
+const canonicalPath = '/cock-hero-funscripts';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Cock Hero funscripts: script beat-driven edits with AI',
+  description,
+  inLanguage: 'en',
+  dateModified: '2026-07-21',
+  mainEntityOfPage: 'https://fungen.app/cock-hero-funscripts',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'Cock Hero funscripts', path: '/cock-hero-funscripts' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="Funscripts for Cock Hero"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    <strong>Cock Hero</strong> edits are paced by the <strong>music</strong>. The stroke follows the
+    beat, the tempo changes on purpose, and the on-screen footage is cut to match - which makes them
+    a different scripting problem from a normal scene. <a href={`${base}/`}>FunGen</a> scripts them
+    from the <strong>audio track</strong> rather than the picture.
+  </p>
+
+  <h2>Why motion tracking is the wrong tool here</h2>
+  <p>
+    An <a href={`${base}/generate-funscripts-from-video/`}>AI motion tracker</a> works by following
+    movement between frames. That is exactly right for a continuous POV scene, and exactly wrong for
+    a Cock Hero edit: the source cuts every few seconds, jumps between performers and angles, and
+    frequently shows footage whose motion has nothing to do with the beat you are meant to stroke
+    to. Tracking that footage faithfully would produce a script that fights the music.
+  </p>
+  <p>
+    The signal that actually carries a Cock Hero round is the <strong>audio</strong>. So that is what
+    FunGen reads.
+  </p>
+
+  <h2>Beat-driven generation</h2>
+  <p>
+    FunGen analyses the video's audio for <strong>onsets</strong> - the percussive hits that define
+    the beat - and lays keyframes on them. You control how it turns those beats into strokes:
+  </p>
+  <ul>
+    <li><strong>Alternate top/bottom</strong> - one beat up, the next down, the classic pattern.</li>
+    <li><strong>Fixed</strong> - a hit on every beat from a held position.</li>
+    <li><strong>Top and bottom positions</strong> - set the stroke range the round should use.</li>
+    <li>
+      <strong>Sensitivity</strong> - tighten it for a sparse kick pattern, loosen it to pick up
+      faster percussion.
+    </li>
+  </ul>
+  <p>
+    Because it reads the real audio, a round that <strong>changes tempo</strong> mid-way is followed
+    rather than averaged over.
+  </p>
+
+  <h2>Then tighten it by hand</h2>
+  <p>
+    Beat detection gets the timing skeleton right; the taste is yours. FunGen's
+    <a href={`${base}/funscript-editor/`}>frame-accurate editor</a> gives you
+    <strong>snap-to-beat</strong> so every manual edit lands on the grid, beat markers on the
+    minimap for orientation, and <strong>BPM stroke generation</strong> to fill a range with an
+    exact rate or an exact number of strokes. Chapters let you treat each round separately, so a
+    slow build and a fast finish can carry different stroke ranges.
+  </p>
+
+  <h2>Instruction rounds and held sections</h2>
+  <p>
+    Most Cock Hero edits include sections that are not simple stroking - holds, edges, pauses on an
+    instruction card. Those are best placed deliberately rather than generated: mark the span, set
+    the position, and let the beat generation resume after it. The
+    <a href={`${base}/studio/`}>Doctor</a> then checks the finished script for gaps, device speed
+    limits and timing problems before you play it.
+  </p>
+
+  <h2>Script your own rounds</h2>
+  <p>
+    Load the edit, let FunGen read the audio, choose a pattern, and refine on the timeline.
+    Everything runs locally on your own machine, so nothing is uploaded. The result plays to
+    <a href={`${base}/supported-devices/`}>any supported device</a> -
+    <strong>The Handy</strong>, <strong>OSR2 / SR6</strong>, or anything on
+    <strong>Buttplug.io / Intiface</strong>. <a href={`${base}/#pricing`}>Download FunGen</a> and
+    try it on a round you already have.
+  </p>
+</Article>

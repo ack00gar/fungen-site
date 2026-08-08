@@ -1,0 +1,131 @@
+---
+// The canonical FunGen licence, at https://fungen.app/license.
+//
+// The app links here (fungen_core::brand::LICENSE_URL) from About and Welcome,
+// which show only a short summary. It used to link at the FunGen 1 repo's
+// LICENSE, i.e. a different codebase's terms.
+//
+// Single source: the two legal texts are read at BUILD TIME from
+// public/license/*.txt, which are verbatim copies of FunGen_2/LICENSE and
+// FunGen_2/LICENSE-SUPPLEMENTAL. They are also served raw at
+// /license/LICENSE.txt so anyone can diff them against the files shipped in
+// their app bundle. Re-copy them whenever the licence changes; never retype
+// the terms into this page.
+import { readFileSync } from 'node:fs';
+import Article from '../layouts/Article.astro';
+
+const strict = readFileSync('public/license/LICENSE.txt', 'utf8');
+const supplemental = readFileSync('public/license/LICENSE-SUPPLEMENTAL.txt', 'utf8');
+
+const title = 'FunGen licence: free for noncommercial use';
+const description =
+  'FunGen is free for personal, noncommercial use under the PolyForm Strict License 1.0.0 plus the FunGen Supplemental Terms. FunGen itself may never be sold or redistributed. Scripts you author are yours.';
+const canonicalPath = '/license';
+const breadcrumbs = [{ name: 'Licence', path: '/license' }];
+---
+
+<Article
+  title={title}
+  description={description}
+  heading="FunGen licence"
+  canonicalPath={canonicalPath}
+  breadcrumbs={breadcrumbs}
+>
+  <p class="lede">
+    FunGen is <strong>not</strong> open-source. It is free of charge for
+    personal, noncommercial use, under the
+    <strong>PolyForm Strict License 1.0.0</strong> together with the
+    <strong>FunGen Supplemental Terms</strong>. Both apply. The full text of
+    each is below.
+  </p>
+
+  <h2>In plain words</h2>
+  <p>
+    This summary is not the licence and does not replace it. It is here so you
+    do not have to read the legal text to know where you stand.
+  </p>
+  <ul>
+    <li>
+      <strong>FunGen is free for personal, noncommercial use.</strong> No pass
+      needed for the editor and the free trackers.
+    </li>
+    <li>
+      <strong>Nobody may sell, resell, or charge for FunGen.</strong> Not in any
+      form, not under any licence, not ever. There is no licence you can buy
+      that grants the right to resell FunGen, and there never will be.
+    </li>
+    <li>
+      <strong>FunGen may not be redistributed.</strong> No mirrors, re-uploads,
+      repackagings, published forks, ports, or modified builds. Point people at
+      the official download instead.
+    </li>
+    <li>
+      <strong>The funscripts you author or edit yourself are yours.</strong> Use
+      them, publish them, share them, <strong>sell</strong> them. We claim no
+      ownership and take no cut.
+    </li>
+    <li>
+      <strong>Selling scripts made with the Pro AI features needs a commercial
+      licence.</strong> Sharing them with the community for free does not, and
+      never will. Letting the AI do the work and then charging for the result is
+      a commercial use of FunGen.
+    </li>
+    <li>
+      <strong>A Pro Pass covers one person</strong>, on the machines that person
+      owns. It is non-transferable: do not share it, publish it, or resell it.
+      Leaked or forged passes get blocked.
+    </li>
+    <li>
+      <strong>No warranty.</strong> The software is provided as is.
+    </li>
+  </ul>
+
+  <p>
+    Commercial licence enquiries: <a href="mailto:fungen_ai@proton.me">fungen_ai@proton.me</a>.
+  </p>
+
+  <h2>1. PolyForm Strict License 1.0.0</h2>
+  <p>
+    The base licence, used verbatim and unmodified. It is a standard,
+    off-the-shelf licence:
+    <a href="https://polyformproject.org/licenses/strict/1.0.0/" rel="nofollow">
+      polyformproject.org/licenses/strict/1.0.0</a>. It permits noncommercial
+    use, and does not permit distributing the software or making changes or new
+    works based on it.
+  </p>
+  <p class="raw-link">
+    Raw text: <a href="/license/LICENSE.txt">LICENSE.txt</a>
+  </p>
+  <pre class="legal">{strict}</pre>
+
+  <h2>2. FunGen Supplemental Terms</h2>
+  <p>
+    What an off-the-shelf licence cannot cover: the Pro Pass, the AI models, and
+    who owns the funscripts you make.
+  </p>
+  <p class="raw-link">
+    Raw text: <a href="/license/LICENSE-SUPPLEMENTAL.txt">LICENSE-SUPPLEMENTAL.txt</a>
+  </p>
+  <pre class="legal">{supplemental}</pre>
+</Article>
+
+<style>
+  .lede {
+    font-size: 1.1rem;
+  }
+  .raw-link {
+    font-size: 0.9rem;
+    opacity: 0.75;
+  }
+  pre.legal {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 0.86rem;
+    line-height: 1.55;
+    padding: 1.25rem;
+    border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+    border-radius: 10px;
+    background: color-mix(in srgb, currentColor 4%, transparent);
+    overflow-x: auto;
+  }
+</style>

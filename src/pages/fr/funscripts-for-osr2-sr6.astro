@@ -1,0 +1,86 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = 'Funscripts multi-axes pour OSR2 / SR6 - générer avec FunGen';
+const description =
+  "Générez et éditez des funscripts multi-axes pour OSR2, SR6 et SSR1 avec FunGen. L'IA écrit la course plus le roulis, le tangage et la torsion ; FunGen route chaque axe via T-Code.";
+const canonicalPath = '/fr/funscripts-for-osr2-sr6';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Funscripts multi-axes pour OSR2 / SR6 avec FunGen',
+  description,
+  inLanguage: 'fr',
+  dateModified: '2026-07-17',
+  mainEntityOfPage: 'https://fungen.app/fr/funscripts-for-osr2-sr6',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'OSR2 / SR6', path: '/fr/funscripts-for-osr2-sr6' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="Funscripts multi-axes pour OSR2 / SR6"
+  lang="fr"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    L'OSR2 et le SR6 brillent sur les scripts <strong>multi-axes</strong> - pas seulement la course,
+    mais aussi le roulis, le tangage et la torsion. <a href={`${base}/fr/`}>FunGen</a> génère ces
+    axes supplémentaires avec l'IA et route chacun vers votre appareil via T-Code, pour obtenir tout
+    le mouvement pour lequel ces machines ont été conçues.
+  </p>
+
+  <h2>Une IA qui écrit plus que la course</h2>
+  <p>
+    Un <a href={`${base}/fr/what-is-a-funscript/`}>funscript</a> de base n'a qu'un axe - de haut en
+    bas. L'IA de FunGen produit un résultat <strong>multi-axes</strong> : la course principale plus
+    des pistes secondaires (roulis, tangage, avancée, balancement, torsion), chacune stockée dans
+    son propre fichier compagnon. Sur les scènes VR en particulier, c'est ce mouvement supplémentaire
+    qui fait qu'un OSR2 ou un SR6 paraît tridimensionnel plutôt qu'un simple piston.
+  </p>
+
+  <h2>Le routage via T-Code</h2>
+  <p>
+    FunGen parle <strong>T-Code</strong> avec la famille OSR - OSR2, SR6 et SSR1. Vous associez
+    chaque axe du script à un axe de l'appareil (L0 pour la course, axes R pour la rotation, etc.),
+    et FunGen les diffuse ensemble, en synchro. L'interpolation et la compensation de latence par
+    appareil gardent les axes coordonnés au lieu de les laisser dériver.
+  </p>
+  <ul>
+    <li>Choisissez quels axes générés router, et vers quel canal de l'appareil.</li>
+    <li>Pilotez la course + roulis/torsion de l'OSR2, ou l'amplitude de mouvement plus complète du SR6.</li>
+    <li>Compensation de latence par appareil pour que les axes restent ensemble et sur le rythme.</li>
+  </ul>
+
+  <h2>Éditez chaque axe sur une seule timeline</h2>
+  <p>
+    La timeline multi-axes affiche chaque piste empilée, pour affiner le roulis ou le tangage
+    indépendamment - superposez un axe sur un autre, lissez ou redimensionnez une seule piste, et
+    chapitrez la scène. Le <strong>Funscript Doctor</strong> vérifie chaque axe par rapport aux
+    limites de votre appareil et corrige la plupart des problèmes en un clic.
+  </p>
+
+  <h2>Générez à partir de vos propres vidéos</h2>
+  <p>
+    Donnez un clip 2D ou VR à FunGen, prévisualisez le tracking, puis générez le script multi-axes
+    complet - en local, sur votre propre machine. Consultez
+    <a href={`${base}/fr/generate-funscripts-from-video/`}>le guide</a>
+    pour le workflow, ou <a href={`${base}/fr/vr-funscripts/`}>les funscripts VR</a> pour le côté casque.
+  </p>
+
+  <p>
+    <a href={`${base}/fr/`}>Téléchargez FunGen</a> - gratuit à l'essai - et scriptez du mouvement
+    multi-axes pour votre OSR2 ou SR6.
+  </p>
+</Article>

@@ -1,0 +1,89 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = 'Editor de funscripts - multieje y con precisión de fotograma, en FunGen';
+const description =
+  'FunGen es un editor de funscripts completo: línea de tiempo multieje con precisión de fotograma, transformaciones y pipelines, capítulos, deshacer/rehacer ilimitado y las comprobaciones de calidad del Doctor. Gratis.';
+const canonicalPath = '/es/funscript-editor';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'El editor de funscripts de FunGen',
+  description,
+  inLanguage: 'es',
+  dateModified: '2026-07-17',
+  mainEntityOfPage: 'https://fungen.app/es/funscript-editor',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'Editor de funscripts', path: '/es/funscript-editor' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="El editor de funscripts de FunGen"
+  lang="es"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    FunGen no es solo un generador con IA - es un <strong>editor de funscripts</strong> completo.
+    Construye un script a mano en una línea de tiempo con precisión de fotograma, o limpia lo que
+    generó la IA, y reprodúcelo directamente en tu dispositivo, sin cambiar de herramienta. El
+    editor es gratuito.
+  </p>
+
+  <h2>Una línea de tiempo multieje con precisión de fotograma</h2>
+  <p>
+    Edita sobre el video fotograma a fotograma: añade, mueve y ajusta puntos, fija un punto a una
+    altura exacta con una tecla numérica, o atrae el punto más cercano al cursor de reproducción y
+    fíjalo con una sola pulsación. Cada eje - la carrera más roll, pitch, surge, sway, twist - tiene
+    su propia pista, y puedes superponer un eje sobre otro para alinearlos.
+  </p>
+
+  <h2>Transformaciones, plugins y pipelines</h2>
+  <p>
+    Remodela una selección entera o el script completo con decenas de transformaciones y plugins de
+    un clic: amplitud, suavizado, límites de velocidad, timing y más. Encadena tus favoritos en un
+    <strong>pipeline</strong> y ejecuta una limpieza completa con un solo clic - autoajustar,
+    remodelar, limitar.
+  </p>
+
+  <h2>Capítulos, marcadores y un flujo de trabajo con memoria</h2>
+  <p>
+    Divide una escena larga en capítulos con nombre y código de color, deja marcadores con una tecla
+    y reabre justo donde lo dejaste. <strong>Deshacer y rehacer son ilimitados y sobreviven a cerrar y reabrir</strong>
+    un proyecto, así que tu historial de edición nunca se pierde. FunGen también abre archivos
+    <code>.funscript</code> y <code>.fungen</code> directamente en Windows, macOS y Linux.
+  </p>
+
+  <h2>El Doctor: la certeza de que está listo</h2>
+  <p>
+    Antes de publicar un script, el <strong>Funscript Doctor</strong> le da una puntuación de
+    calidad de 0 a 100 que conoce tu dispositivo - señalando violaciones de velocidad, puntos fuera
+    de fotograma, zonas muertas, jitter y carreras ausentes, y corrigiendo la mayoría con un clic.
+    Es la diferencia entre un script que se ve bien en la línea de tiempo y uno que de verdad se
+    siente bien en el hardware.
+  </p>
+
+  <h2>Genera y luego refina</h2>
+  <p>
+    El flujo de trabajo más rápido combina las dos mitades: deja que la IA
+    <a href={`${base}/es/generate-funscripts-from-video/`}>genere un funscript desde tu video</a> y
+    luego púlelo en el editor. ¿Nuevo en el formato? Empieza por
+    <a href={`${base}/es/what-is-a-funscript/`}>qué es un funscript</a>.
+  </p>
+
+  <p>
+    <a href={`${base}/es/`}>Descarga FunGen</a> - el editor, el reproductor y la biblioteca son
+    gratuitos; la generación con IA a calidad completa es el desbloqueo Pro.
+  </p>
+</Article>

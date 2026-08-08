@@ -1,0 +1,96 @@
+---
+import Article from '../layouts/Article.astro';
+
+const title = 'JOI funscripts: script instruction scenes with FunGen';
+const description =
+  'JOI scenes are paced by the voice, not by on-screen motion. FunGen scripts them with beat and onset detection, chapters for holds and edges, and a frame-accurate editor. Runs offline.';
+const canonicalPath = '/joi-funscripts';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'JOI funscripts: script instruction scenes with FunGen',
+  description,
+  inLanguage: 'en',
+  dateModified: '2026-07-21',
+  mainEntityOfPage: 'https://fungen.app/joi-funscripts',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'JOI funscripts', path: '/joi-funscripts' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="Funscripts for JOI"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    <strong>JOI</strong> - jerk-off instruction - is paced by <strong>what is said</strong>, not by
+    what moves. The performer sets the rhythm verbally: faster, slower, stop, hold, edge. That makes
+    it the format where an <a href={`${base}/generate-funscripts-from-video/`}>AI motion
+    tracker</a> has the least to work with, and where a good
+    <a href={`${base}/funscript-editor/`}>editor</a> matters most.
+  </p>
+
+  <h2>Be honest about what the AI can do here</h2>
+  <p>
+    FunGen's AI models track <strong>motion</strong>. In a typical JOI scene there is very little of
+    it - often a performer talking to camera, largely still. There is no hidden stroke signal in
+    that footage for a tracker to recover, and any tool claiming to fully auto-script JOI from the
+    picture alone is guessing.
+  </p>
+  <p>
+    So the workflow is different: FunGen gives you a <strong>fast way to build the script
+    yourself</strong>, rather than pretending to read one off the screen.
+  </p>
+
+  <h2>Let the audio carry the pace</h2>
+  <p>
+    Where the instruction is delivered over a beat, or the scene uses music to set tempo, FunGen's
+    <strong>onset detection</strong> reads the audio and lays keyframes on it - with
+    <strong>alternate top/bottom</strong> or <strong>fixed</strong> patterns, adjustable
+    <strong>sensitivity</strong>, and your chosen <strong>top and bottom positions</strong>. That
+    covers the stroking sections without hand-placing every point.
+  </p>
+
+  <h2>Chapters are the real tool</h2>
+  <p>
+    A JOI script is mostly <strong>structure</strong>: a slow section, a faster one, a hold, an
+    edge, a pause, a finish. Mark those spans as chapters and each one gets its own treatment - a
+    stroke rate, a range, or a held position. Building the scene as a sequence of chapters matches
+    how the instruction is actually written, and it makes the script easy to adjust later.
+  </p>
+
+  <h2>Generate strokes to a rate</h2>
+  <p>
+    Inside any section, <strong>parametric stroke generation</strong> fills the range for you: give
+    it a <strong>BPM</strong> for an even rate, or an exact stroke count to fit a span precisely.
+    Ramp the rate across a build, hold at the top for an edge, then resume. This is where most of a
+    JOI script gets written, and it is a few controls rather than a few hundred clicks.
+  </p>
+
+  <h2>Check it before you play it</h2>
+  <p>
+    The <a href={`${base}/studio/`}>Doctor</a> scores the finished script and flags the problems
+    that matter in this format - gaps where the device does nothing, strokes faster than your
+    hardware can physically follow, and ranges that clip. Fix them in one click, then play to
+    <a href={`${base}/supported-devices/`}>your device</a>.
+  </p>
+
+  <h2>Start with a scene you know</h2>
+  <p>
+    The full editor, timeline, chapters, stroke generation and Doctor are all in the
+    <strong>free</strong> download - no account, no card. Everything runs locally on your own
+    machine. <a href={`${base}/#pricing`}>Get FunGen</a> and script a scene you already know well;
+    it is the fastest way to learn the workflow.
+  </p>
+</Article>

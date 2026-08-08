@@ -1,0 +1,42 @@
+---
+import Article from '../layouts/Article.astro';
+import PricingSection from '../components/PricingSection.astro';
+
+const title = 'FunGen pricing: free download, one-time Pro unlock';
+const description =
+  'FunGen is free to download with the full editor, library and AI previews included. A one-time payment unlocks the full-quality Pro AI models, with no subscription and no limits.';
+const canonicalPath = '/pricing';
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'FunGen pricing',
+  description,
+  inLanguage: 'en',
+  dateModified: '2026-07-17',
+  mainEntityOfPage: 'https://fungen.app/pricing',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'Pricing', path: '/pricing' }];
+---
+
+<Article {title} {description} heading="FunGen pricing" {canonicalPath} {articleLd} {breadcrumbs} hideCtaRow>
+  <p class="lead">
+    FunGen is <strong>free to download</strong>, with the full editor, library, batch processing
+    and device control included. A single <strong>one-time payment</strong> unlocks the
+    full-quality Pro AI models, with no subscription and no recurring fees. Funscripts you author or
+    edit are always yours to share or sell.
+  </p>
+  <p>
+    Card and PayPal payments are handled at checkout below; USDT and Bitcoin are also accepted
+    for regions where cards and PayPal aren't supported. Every paid tier is delivered by email as
+    a signed pass. See the plans below for what each one includes.
+  </p>
+
+  <PricingSection slot="full" lang="en" standalone />
+</Article>

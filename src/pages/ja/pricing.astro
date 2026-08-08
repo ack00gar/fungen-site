@@ -1,0 +1,51 @@
+---
+import Article from '../../layouts/Article.astro';
+import PricingSection from '../../components/PricingSection.astro';
+
+const title = 'FunGen 料金：無料ダウンロード、買い切りでProを解放';
+const description =
+  'FunGenは無料でダウンロードでき、フル機能のエディタ、ライブラリ、AIプレビューを含みます。買い切りの一回払いでフル品質のPro AIモデルを解放。サブスクなし、制限なし。PayPal・カード決済対応、USDT（TRC-20）でも同額で購入できます。';
+const canonicalPath = '/ja/pricing';
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'FunGen 料金',
+  description,
+  inLanguage: 'ja',
+  dateModified: '2026-07-31',
+  mainEntityOfPage: 'https://fungen.app/ja/pricing',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: '料金', path: '/ja/pricing' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="FunGen 料金"
+  lang="ja"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+  hideCtaRow
+>
+  <p class="lead">
+    FunGenは<strong>無料でダウンロード</strong>できます。フル機能のエディタ、ライブラリ、
+    バッチ処理、デバイス制御をすべて含みます。<strong>買い切りの一回払い</strong>で
+    フル品質のPro AIモデルを解放——サブスクリプションも定期課金もありません。
+    作成・編集したfunscriptはあなたのものです。共有も販売も自由です。
+  </p>
+  <p>
+    お支払いはPayPalとカードに対応。<strong>USDT（TRC-20）</strong>でも実勢レート換算の
+    同額で購入できます（暗号資産の割増なし）。有料プランは署名済みPassとしてメールで
+    お届けします。表示のユーロ価格が請求額で、円表示は目安です。
+  </p>
+
+  <PricingSection slot="full" lang="ja" standalone />
+</Article>

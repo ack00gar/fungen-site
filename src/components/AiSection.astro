@@ -1,0 +1,90 @@
+---
+// The AI-models section: the three Pro AI model cards + the live VR-tracking
+// demo clip. Extracted from Landing.astro so it renders both inline on the
+// homepage (`#ai` anchor) AND standalone on the dedicated `/ai` page.
+import { AI_TAGS } from '../consts';
+import { t, type Locale } from '../i18n';
+
+interface Props {
+  lang: Locale;
+  /** 'h1' on the dedicated page, 'h2' inline on the homepage. */
+  headingTag?: 'h1' | 'h2';
+  /** True when embedded on the dedicated /ai page rather than inline on the
+   *  homepage scroll - see PricingSection's `standalone` doc for why. */
+  standalone?: boolean;
+}
+const { lang, headingTag = 'h2', standalone = false } = Astro.props;
+const s = t(lang);
+const Heading = headingTag;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+// A real capture of the VR model tracking a scene. No visible caption
+// (operator choice); the alt text stays for a11y/SEO.
+const AI_DEMO_ALT: Record<string, string> = {
+  en: 'FunGen VR model live-tracking demo (pixelated): script timeline and device position gauge moving in real time',
+  zh: 'FunGen VR 模型实时追踪演示（已打码）：脚本时间轴与设备位置实时联动',
+  ja: 'FunGen VRモデルのライブトラッキングデモ（モザイク処理済み）：スクリプトタイムラインとポジションゲージがリアルタイムに動作',
+};
+const aiDemoAlt = AI_DEMO_ALT[lang] ?? AI_DEMO_ALT.en;
+---
+
+<section id="ai" class={`ai${standalone ? ' section-standalone' : ''}`}>
+  <div class="wrap" data-reveal>
+    <div class="section-head">
+      <p class="eyebrow">{s.ai.eyebrow}</p>
+      <Heading>{s.ai.title}</Heading>
+      <p>{s.ai.body}</p>
+    </div>
+    <div class="grid models">
+      {s.ai.models.map((m, i) => (
+        <article class="card model-card">
+          <div class="model-tag">{AI_TAGS[i]}</div>
+          <h3>{m.title}</h3>
+          <p>{m.body}</p>
+        </article>
+      ))}
+    </div>
+    <figure class="ai-demo">
+      <video width="720" height="720" poster={`${base}/shots/live-vr-poster.webp`} autoplay muted loop playsinline preload="metadata" aria-label={aiDemoAlt}>
+        <source src={`${base}/shots/live-vr.webm`} type="video/webm" />
+        <source src={`${base}/shots/live-vr.mp4`} type="video/mp4" />
+      </video>
+    </figure>
+  </div>
+</section>
+
+<style>
+  /* Opt out of the homepage's one-section-per-screen rhythm (see the
+     `standalone` prop doc above) - natural content height, modest
+     top/bottom padding instead of a forced full-viewport centered box. */
+  .section-standalone { min-height: 0; display: block; padding: 8px 0 60px; }
+  /* Card grid base, shared by the AI model cards below. */
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .card {
+    background: linear-gradient(180deg, var(--card), var(--bg-soft));
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .card:hover { border-color: rgba(34, 211, 238, 0.4); transform: translateY(-3px); }
+  .card h3 { font-size: 1.15rem; margin-bottom: 8px; }
+  .card p { color: var(--muted); font-size: 0.96rem; margin: 0; }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+
+  .ai { background: var(--bg-soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .models { grid-template-columns: repeat(2, 1fr); max-width: 900px; margin: 0 auto; }
+  @media (max-width: 700px) { .models { grid-template-columns: 1fr; } }
+  .model-tag {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 46px; height: 46px; padding: 0 12px; margin-bottom: 16px;
+    border-radius: 12px; font-weight: 800; font-size: 1.1rem; letter-spacing: 0.02em;
+    background: var(--brand); color: #04181c;
+  }
+  .model-card:hover { border-color: rgba(240, 140, 90, 0.4); }
+  .ai-demo { max-width: 420px; margin: 30px auto 0; padding: 0; }
+  .ai-demo video {
+    width: 100%; height: auto; display: block;
+    border-radius: 16px; border: 1px solid var(--line);
+  }
+</style>

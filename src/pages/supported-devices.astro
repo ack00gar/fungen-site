@@ -1,0 +1,98 @@
+---
+import Article from '../layouts/Article.astro';
+
+const title = 'Supported devices - what FunGen drives (Handy, OSR2/SR6, Buttplug)';
+const description =
+  'The hardware FunGen plays funscripts to: The Handy, Autoblow, Vacuglide, the OSR2/SR6/SSR1 over T-Code, and anything on Buttplug.io / Intiface - with latency compensation.';
+const canonicalPath = '/supported-devices';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Devices FunGen supports',
+  description,
+  inLanguage: 'en',
+  dateModified: '2026-07-17',
+  mainEntityOfPage: 'https://fungen.app/supported-devices',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'Supported devices', path: '/supported-devices' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="Devices FunGen supports"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    FunGen plays <a href={`${base}/what-is-a-funscript/`}>funscripts</a> straight to your hardware,
+    with per-device interpolation and latency compensation so the motion stays in time with the
+    video. It works with the gear you already have:
+  </p>
+
+  <h2>The Handy</h2>
+  <p>
+    Connect over <strong>HTTPS (Handy Connect API)</strong> or <strong>Bluetooth LE</strong>, with
+    latency compensation tuned for the Handy's round-trip. Generate a stroke script for any 2D or VR
+    video and play it from the couch or a headset.
+    <a href={`${base}/funscripts-for-the-handy/`}>More on FunGen + The Handy →</a>
+  </p>
+
+  <h2>OSR2 / SR6 / SSR1</h2>
+  <p>
+    The T-Code builds are where <strong>multi-axis</strong> shines. FunGen's AI writes stroke plus
+    roll, pitch and twist, and routes each axis to your device so you get full motion, not just a
+    piston. <a href={`${base}/funscripts-for-osr2-sr6/`}>More on FunGen + OSR2 / SR6 →</a>
+  </p>
+
+  <h2>Autoblow</h2>
+  <p>
+    Drive the <strong>Autoblow Ultra</strong> from its stroke track. Generate the script with AI,
+    refine it on the timeline, and play it in sync - the same one-app workflow as every other device.
+  </p>
+
+  <h2>Vacuglide</h2>
+  <p>
+    FunGen supports the <strong>Vacuglide</strong> directly, so a generated or hand-built script
+    drives it with the same interpolation and latency handling as the rest.
+  </p>
+
+  <h2>Buttplug.io / Intiface</h2>
+  <p>
+    Beyond the built-in integrations, FunGen speaks to <strong>Buttplug.io / Intiface</strong> - the
+    open bridge to a long list of consumer toys. If your device works with Intiface, FunGen can drive
+    it from a funscript, which makes it a practical
+    <a href={`${base}/funscript-editor/`}>funscript editor and player</a> for hardware it doesn't
+    integrate with natively.
+  </p>
+
+  <h2>Media libraries: Stash & XBVR</h2>
+  <p>
+    FunGen also reads from your <strong>Stash</strong> and <strong>XBVR</strong> media servers. It
+    finds them on your network, browses their scene library inside the app, streams a scene without
+    downloading it, and generates a funscript from it - then plays that script to any device above.
+    <a href={`${base}/stash-xbvr-funscripts/`}>More on FunGen + Stash / XBVR →</a>
+  </p>
+
+  <h2>How devices stay in sync</h2>
+  <p>
+    Whatever the device, FunGen applies <strong>per-device interpolation</strong> (smoothing the
+    motion to what the hardware can do) and <strong>latency compensation</strong> (so the action
+    lands on the beat). A built-in streamer can drive a session from a phone or VR headset while the
+    device follows, and the <strong>Funscript Doctor</strong> scores a script against your specific
+    device's limits before you play it.
+  </p>
+
+  <p>
+    <a href={`${base}/`}>Download FunGen</a> and play to the device you already own - free to try.
+  </p>
+</Article>

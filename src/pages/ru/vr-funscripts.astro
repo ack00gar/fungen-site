@@ -1,0 +1,85 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = 'VR funscript: как сгенерировать и запустить в шлеме - FunGen';
+const description =
+  'Как работают VR funscript и как сделать свой. FunGen генерирует funscript из VR-видео в fisheye, эквиректангулярной проекции, side-by-side и top/bottom - для POV- и не-POV-сцен.';
+const canonicalPath = '/ru/vr-funscripts';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'VR funscript: генерация и воспроизведение в шлеме',
+  description,
+  inLanguage: 'ru',
+  dateModified: '2026-07-17',
+  mainEntityOfPage: 'https://fungen.app/ru/vr-funscripts',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'VR funscript', path: '/ru/vr-funscripts' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="VR funscript"
+  lang="ru"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    <strong>VR funscript</strong> - та же идея, что и любой другой
+    <a href={`${base}/ru/what-is-a-funscript/`}>funscript</a>: данные о движении, синхронизированные
+    с видео, - но для иммерсивных роликов под шлем, где проекция камеры и глубина усложняют
+    скриптинг. <a href={`${base}/ru/`}>FunGen</a> генерирует их автоматически, так что вы можете
+    заскриптовать собственную VR-библиотеку, а не ждать, пока это сделает кто-то другой.
+  </p>
+
+  <h2>Чем VR отличается</h2>
+  <p>
+    VR-видео - не плоский прямоугольник. Картинка искажена под шлем - обычно это
+    <strong>fisheye</strong>, <strong>эквиректангулярная проекция</strong>, <strong>side-by-side</strong>
+    или <strong>top/bottom</strong> стерео, - а действие происходит в POV-глубине. Модель скриптинга
+    должна понимать эту геометрию, чтобы корректно отслеживать движение, - вот почему обычный
+    2D-подход на VR разваливается.
+  </p>
+
+  <h2>Как FunGen работает с VR</h2>
+  <p>
+    В FunGen есть <strong>отдельная ИИ-модель для VR</strong>, независимая от 2D / плоской. Она сама
+    определяет формат кадра, разворачивает картинку на GPU и отслеживает как
+    <strong>POV, так и не-POV</strong> сцены, поэтому итоговый funscript соответствует тому, что вы
+    реально видите в шлеме. На выходе - многоосевой скрипт, готовый к воспроизведению или доработке.
+  </p>
+  <ul>
+    <li>Автоопределение fisheye, эквиректангулярной проекции, side-by-side и top/bottom.</li>
+    <li>GPU-развёртка и трекинг, настроенные под глубину шлема и POV-ракурс.</li>
+    <li>Полноценный многоосевой результат, который можно доработать на таймлайне.</li>
+    <li>Пакетная обработка целой папки VR-сцен за ночь.</li>
+  </ul>
+
+  <h2>Воспроизведение VR funscript в шлеме</h2>
+  <p>
+    Сгенерированный VR funscript проигрывается как любой другой. Встроенный стример FunGen плюс
+    мосты <strong>HereSphere</strong> и <strong>DeoVR</strong> (и интеграция с XBVR) синхронизируют
+    скрипт с видео в шлеме и управляют вашим устройством - <strong>The Handy</strong>,
+    <strong>OSR2 / SR6</strong>, <strong>Autoblow</strong> или чем угодно через
+    <strong>Buttplug.io / Intiface</strong> - с компенсацией задержки, чтобы всё оставалось в такт.
+  </p>
+
+  <h2>Сделайте свои VR funscript</h2>
+  <p>
+    Укажите FunGen на VR-клип, запустите бесплатный 20-секундный предпросмотр, чтобы проверить
+    трекинг, затем сгенерируйте всю сцену. Всё работает локально на вашем компьютере, так что ваша
+    VR-библиотека остаётся приватной. Пошаговая инструкция - в
+    <a href={`${base}/ru/generate-funscripts-from-video/`}>полном руководстве</a>, или сразу
+    <a href={`${base}/ru/`}>скачайте FunGen</a> и попробуйте на собственных роликах.
+  </p>
+</Article>

@@ -1,0 +1,42 @@
+---
+import Article from '../layouts/Article.astro';
+import AiSection from '../components/AiSection.astro';
+
+const title = 'FunGen AI funscript generation: dedicated 2D and VR models';
+const description =
+  'Two dedicated AI models generate funscripts from video: one for 2D / flat, one for VR. Both read the on-screen motion and write a full, multi-axis funscript on your own machine.';
+const canonicalPath = '/ai';
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'FunGen AI funscript generation',
+  description,
+  inLanguage: 'en',
+  dateModified: '2026-07-17',
+  mainEntityOfPage: 'https://fungen.app/ai',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'AI models', path: '/ai' }];
+---
+
+<Article {title} {description} heading="AI funscript generation" {canonicalPath} {articleLd} {breadcrumbs}>
+  <p class="lead">
+    FunGen generates funscripts with two <strong>dedicated AI models</strong>: one trained for
+    2D / flat video, one for VR. Both read the on-screen motion frame by frame and write a
+    smooth, full-stroke funscript on your own machine, a whole folder at a time.
+  </p>
+  <p>
+    The VR model detects fisheye, equirectangular, side-by-side and top/bottom footage, unwarps
+    it on the GPU, and tracks both POV and non-POV scenes so the script matches what you see in
+    the headset. Every free download includes a few AI previews a day to try before you buy; the
+    Pro unlock removes the daily limit and switches to the full-quality models.
+  </p>
+
+  <AiSection slot="full" lang="en" standalone />
+</Article>

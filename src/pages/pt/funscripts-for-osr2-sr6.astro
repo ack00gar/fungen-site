@@ -1,0 +1,86 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = 'Funscripts multieixo para OSR2 / SR6 - gere com o FunGen';
+const description =
+  'Gere e edite funscripts multieixo para OSR2, SR6 e SSR1 com o FunGen. A IA escreve o curso mais roll, pitch e twist; o FunGen roteia cada eixo via T-Code.';
+const canonicalPath = '/pt/funscripts-for-osr2-sr6';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Funscripts multieixo para OSR2 / SR6 com o FunGen',
+  description,
+  inLanguage: 'pt',
+  dateModified: '2026-07-17',
+  mainEntityOfPage: 'https://fungen.app/pt/funscripts-for-osr2-sr6',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'OSR2 / SR6', path: '/pt/funscripts-for-osr2-sr6' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="Funscripts multieixo para OSR2 / SR6"
+  lang="pt"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    O OSR2 e o SR6 brilham com scripts <strong>multieixo</strong> - não só o curso, mas roll, pitch
+    e twist. O <a href={`${base}/pt/`}>FunGen</a> gera esses eixos extras com IA e roteia cada um
+    para o seu dispositivo via T-Code, entregando o movimento completo para o qual essas máquinas
+    foram construídas.
+  </p>
+
+  <h2>IA que escreve mais do que o curso</h2>
+  <p>
+    Um <a href={`${base}/pt/what-is-a-funscript/`}>funscript</a> básico tem um eixo - sobe e desce. A
+    IA do FunGen produz um resultado <strong>multieixo</strong>: o curso principal mais faixas
+    secundárias (roll, pitch, surge, sway, twist), cada uma armazenada como um arquivo próprio.
+    Especialmente em cenas de VR, é esse movimento extra que faz um OSR2 ou SR6 parecer
+    tridimensional em vez de um pistão.
+  </p>
+
+  <h2>Roteamento via T-Code</h2>
+  <p>
+    O FunGen fala <strong>T-Code</strong> com a família OSR - OSR2, SR6 e SSR1. Você mapeia cada
+    eixo do script para um eixo do dispositivo (L0 para o curso, eixos R para rotação, e assim por
+    diante), e o FunGen os transmite juntos em sincronia. Interpolação e compensação de latência por
+    dispositivo mantêm os eixos coordenados em vez de se descolarem uns dos outros.
+  </p>
+  <ul>
+    <li>Escolha quais eixos gerados rotear, e para qual canal do dispositivo.</li>
+    <li>Controle o curso + roll/twist do OSR2, ou a amplitude de movimento mais completa do SR6.</li>
+    <li>Compensação de latência por dispositivo para os eixos ficarem juntos e na batida.</li>
+  </ul>
+
+  <h2>Edite cada eixo em uma única linha do tempo</h2>
+  <p>
+    A linha do tempo multieixo mostra cada faixa empilhada, então você refina roll ou pitch de forma
+    independente - sobreponha um eixo ao outro, suavize ou redimensione uma única faixa e divida a
+    cena em capítulos. O <strong>Funscript Doctor</strong> verifica cada eixo contra os limites do
+    seu dispositivo e corrige a maioria dos problemas em um clique.
+  </p>
+
+  <h2>Gere a partir do seu próprio material</h2>
+  <p>
+    Aponte o FunGen para um clipe 2D ou VR, veja a prévia do rastreamento e gere o script multieixo
+    completo - localmente, na sua própria máquina. Veja
+    <a href={`${base}/pt/generate-funscripts-from-video/`}>o guia</a> com o fluxo de trabalho, ou
+    <a href={`${base}/pt/vr-funscripts/`}>funscripts VR</a> para o lado do headset.
+  </p>
+
+  <p>
+    <a href={`${base}/pt/`}>Baixe o FunGen</a> - grátis para experimentar - e roteirize movimento
+    multieixo para o seu OSR2 ou SR6.
+  </p>
+</Article>

@@ -1,0 +1,108 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = '動画からfunscriptを自動生成する方法（2D・VR対応）- FunGen';
+const description =
+  'AIで好きな動画をfunscriptに。2D・POV・VRシーンからfunscriptを自動生成し、仕上げてデバイスで再生するまでの手順をステップごとに解説します。';
+const canonicalPath = '/ja/generate-funscripts-from-video';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: '動画からfunscriptを自動生成する方法',
+  description,
+  inLanguage: 'ja',
+  dateModified: '2026-07-17',
+  mainEntityOfPage: 'https://fungen.app/ja/generate-funscripts-from-video',
+  tool: [{ '@type': 'HowToTool', name: 'FunGen' }],
+  step: [
+    {
+      '@type': 'HowToStep',
+      name: 'FunGenをダウンロード',
+      text: '無料のFunGenデスクトップアプリ（Windows・macOS・Linux対応）をダウンロード。単一のネイティブバイナリで、インストール作業は不要です。',
+      url: 'https://fungen.app/ja/generate-funscripts-from-video#download',
+    },
+    {
+      '@type': 'HowToStep',
+      name: '動画を開く',
+      text: '2D・POV・VRの動画をFunGenにドロップ。レイアウト（平面、フィッシュアイ、エクイレクタングラー、サイドバイサイド、トップ/ボトム）は自動で判別されます。',
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'AIで生成',
+      text: 'まず20秒プレビューで結果を確認し、そのままシーン全体を生成。専用AIモデルが画面内の動きを読み取り、多軸のfunscriptを書き出します。',
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'タイムラインで仕上げ',
+      text: 'フレーム精度の多軸タイムラインで微調整 - 変形処理、チャプター、そしてDoctorの品質チェックで、ほとんどの問題はワンクリックで直ります。',
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'デバイスで再生',
+      text: 'The Handy、OSR2/SR6、Autoblow、Vacuglide、またはButtplug.io / Intiface対応デバイスへ、デバイスごとのレイテンシ補正付きでスクリプトを直接再生。',
+    },
+  ],
+};
+const breadcrumbs = [
+  { name: '動画からfunscriptを生成', path: '/ja/generate-funscripts-from-video' },
+];
+---
+
+<Article
+  {title}
+  {description}
+  heading="動画からfunscriptを自動生成する方法"
+  lang="ja"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    手作業でスクリプトを打ち込んだり、既存ファイルを探し回ったりする必要はもうありません。AIを使えば、2D・POV・VRを問わずほぼどんな動画でも数分で完全な
+    <a href={`${base}/ja/what-is-a-funscript/`}>funscript</a>に変換し、あとは好みに合わせて仕上げるだけ。<a href={`${base}/ja/`}>FunGen</a>での手順を紹介します。
+  </p>
+
+  <h2 id="download">1. FunGenをダウンロード（無料）</h2>
+  <p>
+    <strong>Windows・macOS・Linux</strong>対応の無料デスクトップアプリを入手します。ネイティブバイナリ1つだけ
+    - Pythonランタイムや大量のライブラリのインストールは不要 - で、AIはお使いのGPU上でローカルに動作するため、動画ライブラリがマシンの外に出ることはありません。
+  </p>
+
+  <h2>2. 動画を開く</h2>
+  <p>
+    好きなシーンをドロップするだけ。FunGenが動画を直接読み込み、レイアウトを自動で判別します - 平面の2DやPOVはもちろん、フィッシュアイ、エクイレクタングラー、サイドバイサイド、トップ/ボトムのVRにも対応。事前の変換作業は一切不要です。
+  </p>
+
+  <h2>3. AIで生成</h2>
+  <p>
+    まずクリップの好きな箇所で無料の<strong>20秒プレビュー</strong>を実行して品質を確認し、そのままシーン全体を生成します。専用のPro
+    AIモデル - 2D／平面動画用とVR用の2種類 -
+    が画面内の動きをフレーム単位で追跡し、滑らかでフルストロークの多軸funscriptを書き出します。1本ずつでも、フォルダ丸ごと夜間バッチでも生成できます。
+  </p>
+
+  <h2>4. タイムラインで仕上げる</h2>
+  <p>
+    AIが大部分を仕上げ、残りはエディタの出番です。フレーム精度の多軸タイムライン上で、変形処理（振幅、スムージング、速度制限、タイミング）やチャプター、そして
+    <strong>Doctor</strong> - 速度超過・デッドゾーン・ストローク抜けを検出し、その多くをワンクリックで修正する、デバイスの特性を考慮した0〜100の品質スコア
+    - を使って整えます。
+  </p>
+
+  <h2>5. デバイスで再生</h2>
+  <p>
+    完成したスクリプトはそのままハードウェアへ - <strong>The Handy</strong>、
+    <strong>OSR2 / SR6 / SSR1</strong>、<strong>Autoblow</strong>、<strong>Vacuglide</strong>、あるいは
+    <strong>Buttplug.io / Intiface</strong>対応デバイスへ、機種ごとの補間とレイテンシ補正付きで再生できます。内蔵ストリーマーを使えば、スマホやVRヘッドセットからセッションを進めることも可能です。
+  </p>
+
+  <h2>どんな動画をスクリプト化できる？</h2>
+  <p>
+    リズミカルな動きがあれば何でも。標準的なVRや2D / POVシーン - JAV・JAVR（アダルトVR／VR AV）作品も含めて - に加え、FunGenはビート同期の
+    <strong>cock hero</strong>や<strong>PMV</strong>編集、<strong>JOI</strong>（オナサポ）や焦らし系動画にも対応。フォーラムで既存スクリプトを探す代わりに、自分で生成しましょう。
+  </p>
+
+  <p>
+    さっそく試してみませんか？<a href={`${base}/ja/`}>FunGenをダウンロード</a>すれば、数分後には最初のfunscriptの生成が始まります。
+  </p>
+</Article>

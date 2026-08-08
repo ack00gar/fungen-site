@@ -1,0 +1,91 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = 'Funscripts für The Handy - mit FunGen generieren und abspielen';
+const description =
+  'Generiere mit FunGen Funscripts für The Handy aus jedem 2D- oder VR-Video und spiele sie über HTTPS oder Bluetooth LE ab - mit Latenzkompensation, damit alles synchron bleibt.';
+const canonicalPath = '/de/funscripts-for-the-handy';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Funscripts für The Handy mit FunGen',
+  description,
+  inLanguage: 'de',
+  dateModified: '2026-07-17',
+  mainEntityOfPage: 'https://fungen.app/de/funscripts-for-the-handy',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'The Handy', path: '/de/funscripts-for-the-handy' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="Funscripts für The Handy"
+  lang="de"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    <a href={`${base}/de/`}>FunGen</a> <strong>generiert</strong> Funscripts für The Handy und
+    <strong>spielt</strong> sie direkt darauf ab - nimm also jedes 2D- oder VR-Video, lass es von
+    der KI scripten und steuere deinen Handy synchron dazu, alles in einer App.
+  </p>
+
+  <h2>Ein Script für jedes Video generieren</h2>
+  <p>
+    The Handy liest ein Standard-<a href={`${base}/de/what-is-a-funscript/`}>Funscript</a> (die
+    Auf-/Ab-Hubachse). Zeig FunGen einen Clip - 2D, POV oder VR - und ein dediziertes KI-Modell
+    schreibt diese Hubspur für dich. Starte zuerst eine kostenlose 20-Sekunden-Vorschau, generiere
+    dann die ganze Szene oder gleich einen ganzen Ordner im Batch. Die einzelnen Schritte findest
+    du in <a href={`${base}/de/generate-funscripts-from-video/`}>der ausführlichen Anleitung</a>.
+  </p>
+
+  <h2>Auf The Handy abspielen</h2>
+  <p>FunGen verbindet sich auf zwei Wegen mit The Handy:</p>
+  <ul>
+    <li>
+      <strong>HTTPS (Handy Connect API)</strong> - Steuerung übers Internet mit deinem Connection
+      Key, der zuverlässigste Weg, um ein Script synchron zum Video zu streamen.
+    </li>
+    <li>
+      <strong>Bluetooth LE</strong> - eine direkte lokale Verbindung ohne Cloud-Umweg, wenn Handy
+      und Rechner in Reichweite sind.
+    </li>
+  </ul>
+  <p>
+    In beiden Fällen wendet FunGen <strong>Latenzkompensation pro Gerät</strong> an, damit die
+    Bewegung auf den Takt trifft, statt dem Video hinterherzuhinken - wichtig beim Handy, wo die
+    Round-Trip-Latenz real ist. Bei Bedarf kannst du den Offset feinjustieren.
+  </p>
+
+  <h2>Vom Sofa, vom Schreibtisch oder im Headset</h2>
+  <p>
+    Ein integrierter Streamer schickt den Film samt Script an ein Smartphone, einen Browser oder
+    ein VR-Headset, während FunGen den Handy synchron steuert - praktisch bei VR-Szenen, wo du im
+    Headset schaust und das Gerät folgt. Dasselbe Script funktioniert auch in Playern wie
+    HereSphere und DeoVR.
+  </p>
+
+  <h2>Damit es sich richtig anfühlt</h2>
+  <p>
+    Die KI liefert die Bewegung; der Editor macht sie zu deiner. Glätte oder schärfe Hübe,
+    begrenze das Tempo auf das, was der Handy bequem schafft, und lass den
+    <strong>Funscript Doctor</strong> laufen - einen gerätebewussten Qualitäts-Score, der
+    Tempoverstöße und tote Zonen markiert und die meisten mit einem Klick behebt, damit sich ein
+    Script auf der Hardware wirklich gut anfühlt, statt nur auf der Timeline gut auszusehen.
+  </p>
+
+  <p>
+    <a href={`${base}/de/`}>Lade FunGen herunter</a> - kostenlos testbar, läuft auf deinem eigenen
+    Rechner - und scripte deine Sammlung für The Handy.
+  </p>
+</Article>

@@ -1,0 +1,13 @@
+---
+// The FunGen text wordmark lockup: "Fun" in the surrounding ink color,
+// "Gen" in the brand teal — matching the pass-delivery email's lockup.
+// Text-only span: size/weight/color of "Fun" come from the parent element.
+// Same in every locale; use ONLY for brand lockups, never in running prose.
+---
+<span class="wm">Fun<span class="wm-gen">Gen</span></span>
+
+<style>
+  .wm-gen {
+    color: var(--teal, #22d3ee);
+  }
+</style>

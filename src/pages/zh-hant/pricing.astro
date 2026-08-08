@@ -1,0 +1,49 @@
+---
+import Article from '../../layouts/Article.astro';
+import PricingSection from '../../components/PricingSection.astro';
+
+const title = 'FunGen 價格：免費下載，一次性付款解鎖 Pro';
+const description =
+  'FunGen 免費下載，包含完整編輯器、影片庫和 AI 預覽。一次性付款解鎖全品質 Pro AI 模型，無訂閱、無限制。支援 PayPal 與信用卡，也可用 USDT（TRC-20）同價購買。';
+const canonicalPath = '/zh-hant/pricing';
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'FunGen 價格',
+  description,
+  inLanguage: 'zh-Hant',
+  dateModified: '2026-07-31',
+  mainEntityOfPage: 'https://fungen.app/zh-hant/pricing',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: '價格', path: '/zh-hant/pricing' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="FunGen 價格"
+  lang="zh-hant"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+  hideCtaRow
+>
+  <p class="lead">
+    FunGen <strong>免費下載</strong>，完整編輯器、影片庫、批次處理和裝置控制全部包含在內。
+    <strong>一次性付款</strong>即可解鎖全品質 Pro AI 模型——沒有訂閱，沒有循環扣款。
+    你製作或編輯的 funscript 永遠屬於你，可自由分享或出售。
+  </p>
+  <p>
+    支援 PayPal 與信用卡付款；也可以用 <strong>USDT（TRC-20）</strong>購買——與 PayPal
+    同價、按即時匯率換算、不額外加價。所有付費方案都會透過電子郵件寄送簽名 Pass。
+  </p>
+
+  <PricingSection slot="full" lang="zh-hant" standalone />
+</Article>

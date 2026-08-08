@@ -1,0 +1,91 @@
+---
+import Article from '../layouts/Article.astro';
+
+const title = 'Funscripts for JAV and JAVR: generate your own with AI - FunGen';
+const description =
+  'Very few JAV and JAVR releases ship with funscripts. FunGen generates them with AI from fisheye and equirectangular VR AV - and 2D JAV too - right on your own machine.';
+const canonicalPath = '/funscripts-for-jav-and-javr';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Funscripts for JAV and JAVR: generate your own with AI',
+  description,
+  inLanguage: 'en',
+  dateModified: '2026-07-17',
+  mainEntityOfPage: 'https://fungen.app/funscripts-for-jav-and-javr',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'JAV & JAVR funscripts', path: '/funscripts-for-jav-and-javr' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="Funscripts for JAV & JAVR"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    <strong>JAV</strong> is Japanese adult video; <strong>JAVR</strong> is its VR branch - and it's
+    some of the best material there is for funscripts. JAVR is shot almost entirely in
+    <strong>POV framing</strong> with long, rhythmic scenes, which is exactly what a
+    <a href={`${base}/vr-funscripts/`}>VR funscript</a> tracks best.
+    <a href={`${base}/`}>FunGen</a> generates the script for you with AI, so any scene in your
+    library can become interactive.
+  </p>
+
+  <h2>The catch: almost no JAV ships with a script</h2>
+  <p>
+    Unlike some Western studios, JAV and JAVR releases very rarely include an official funscript.
+    Hunting for community scripts scene by scene is hit-or-miss: a handful of popular titles are
+    covered, the rest of a large library isn't, and quality varies wildly. The practical answer is
+    to stop searching and <strong>generate your own</strong> - point FunGen at the video and let the
+    AI script it.
+  </p>
+
+  <h2>How FunGen handles JAVR</h2>
+  <p>
+    JAVR is technically demanding footage: studios ship <strong>fisheye</strong> projections
+    (FISHEYE190 / MKX200-style lenses) as well as <strong>equirectangular</strong>, often at
+    <strong>8K</strong>. FunGen's <strong>dedicated VR AI model</strong> detects the layout, unwarps
+    it on the GPU, and tracks the POV action, producing a full multi-axis funscript in minutes.
+  </p>
+  <ul>
+    <li>Handles fisheye (FISHEYE190 / MKX200-style) and equirectangular JAVR sources.</li>
+    <li>8K-ready decode pipeline, tuned for POV depth and framing.</li>
+    <li>Full-length, multi-axis output you can refine on the timeline if you want.</li>
+    <li>Batch a whole folder of JAVR scenes overnight.</li>
+  </ul>
+
+  <h2>Playing it in your headset</h2>
+  <p>
+    Once generated, the script plays like any other funscript. FunGen's built-in streamer plus
+    <strong>HereSphere</strong> and <strong>DeoVR</strong> bridges (and XBVR integration) sync it to
+    the video in your headset and drive your device - <strong>The Handy</strong>,
+    <strong>OSR2 / SR6</strong>, <strong>Autoblow</strong>, or anything on
+    <strong>Buttplug.io / Intiface</strong> - with latency compensation so it stays in time.
+  </p>
+
+  <h2>2D JAV works too</h2>
+  <p>
+    Not everything is VR, and that's fine: FunGen also ships a <strong>POV 2D model</strong> for
+    flat footage, so classic 2D JAV scenes script just as easily. Same workflow, same multi-axis
+    output, same devices.
+  </p>
+
+  <h2>Script your JAV library</h2>
+  <p>
+    Load a scene, run a free 20-second preview to check the tracking, then generate the full video.
+    Everything runs locally on your own machine, so your library stays private. See
+    <a href={`${base}/generate-funscripts-from-video/`}>the full how-to</a> for the step-by-step, or
+    <a href={`${base}/#pricing`}>download FunGen</a> and try it on your own collection.
+  </p>
+</Article>

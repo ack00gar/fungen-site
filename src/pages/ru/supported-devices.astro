@@ -1,0 +1,93 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = 'Поддерживаемые устройства FunGen - Handy, OSR2/SR6, Buttplug';
+const description =
+  'Устройства, на которых FunGen проигрывает funscript: The Handy, Autoblow, Vacuglide, OSR2/SR6/SSR1 по T-Code и всё, что работает через Buttplug.io / Intiface, - с компенсацией задержки.';
+const canonicalPath = '/ru/supported-devices';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Устройства, которые поддерживает FunGen',
+  description,
+  inLanguage: 'ru',
+  dateModified: '2026-07-17',
+  mainEntityOfPage: 'https://fungen.app/ru/supported-devices',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'Поддерживаемые устройства', path: '/ru/supported-devices' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="Устройства, которые поддерживает FunGen"
+  lang="ru"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    FunGen проигрывает <a href={`${base}/ru/what-is-a-funscript/`}>funscript</a> прямо на ваше железо -
+    с интерполяцией и компенсацией задержки под каждое устройство, чтобы движение шло в такт видео.
+    Он работает с тем, что у вас уже есть:
+  </p>
+
+  <h2>The Handy</h2>
+  <p>
+    Подключение по <strong>HTTPS (Handy Connect API)</strong> или <strong>Bluetooth LE</strong>, с
+    компенсацией задержки, настроенной под сетевой путь Handy. Сгенерируйте скрипт хода для любого
+    2D- или VR-видео и проигрывайте его с дивана или из шлема.
+    <a href={`${base}/ru/funscripts-for-the-handy/`}>Подробнее о FunGen + The Handy →</a>
+  </p>
+
+  <h2>OSR2 / SR6 / SSR1</h2>
+  <p>
+    Устройства на T-Code - то место, где раскрывается <strong>многоосевой</strong> режим. ИИ FunGen
+    пишет ход плюс крен, наклон и вращение и передаёт каждую ось на устройство: вы получаете полное
+    движение, а не поршень. <a href={`${base}/ru/funscripts-for-osr2-sr6/`}>Подробнее о FunGen + OSR2 / SR6 →</a>
+  </p>
+
+  <h2>Autoblow</h2>
+  <p>
+    Управляйте <strong>Autoblow Ultra</strong> по его дорожке хода. Сгенерируйте скрипт с помощью ИИ,
+    доработайте на таймлайне и проигрывайте синхронно - тот же процесс в одном приложении, что и для
+    любого другого устройства.
+  </p>
+
+  <h2>Vacuglide</h2>
+  <p>
+    FunGen поддерживает <strong>Vacuglide</strong> напрямую: сгенерированный или собранный вручную
+    скрипт управляет им с той же интерполяцией и компенсацией задержки, что и остальные устройства.
+  </p>
+
+  <h2>Buttplug.io / Intiface</h2>
+  <p>
+    Помимо встроенных интеграций, FunGen умеет говорить с <strong>Buttplug.io / Intiface</strong> -
+    открытым мостом к длинному списку массовых игрушек. Если ваше устройство работает с Intiface,
+    FunGen сможет управлять им по funscript - практичный
+    <a href={`${base}/ru/funscript-editor/`}>редактор и плеер funscript</a> даже для железа, с которым
+    у него нет нативной интеграции.
+  </p>
+
+  <h2>Как устройства держат синхронизацию</h2>
+  <p>
+    Каким бы ни было устройство, FunGen применяет <strong>интерполяцию под конкретный девайс</strong>
+    (сглаживает движение до того, что железо реально может) и <strong>компенсацию задержки</strong>
+    (чтобы действие попадало в ритм). Встроенный стример позволяет вести сессию с телефона или
+    VR-шлема, пока устройство следует за видео, а <strong>Funscript Doctor</strong> оценивает скрипт
+    по лимитам именно вашего устройства ещё до воспроизведения.
+  </p>
+
+  <p>
+    <a href={`${base}/ru/`}>Скачайте FunGen</a> и играйте на том устройстве, которое у вас уже есть, -
+    попробовать можно бесплатно.
+  </p>
+</Article>

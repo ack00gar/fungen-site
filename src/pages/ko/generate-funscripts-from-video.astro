@@ -1,0 +1,117 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = '동영상에서 funscript 자동 생성하는 방법 (2D·VR) - FunGen';
+const description =
+  'AI로 어떤 동영상이든 funscript로 만들어 보세요. 2D·POV·VR 씬에서 funscript를 생성하고, 다듬고, 기기로 재생하는 단계별 가이드입니다.';
+const canonicalPath = '/ko/generate-funscripts-from-video';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: '동영상에서 funscript를 생성하는 방법',
+  description,
+  inLanguage: 'ko',
+  dateModified: '2026-07-17',
+  mainEntityOfPage: 'https://fungen.app/ko/generate-funscripts-from-video',
+  tool: [{ '@type': 'HowToTool', name: 'FunGen' }],
+  step: [
+    {
+      '@type': 'HowToStep',
+      name: 'FunGen 다운로드',
+      text: 'Windows, macOS, Linux용 무료 FunGen 데스크톱 앱을 다운로드하세요. 단일 네이티브 바이너리라 따로 설치할 것이 없습니다.',
+      url: 'https://fungen.app/ko/generate-funscripts-from-video#download',
+    },
+    {
+      '@type': 'HowToStep',
+      name: '동영상 열기',
+      text: '2D, POV, VR 동영상을 FunGen에 끌어다 놓으세요. 레이아웃(플랫, 어안, 등장방형, 좌우 분할, 상하 분할)을 자동으로 감지합니다.',
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'AI로 생성',
+      text: '20초 미리보기로 결과를 확인한 뒤 전체 씬을 생성하세요. 전용 AI 모델이 화면 속 움직임을 읽어 다축 funscript를 작성합니다.',
+    },
+    {
+      '@type': 'HowToStep',
+      name: '타임라인에서 다듬기',
+      text: '프레임 단위로 정밀한 다축 타임라인에서 정리하세요. 변형 도구, 챕터, 그리고 Doctor 품질 검사가 대부분의 문제를 클릭 한 번에 고칩니다.',
+    },
+    {
+      '@type': 'HowToStep',
+      name: '기기로 재생',
+      text: 'The Handy, OSR2/SR6, Autoblow, Vacuglide는 물론 Buttplug.io / Intiface의 모든 기기로 스크립트를 바로 재생하세요. 기기별 레이턴시 처리가 적용됩니다.',
+    },
+  ],
+};
+const breadcrumbs = [
+  { name: '동영상에서 funscript 생성', path: '/ko/generate-funscripts-from-video' },
+];
+---
+
+<Article
+  {title}
+  {description}
+  heading="어떤 동영상이든 funscript로 만드는 방법"
+  lang="ko"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    손으로 일일이 스크립트를 만들거나 기존 파일을 찾아 헤맬 필요가 없습니다. AI를 쓰면 2D, POV,
+    VR을 가리지 않고 거의 모든 동영상을 몇 분 만에 완전한 <a href={`${base}/ko/what-is-a-funscript/`}>funscript</a>로
+    바꾸고, 취향에 맞게 다듬을 수 있습니다. <a href={`${base}/ko/`}>FunGen</a>에서 어떻게 진행되는지 살펴보겠습니다.
+  </p>
+
+  <h2 id="download">1. FunGen 다운로드 (무료)</h2>
+  <p>
+    <strong>Windows, macOS, Linux</strong>용 무료 데스크톱 앱을 받으세요. 네이티브 바이너리 하나로 끝이라 -
+    Python 런타임이나 라이브러리 뭉치를 설치할 필요가 없고 - AI는 내 GPU에서 로컬로 실행되므로
+    소장한 영상이 컴퓨터 밖으로 나가지 않습니다.
+  </p>
+
+  <h2>2. 동영상 열기</h2>
+  <p>
+    어떤 씬이든 끌어다 놓으세요. FunGen이 영상을 직접 읽어 레이아웃을 알아서 파악합니다 - 플랫 2D와
+    POV는 물론, 어안·등장방형·좌우 분할·상하 분할 VR까지. 미리 변환해 둘 것이
+    전혀 없습니다.
+  </p>
+
+  <h2>3. AI로 생성</h2>
+  <p>
+    먼저 클립의 아무 구간에서나 무료 <strong>20초 미리보기</strong>를 돌려 품질을 확인한 뒤,
+    전체 씬을 생성하세요. 2D/플랫 영상용과 VR용으로 각각 튜닝된 전용 Pro AI 모델이 화면 속
+    움직임을 프레임 단위로 따라가며 부드럽고 스트로크 폭이 살아 있는 다축
+    funscript를 작성합니다. 클립 하나만 생성할 수도, 폴더 전체를 밤새 일괄 처리할 수도 있습니다.
+  </p>
+
+  <h2>4. 타임라인에서 다듬기</h2>
+  <p>
+    AI가 대부분을 해내고, 나머지는 편집기가 채워 줍니다. 프레임 단위로 정밀한 다축
+    타임라인에서 변형 도구(진폭, 스무딩, 속도 제한, 타이밍)와 챕터, 그리고
+    <strong>Doctor</strong>로 정리하세요 - 기기 특성을 반영한 0~100점 품질 점수가 속도
+    위반, 데드 존, 누락된 스트로크를 잡아내고 대부분을 클릭 한 번에 고칩니다.
+  </p>
+
+  <h2>5. 기기로 재생</h2>
+  <p>
+    완성된 스크립트를 하드웨어로 바로 재생하세요 - <strong>The Handy</strong>,
+    <strong>OSR2 / SR6 / SSR1</strong>, <strong>Autoblow</strong>, <strong>Vacuglide</strong>, 그리고
+    <strong>Buttplug.io / Intiface</strong>의 모든 기기 - 기기별 보간과 레이턴시
+    보정이 적용됩니다. 내장 스트리머로 휴대폰이나 VR 헤드셋에서 세션을 진행할 수도 있습니다.
+  </p>
+
+  <h2>어떤 동영상을 스크립트로 만들 수 있나요?</h2>
+  <p>
+    리드미컬한 움직임이 있다면 무엇이든 가능합니다. 일반적인 VR·2D/POV 씬 외에도 FunGen은
+    비트에 맞춘 <strong>cock hero</strong>·<strong>PMV</strong> 편집 영상, <strong>JOI</strong>와
+    티징 영상까지 처리합니다 - 포럼에서 기존 스크립트를 검색하는 대신 직접 생성해 보세요.
+  </p>
+
+  <p>
+    바로 시작해 볼까요? <a href={`${base}/ko/`}>FunGen을 다운로드</a>하면 몇 분 안에 첫 funscript가
+    만들어지기 시작합니다.
+  </p>
+</Article>

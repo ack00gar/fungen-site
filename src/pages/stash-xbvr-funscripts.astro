@@ -1,0 +1,90 @@
+---
+import Article from '../layouts/Article.astro';
+
+const title = 'Funscripts from your Stash & XBVR library - browse, stream, generate';
+const description =
+  'FunGen connects to your Stash and XBVR media servers, browses their scene library inside the app, streams a scene directly, and generates an AI funscript from it - no downloading, no copying files.';
+const canonicalPath = '/stash-xbvr-funscripts';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Generate funscripts from Stash and XBVR',
+  description,
+  inLanguage: 'en',
+  dateModified: '2026-07-17',
+  mainEntityOfPage: 'https://fungen.app/stash-xbvr-funscripts',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'Stash & XBVR', path: '/stash-xbvr-funscripts' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="Funscripts from your Stash & XBVR library"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    Already organise your collection in <strong>Stash</strong> or <strong>XBVR</strong>? FunGen reads
+    from them directly. It finds your servers on the network, browses their scene library inside the
+    app, streams a scene without downloading it, and generates an
+    <a href={`${base}/generate-funscripts-from-video/`}>AI funscript</a> from it - one workflow, no
+    copying files around.
+  </p>
+
+  <h2>It finds your servers automatically</h2>
+  <p>
+    Open FunGen and it sweeps your local network for <strong>Stash</strong> and <strong>XBVR</strong>
+    instances, offering each one as a one-click connect on the Welcome page. A password-protected
+    Stash prompts for its API key inline; servers on another subnet or a VPN / Tailscale address can
+    be added by hand in Preferences. XBVR needs nothing but the connection.
+  </p>
+
+  <h2>Browse the whole library, in the app</h2>
+  <p>
+    Connected scenes show up as their own browse sections - <strong>XBVR scenes</strong> and
+    <strong>Stash scenes</strong> each get a collapsible, searchable grid with the server's own cover
+    art. Scroll a library of thousands; search narrows it instantly. FunGen respects what each server
+    already knows: scenes flagged interactive, existing funscripts, VR versus 2D.
+  </p>
+
+  <h2>Stream a scene and script it</h2>
+  <p>
+    Click a scene and FunGen <strong>streams it straight from the server</strong> - Stash's stream
+    endpoint or XBVR's DMS URL - so nothing is copied to your disk. From there it's the normal FunGen
+    flow: generate a stroke script with AI, or full <a href={`${base}/funscripts-for-osr2-sr6/`}
+      >multi-axis</a
+    > motion for <a href={`${base}/vr-funscripts/`}>VR</a>, then refine it on the
+    <a href={`${base}/funscript-editor/`}>timeline</a>. If the server already has a funscript for the
+    scene, FunGen loads it alongside the video so you can play or edit it right away.
+  </p>
+
+  <h2>Play it to your device</h2>
+  <p>
+    The script drives whatever hardware you own - <a href={`${base}/funscripts-for-the-handy/`}
+      >The Handy</a
+    >, OSR2 / SR6, or anything on <a href={`${base}/supported-devices/`}>Buttplug.io / Intiface</a> -
+    with per-device interpolation and latency compensation. FunGen can even serve the session to a
+    phone or VR headset while the device follows.
+  </p>
+
+  <h2>Why it's set up this way</h2>
+  <p>
+    Your library lives where you already keep it. FunGen doesn't ask you to re-import, duplicate, or
+    move anything - it connects, reads, streams, and generates. Stash and XBVR stay the source of
+    truth for your collection; FunGen is the piece that turns any scene in it into motion.
+  </p>
+
+  <p>
+    <a href={`${base}/`}>Download FunGen</a> and point it at your Stash or XBVR server - free to try.
+  </p>
+</Article>

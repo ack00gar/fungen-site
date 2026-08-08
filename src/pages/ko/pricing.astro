@@ -1,0 +1,51 @@
+---
+import Article from '../../layouts/Article.astro';
+import PricingSection from '../../components/PricingSection.astro';
+
+const title = 'FunGen 가격: 무료 다운로드, 일회성 결제로 Pro 잠금 해제';
+const description =
+  'FunGen은 무료로 다운로드할 수 있으며 전체 에디터, 라이브러리, AI 미리보기를 포함합니다. 일회성 결제로 풀 퀄리티 Pro AI 모델을 잠금 해제하세요. 구독 없음, 제한 없음. PayPal·카드 결제 지원, USDT(TRC-20)로도 동일한 가격에 구매할 수 있습니다.';
+const canonicalPath = '/ko/pricing';
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'FunGen 가격',
+  description,
+  inLanguage: 'ko',
+  dateModified: '2026-07-31',
+  mainEntityOfPage: 'https://fungen.app/ko/pricing',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: '가격', path: '/ko/pricing' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="FunGen 가격"
+  lang="ko"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+  hideCtaRow
+>
+  <p class="lead">
+    FunGen은 <strong>무료로 다운로드</strong>할 수 있습니다. 전체 에디터, 라이브러리,
+    일괄 처리, 디바이스 제어가 모두 포함됩니다. <strong>일회성 결제</strong>로 풀 퀄리티
+    Pro AI 모델을 잠금 해제하세요. 구독도, 반복 결제도 없습니다. 직접 만들거나 편집한
+    funscript는 언제나 당신의 것이며 자유롭게 공유하거나 판매할 수 있습니다.
+  </p>
+  <p>
+    결제는 PayPal과 카드를 지원하며, <strong>USDT(TRC-20)</strong>로도 실시간 환율 기준
+    동일한 가격에 구매할 수 있습니다(암호화폐 할증 없음). 유료 등급은 서명된 Pass로
+    이메일 발송됩니다. 청구는 유로(EUR) 가격 기준이며 원화 표시는 참고용입니다.
+  </p>
+
+  <PricingSection slot="full" lang="ko" standalone />
+</Article>

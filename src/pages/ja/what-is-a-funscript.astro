@@ -1,0 +1,79 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = 'funscriptとは？動画と連動するインタラクティブ形式をわかりやすく解説';
+const description =
+  'funscript（ファンスクリプト）は動きを時系列で記録した小さなファイルで、動画に同期して対応デバイスを動かします。フォーマットの仕組み、多軸スクリプト、作り方まで解説。';
+const canonicalPath = '/ja/what-is-a-funscript';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'funscriptとは？',
+  description,
+  inLanguage: 'ja',
+  dateModified: '2026-07-17',
+  mainEntityOfPage: 'https://fungen.app/ja/what-is-a-funscript',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'funscriptとは？', path: '/ja/what-is-a-funscript' }];
+---
+
+<Article {title} {description} heading="funscriptとは？" lang="ja" {canonicalPath} {articleLd} {breadcrumbs}>
+  <p class="lead">
+    <strong>funscript</strong>（ファンスクリプト）とは、動きの変化を時系列で記録した小さなテキストファイルです。動画と一緒に再生すると、対応デバイスを映像に同期して動かします
+    - ポジション単位で連動するため、画面内のアクションとデバイスの動きがぴったり一致します。
+  </p>
+
+  <h2>フォーマットの仕組み</h2>
+  <p>
+    funscriptの中身はただのJSONで、<em>アクション</em>のリストで構成されています。各アクションはタイムスタンプ（ミリ秒）と
+    <strong>0〜100</strong>のポジション値のペアで、0と100がストロークの両端に対応します。プレイヤーはこのリストを読み込み、ポイント間を補間しながらリアルタイムでハードウェアへ送信します。拡張子は
+    <code>.funscript</code>。中身はただのテキストなのでサイズはごく小さく、フル尺のシーン1本でも通常は数百キロバイト程度です。
+  </p>
+  <p>
+    基本のスクリプトは1軸（上下のストローク）を制御します。<strong>多軸（マルチアクシス）</strong>スクリプトでは、ロール・ピッチ・前後・左右・ツイストといった追加トラックを、それぞれメインファイルと並ぶ独立したファイルとして保存し、対応デバイスで再生できます。
+  </p>
+
+  <h2>funscriptの作り方</h2>
+  <p>作り方は2通りあります：</p>
+  <ul>
+    <li>
+      <strong>手作業</strong> - funscriptエディタで、動画に合わせてタイムライン上にポイントを置いて調整する方法。正確ですが、時間がかかります。
+    </li>
+    <li>
+      <strong>AIで自動生成</strong> - AIモデルが動画を解析して動きを自動でスクリプト化し、あとは手作業で仕上げるだけ。<a href={`${base}/ja/`}>FunGen</a>はまさにこの方式で、2DでもVRでも動画を指定するだけで、完全な多軸funscriptを数分で生成します。
+    </li>
+  </ul>
+
+  <h2>funscriptを再生できるデバイス</h2>
+  <p>
+    funscriptはデバイスを選びません。同じファイルで<strong>The Handy</strong>、
+    T-Code経由の<strong>OSR2 / SR6 / SSR1</strong>ファミリー、<strong>Autoblow</strong>、
+    <strong>Vacuglide</strong>、さらに
+    <strong>Buttplug.io / Intiface</strong>経由でつながるあらゆるデバイスを動かせます。HereSphereやDeoVRのようなプレイヤーやブリッジがスクリプトを動画に自動で同期してくれるので、VRヘッドセット内でもそのまま使えます。
+  </p>
+
+  <h2>どんな動画がスクリプト化されるのか</h2>
+  <p>
+    リズミカルな動きのある動画ならすべて候補になります：<strong>VR</strong>や<strong>2D / POV</strong>
+    のシーン（JAV・JAVR〔アダルトVR／VR AV〕作品を含む）、ビート同期の<strong>cock hero</strong>や<strong>PMV</strong>のコンピレーション、
+    <strong>JOI</strong>（オナサポ）、焦らし・寸止め系の動画など。Eroscriptsのようなフォーラムでスクリプトが共有・議論されていますが、FunGenのようなツールを使えば、既存のスクリプトを探し回る代わりに好きなクリップから自分で生成できます。
+  </p>
+
+  <h2>funscriptと動画の関係</h2>
+  <p>
+    funscriptに動画そのものは一切含まれません - 中身はモーションデータだけなので、手持ちのシーンと組み合わせて使う小さな別ファイルとして共有されます。この分離のおかげで、1つのスクリプトをプレイヤーやデバイスをまたいで再利用できます：スクリプトが<em>何をするか</em>を記述し、<em>どう動くか</em>は各デバイスがそれぞれの補間とレイテンシ処理で決める、という役割分担です。
+  </p>
+
+  <p>
+    <strong>自分で作ってみたくなりましたか？</strong> <a href={`${base}/ja/`}>FunGen</a>は専用のAIモデルで2D・VR動画からfunscriptを生成し、多軸タイムラインで編集して、そのままデバイスへ再生できます
+    - 無料で試せて、処理はすべてお使いのマシン上で完結します。
+  </p>
+</Article>

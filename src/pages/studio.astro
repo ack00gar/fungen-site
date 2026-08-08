@@ -1,0 +1,123 @@
+---
+import Article from '../layouts/Article.astro';
+import { SHOWCASE } from '../i18n/showcase';
+
+// The Studio page: the power tools that used to crowd the landing page
+// (Doctor, transforms/pipelines, command palette) get their own home.
+// Copy comes from the showcase dict so the pitch never drifts from the app.
+const sc = SHOWCASE.en;
+
+const title = 'The FunGen Studio - Doctor, transforms and the command palette';
+const description =
+  'Inside the FunGen Studio: the Funscript Doctor quality checks, one-click transforms and pipelines, and a command palette that keeps every tool one keystroke away.';
+const canonicalPath = '/studio';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'The FunGen Studio',
+  description,
+  inLanguage: 'en',
+  dateModified: '2026-07-17',
+  mainEntityOfPage: 'https://fungen.app/studio',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'The Studio', path: '/studio' }];
+
+const TOOLS = [
+  { d: sc.doctor, img: 'doctor', w: 1700, h: 1375 },
+  { d: sc.transforms, img: 'library', w: 802, h: 1932 },
+  { d: sc.palette, img: 'palette', vid: 'palette', w: 1144, h: 858 },
+] as { d: typeof sc.doctor; img: string; w: number; h: number; vid?: string }[];
+---
+
+<Article
+  {title}
+  {description}
+  heading="The FunGen Studio"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    The Studio is where a script gets finished. Generate first, then refine: quality checks,
+    one-click reshaping, and a keyboard-first workflow that keeps every tool one keystroke away.
+    All of it is in the free download.
+  </p>
+
+  {TOOLS.map((row) => (
+    <section class="tool">
+      <p class="eyebrow">{row.d.eyebrow}</p>
+      <h2>{row.d.title}</h2>
+      <p>{row.d.body}</p>
+      <figure class="tool-shot">
+        {row.vid ? (
+          <video
+            width={row.w}
+            height={row.h}
+            poster={`${base}/shots/${row.vid}-poster.webp`}
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            aria-label={row.d.alt}
+          >
+            <source src={`${base}/shots/${row.vid}.mp4`} type="video/mp4" />
+          </video>
+        ) : (
+          <img
+            src={`${base}/shots/${row.img}.webp`}
+            width={row.w}
+            height={row.h}
+            loading="lazy"
+            decoding="async"
+            alt={row.d.alt}
+          />
+        )}
+      </figure>
+    </section>
+  ))}
+
+  <h2>Part of one workflow</h2>
+  <p>
+    The Studio sits next to the player, the library and the AI: let FunGen
+    <a href={`${base}/generate-funscripts-from-video/`}> generate a funscript from your video</a>,
+    polish it here, and play it straight to your device. The full editing walkthrough lives in
+    <a href={`${base}/funscript-editor/`}>the funscript editor guide</a>.
+  </p>
+
+  <p>
+    <a href={`${base}/`}>Download FunGen</a> - the Studio, player and library are free; full-quality
+    AI generation is the Pro unlock.
+  </p>
+</Article>
+
+<style>
+  .tool { margin: 44px 0; }
+  .eyebrow {
+    color: var(--teal, #22d3ee);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin: 0 0 4px;
+  }
+  .tool h2 { margin-top: 0; }
+  .tool-shot { margin: 18px 0 0; }
+  .tool-shot img,
+  .tool-shot video {
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    border: 1px solid rgba(34, 211, 238, 0.15);
+  }
+</style>

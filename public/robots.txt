@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fungen.app/sitemap-index.xml

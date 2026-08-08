@@ -1,0 +1,92 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = '지원 기기 - FunGen이 구동하는 하드웨어 (The Handy, OSR2/SR6, Buttplug)';
+const description =
+  'FunGen이 funscript를 재생하는 하드웨어: The Handy, Autoblow, Vacuglide, T-Code 기반 OSR2/SR6/SSR1, 그리고 Buttplug.io / Intiface의 모든 기기 - 레이턴시 보정 지원.';
+const canonicalPath = '/ko/supported-devices';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'FunGen이 지원하는 기기',
+  description,
+  inLanguage: 'ko',
+  dateModified: '2026-07-17',
+  mainEntityOfPage: 'https://fungen.app/ko/supported-devices',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: '지원 기기', path: '/ko/supported-devices' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="FunGen이 지원하는 기기"
+  lang="ko"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    FunGen은 <a href={`${base}/ko/what-is-a-funscript/`}>funscript</a>를 하드웨어로 바로 재생하며,
+    기기별 보간과 레이턴시 보정으로 움직임이 영상과 어긋나지 않게 합니다. 이미 갖고 있는
+    장비 그대로 사용할 수 있습니다:
+  </p>
+
+  <h2>The Handy</h2>
+  <p>
+    <strong>HTTPS (Handy Connect API)</strong> 또는 <strong>Bluetooth LE</strong>로 연결하며,
+    Handy의 왕복 지연에 맞춰 튜닝된 레이턴시 보정이 적용됩니다. 어떤 2D·VR 영상에서든 스트로크
+    스크립트를 생성해 소파에서나 헤드셋에서 재생하세요.
+    <a href={`${base}/ko/funscripts-for-the-handy/`}>FunGen + The Handy 자세히 보기 →</a>
+  </p>
+
+  <h2>OSR2 / SR6 / SSR1</h2>
+  <p>
+    <strong>다축</strong>이 빛나는 곳이 바로 T-Code 장비들입니다. FunGen의 AI가 스트로크에 롤,
+    피치, 트위스트까지 작성하고 각 축을 기기로 전송하므로, 단순한 피스톤이 아닌 풀 모션을
+    얻습니다. <a href={`${base}/ko/funscripts-for-osr2-sr6/`}>FunGen + OSR2 / SR6 자세히 보기 →</a>
+  </p>
+
+  <h2>Autoblow</h2>
+  <p>
+    <strong>Autoblow Ultra</strong>를 스트로크 트랙으로 구동합니다. AI로 스크립트를 생성하고,
+    타임라인에서 다듬고, 싱크에 맞춰 재생하는 - 다른 모든 기기와 동일한 원-앱 워크플로입니다.
+  </p>
+
+  <h2>Vacuglide</h2>
+  <p>
+    FunGen은 <strong>Vacuglide</strong>를 직접 지원하므로, AI로 생성했든 직접 만들었든 스크립트가
+    다른 기기와 같은 보간·레이턴시 처리로 구동됩니다.
+  </p>
+
+  <h2>Buttplug.io / Intiface</h2>
+  <p>
+    내장 연동 외에도 FunGen은 <strong>Buttplug.io / Intiface</strong>와 통신합니다 - 수많은
+    소비자용 토이로 이어지는 오픈 브리지죠. 기기가 Intiface에서 작동한다면 FunGen이 funscript로
+    구동할 수 있으므로, 네이티브로 연동되지 않는 하드웨어에도 실용적인
+    <a href={`${base}/ko/funscript-editor/`}>funscript 편집기 겸 플레이어</a>가
+    됩니다.
+  </p>
+
+  <h2>기기 싱크가 유지되는 원리</h2>
+  <p>
+    어떤 기기든 FunGen은 <strong>기기별 보간</strong>(하드웨어가 소화할 수 있는 수준으로
+    움직임을 다듬기)과 <strong>레이턴시 보정</strong>(동작이 박자에 정확히 떨어지게 하기)을
+    적용합니다. 내장 스트리머로 휴대폰이나 VR 헤드셋에서 세션을 진행하는 동안 기기가 따라오게
+    할 수 있고, <strong>Funscript Doctor</strong>는 재생 전에 스크립트를 내 기기의 한계에
+    대조해 점수를 매깁니다.
+  </p>
+
+  <p>
+    <a href={`${base}/ko/`}>FunGen을 다운로드</a>하고 이미 가진 기기로 재생해 보세요 - 무료로
+    시작할 수 있습니다.
+  </p>
+</Article>

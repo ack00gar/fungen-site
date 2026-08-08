@@ -1,0 +1,86 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = 'Funscripts multieje para OSR2 / SR6 - genéralos con FunGen';
+const description =
+  'Genera y edita funscripts multieje para OSR2, SR6 y SSR1 con FunGen. La IA escribe la carrera más roll, pitch y twist; FunGen envía cada eje por T-Code.';
+const canonicalPath = '/es/funscripts-for-osr2-sr6';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Funscripts multieje para OSR2 / SR6 con FunGen',
+  description,
+  inLanguage: 'es',
+  dateModified: '2026-07-17',
+  mainEntityOfPage: 'https://fungen.app/es/funscripts-for-osr2-sr6',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'OSR2 / SR6', path: '/es/funscripts-for-osr2-sr6' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="Funscripts multieje para OSR2 / SR6"
+  lang="es"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    El OSR2 y el SR6 brillan con scripts <strong>multieje</strong> - no solo la carrera, sino
+    también roll, pitch y twist. <a href={`${base}/es/`}>FunGen</a> genera esos ejes adicionales con
+    IA y envía cada uno a tu dispositivo por T-Code, para que aproveches todo el movimiento para el
+    que se construyeron estas máquinas.
+  </p>
+
+  <h2>IA que escribe más que la carrera</h2>
+  <p>
+    Un <a href={`${base}/es/what-is-a-funscript/`}>funscript</a> básico es un solo eje - arriba y
+    abajo. La IA de FunGen produce un resultado <strong>multieje</strong>: la carrera principal más
+    pistas secundarias (roll, pitch, surge, sway, twist), cada una guardada como su propio archivo
+    complementario. Sobre todo en escenas VR, ese movimiento extra es lo que hace que un OSR2 o un
+    SR6 se sienta tridimensional en lugar de un pistón.
+  </p>
+
+  <h2>Enrutado por T-Code</h2>
+  <p>
+    FunGen habla <strong>T-Code</strong> con la familia OSR - OSR2, SR6 y SSR1. Asignas cada eje del
+    script a un eje del dispositivo (L0 para la carrera, ejes R para la rotación, etc.) y FunGen los
+    transmite juntos y en sincronía. La interpolación y la compensación de latencia por dispositivo
+    mantienen los ejes coordinados en lugar de dejar que se desvíen entre sí.
+  </p>
+  <ul>
+    <li>Elige qué ejes generados enviar, y a qué canal del dispositivo.</li>
+    <li>Mueve la carrera + roll/twist del OSR2, o el rango de movimiento más amplio del SR6.</li>
+    <li>Compensación de latencia por dispositivo para que los ejes se mantengan juntos y al compás.</li>
+  </ul>
+
+  <h2>Edita cada eje en una sola línea de tiempo</h2>
+  <p>
+    La línea de tiempo multieje muestra las pistas apiladas, de modo que puedes refinar el roll o el
+    pitch por separado - superponer un eje sobre otro, suavizar o escalar una sola pista y dividir
+    la escena en capítulos. El <strong>Funscript Doctor</strong> revisa cada eje contra los límites
+    de tu dispositivo y corrige la mayoría de los problemas con un clic.
+  </p>
+
+  <h2>Genera desde tu propio material</h2>
+  <p>
+    Apunta FunGen a un clip 2D o VR, previsualiza el seguimiento y genera el script multieje
+    completo - localmente, en tu propia máquina. Consulta <a href={`${base}/es/generate-funscripts-from-video/`}>la guía</a>
+    para el flujo de trabajo, o <a href={`${base}/es/vr-funscripts/`}>funscripts VR</a> para la parte
+    del visor.
+  </p>
+
+  <p>
+    <a href={`${base}/es/`}>Descarga FunGen</a> - gratis para probar - y scriptea movimiento
+    multieje para tu OSR2 o SR6.
+  </p>
+</Article>

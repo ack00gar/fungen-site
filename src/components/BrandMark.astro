@@ -1,0 +1,90 @@
+---
+// The FunGen "Curve" mark: a funscript curve between two keyframe dots.
+// Geometry lifted verbatim from the app's brand_mark widget (96x96 viewBox).
+interface Props {
+  size?: number;
+  animate?: boolean;
+}
+const { size = 210, animate = true } = Astro.props;
+---
+
+<svg
+  class={`bmark${animate ? ' is-anim' : ''}`}
+  width={size}
+  height={size}
+  viewBox="0 0 96 96"
+  fill="none"
+  role="img"
+  aria-label="FunGen"
+>
+  <path
+    class="bmark-curve"
+    d="M12 74 C22 74 26 22 36 22 C46 22 50 74 60 74 C70 74 74 22 84 22"
+    pathLength="1"
+    stroke="#f2f6f9"
+    stroke-width="6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  ></path>
+  <circle class="bmark-dot d1" cx="36" cy="22" r="7.5" fill="#22d3ee"></circle>
+  <circle class="bmark-dot d2" cx="60" cy="74" r="7.5" fill="#22d3ee"></circle>
+</svg>
+
+<style>
+  .bmark-curve {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+    filter: drop-shadow(0 2px 12px rgba(34, 211, 238, 0.12));
+  }
+  .bmark-dot {
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  /* Animated splash replay: draw the curve, then pop the dots in. */
+  .is-anim .bmark-curve {
+    stroke-dashoffset: 1;
+    animation: bmark-draw 2.6s cubic-bezier(0.65, 0, 0.35, 1) 0.2s forwards;
+  }
+  .is-anim .bmark-dot {
+    opacity: 0;
+  }
+  .is-anim .d1 {
+    animation: bmark-pop 0.55s cubic-bezier(0.2, 0.9, 0.25, 1) 1.45s forwards;
+  }
+  .is-anim .d2 {
+    animation: bmark-pop 0.55s cubic-bezier(0.2, 0.9, 0.25, 1) 2.45s forwards;
+  }
+
+  @keyframes bmark-draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes bmark-pop {
+    0% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    60% {
+      opacity: 1;
+      transform: scale(1.25);
+    }
+    80% {
+      transform: scale(0.92);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .is-anim .bmark-curve,
+    .is-anim .bmark-dot {
+      animation: none;
+      stroke-dashoffset: 0;
+      opacity: 1;
+    }
+  }
+</style>

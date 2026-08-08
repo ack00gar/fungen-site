@@ -1,0 +1,91 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = 'Funscript-Editor - framegenau und multi-achsig in FunGen';
+const description =
+  'FunGen ist ein vollwertiger Funscript-Editor: framegenaue Multi-Achsen-Timeline, Transformationen und Pipelines, Kapitel, unbegrenztes Undo/Redo und die Doctor-Qualitätsprüfungen. Kostenlos nutzbar.';
+const canonicalPath = '/de/funscript-editor';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Der FunGen-Funscript-Editor',
+  description,
+  inLanguage: 'de',
+  dateModified: '2026-07-17',
+  mainEntityOfPage: 'https://fungen.app/de/funscript-editor',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'Funscript-Editor', path: '/de/funscript-editor' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="Der Funscript-Editor in FunGen"
+  lang="de"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    FunGen ist nicht nur ein KI-Generator - es ist ein vollwertiger
+    <strong>Funscript-Editor</strong>. Bau ein Script von Hand auf einer framegenauen Timeline oder
+    räum auf, was die KI generiert hat, und spiel es direkt auf dein Gerät - ohne das Tool zu
+    wechseln. Der Editor ist kostenlos nutzbar.
+  </p>
+
+  <h2>Eine framegenaue Multi-Achsen-Timeline</h2>
+  <p>
+    Bearbeite Frame für Frame direkt am Video: Punkte hinzufügen, verschieben und feinjustieren,
+    einen Punkt per Zifferntaste auf eine exakte Höhe setzen oder den nächstgelegenen Punkt zum
+    Playhead ziehen und mit einem Tastendruck festlegen. Jede Achse - Hub plus Roll, Pitch, Surge,
+    Sway, Twist - bekommt ihre eigene Spur, und du kannst eine Achse über eine andere legen, um sie
+    abzugleichen.
+  </p>
+
+  <h2>Transformationen, Plugins und Pipelines</h2>
+  <p>
+    Forme eine ganze Auswahl oder das komplette Script mit Dutzenden Ein-Klick-Transformationen und
+    Plugins um: Amplitude, Glättung, Tempolimits, Timing und mehr. Verkette deine Favoriten zu
+    einer <strong>Pipeline</strong> und fahr ein komplettes Cleanup mit einem einzigen Klick -
+    Autotune, Umformen, Begrenzen.
+  </p>
+
+  <h2>Kapitel, Lesezeichen und ein Workflow mit Gedächtnis</h2>
+  <p>
+    Teile eine lange Szene in benannte, farbcodierte Kapitel, setze Lesezeichen mit einer Taste und
+    öffne dein Projekt genau dort wieder, wo du aufgehört hast. <strong>Undo und Redo sind
+    unbegrenzt und überstehen das Schließen und erneute Öffnen</strong> eines Projekts - dein
+    Bearbeitungsverlauf geht nie verloren. FunGen öffnet außerdem <code>.funscript</code>- und
+    <code>.fungen</code>-Dateien direkt unter Windows, macOS und Linux.
+  </p>
+
+  <h2>Der Doctor: Gewissheit, dass es sitzt</h2>
+  <p>
+    Bevor du ein Script rausgibst, vergibt der <strong>Funscript Doctor</strong> einen
+    gerätebewussten Qualitäts-Score von 0 bis 100 - er markiert Tempoverstöße, Punkte neben dem
+    Frame, tote Zonen, Jitter und fehlende Hübe und behebt die meisten davon mit einem Klick. Das
+    ist der Unterschied zwischen einem Script, das auf der Timeline gut aussieht, und einem, das
+    sich auf der Hardware wirklich gut anfühlt.
+  </p>
+
+  <h2>Generieren, dann verfeinern</h2>
+  <p>
+    Am schnellsten geht es mit beiden Hälften zusammen: Lass die KI
+    <a href={`${base}/de/generate-funscripts-from-video/`}>ein Funscript aus deinem Video
+    generieren</a> und polier es dann im Editor. Neu im Thema? Starte mit
+    <a href={`${base}/de/what-is-a-funscript/`}>was ein Funscript ist</a>.
+  </p>
+
+  <p>
+    <a href={`${base}/de/`}>Lade FunGen herunter</a> - Editor, Player und Bibliothek sind kostenlos;
+    die KI-Generierung in voller Qualität ist das Pro-Upgrade.
+  </p>
+</Article>

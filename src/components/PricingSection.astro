@@ -1,0 +1,469 @@
+---
+// The pricing section: plan cards + the crypto (USDT/BTC) payment block.
+// Extracted from Landing.astro so it can render both inline on the homepage
+// (`#pricing` anchor) AND standalone on the dedicated `/pricing` page - one
+// source of truth, no copy fork between the two.
+import { LINKS, PLAN_META, PROMO, PROMO_ACTIVE, PROMO_ENDS, CRYPTO, localApprox } from '../consts';
+import { t, type Locale } from '../i18n';
+
+interface Props {
+  lang: Locale;
+  /** Heading level for the section title: 'h1' on the dedicated page (it IS
+   *  the page subject), 'h2' inline on the homepage (a section of it). */
+  headingTag?: 'h1' | 'h2';
+  /** True when embedded on the dedicated /pricing page rather than inline
+   *  on the homepage scroll. Opts out of the global `section` rule's
+   *  `min-height: 100vh` + vertical centering (built for the homepage's
+   *  one-section-per-screen rhythm) - inside a short article it just
+   *  leaves a huge empty gap above the cards. */
+  standalone?: boolean;
+}
+const { lang, headingTag = 'h2', standalone = false } = Astro.props;
+const s = t(lang);
+const Heading = headingTag;
+
+// Crypto-block strings. The USDT path exists FOR the no-PayPal regions (China
+// above all: ~1/3 of traffic, ~2% of buyers), so it must read natively there -
+// zh/ja localized here, everything else falls back to English. On zh the
+// <details> also renders OPEN and links a step-by-step tutorial page.
+const CRYPTO_TEXT: Record<string, {
+  eyebrow: string; hint: string; sub: string; chain: string; copy: string;
+  how1: string; how2: string; how3: string; tutorial?: string;
+  btcChain: string; btcNote: string;
+  /** The three rules that keep a payment redeemable - shown as a short list.
+   *  They exist because the redeem tool verifies ON-CHAIN and strictly:
+   *  right network, full amount RECEIVED, then the pass is emailed. */
+  pitfalls: string[];
+}> = {
+  en: {
+    eyebrow: 'Pay with crypto',
+    hint: "for regions where cards or PayPal aren't supported",
+    sub: 'Paid in USDT on the TRON (TRC-20) network, at the live EUR rate - same price as PayPal, no crypto surcharge.',
+    chain: 'Send to this TRON (TRC-20) address',
+    copy: 'Copy',
+    how1: 'Then email your ',
+    how2: ' and the email for your pass to ',
+    how3: ' Your signed pass comes back by email, normally within 24 hours.',
+    btcChain: 'Or pay in Bitcoin (on-chain) to this address',
+    btcNote: 'Send the EUR amount in BTC at the current rate. One confirmation (~10-60 min); the network fee is yours. Then email the TXID as above.',
+    pitfalls: [
+      'TRC-20 (TRON) only - USDT sent on another network cannot be recovered.',
+      'The amount RECEIVED must cover the full price: exchange withdrawal fees are extra, so send price + your fee.',
+      'Payments are verified on-chain against this exact address and amount before the pass is issued.',
+    ],
+  },
+  zh: {
+    eyebrow: '使用 USDT 付款',
+    hint: '无法使用 PayPal 或信用卡？推荐中国大陆用户使用此方式',
+    sub: '通过 TRON（TRC-20）网络支付 USDT，按实时欧元汇率换算——与 PayPal 同价，加密货币不加价。',
+    chain: '转账到这个 TRON（TRC-20）收款地址',
+    copy: '复制',
+    how1: '转账后，把',
+    how2: '和接收 Pass 的邮箱发送至 ',
+    how3: ' 签名后的 Pass 会通过邮件发回（通常 24 小时内），导入 FunGen 即可解锁。',
+    tutorial: '第一次用 USDT 购买？查看图文教程',
+    btcChain: '或将比特币（链上）转账到这个地址',
+    btcNote: '按当前汇率发送等值于欧元价格的 BTC。需要 1 个确认（约 10-60 分钟），矿工费自理。然后同样把 TXID 发邮件给我们。',
+    pitfalls: [
+      '只支持 TRC-20（TRON）网络——用其他网络转 USDT 将无法找回。',
+      '到账金额必须不低于标价：交易所提币手续费另计，请按“标价 + 手续费”转出。',
+      '发放 Pass 前会在链上核验地址与金额，确认后立即签发。',
+    ],
+  },
+  'zh-hant': {
+    eyebrow: '使用 USDT 付款',
+    hint: '無法使用 PayPal 或信用卡時的替代付款方式',
+    sub: '透過 TRON（TRC-20）網路支付 USDT，按即時歐元匯率換算——與 PayPal 同價，加密貨幣不加價。',
+    chain: '轉帳到這個 TRON（TRC-20）收款地址',
+    copy: '複製',
+    how1: '轉帳後，把',
+    how2: '和接收 Pass 的信箱寄到 ',
+    how3: ' 簽名後的 Pass 會以電子郵件寄回（通常 24 小時內），匯入 FunGen 即可解鎖。',
+    tutorial: '第一次用 USDT 購買？查看圖文教學',
+    btcChain: '或將比特幣（鏈上）轉帳到這個地址',
+    btcNote: '按目前匯率發送等值於歐元價格的 BTC。需要 1 個確認（約 10-60 分鐘），礦工費自理。然後同樣把 TXID 寄給我們。',
+    pitfalls: [
+      '只支援 TRC-20（TRON）網路——用其他網路轉 USDT 將無法找回。',
+      '到帳金額必須不低於標價：交易所提幣手續費另計，請按「標價 + 手續費」轉出。',
+      '發放 Pass 前會在鏈上核驗地址與金額，確認後立即簽發。',
+    ],
+  },
+  ja: {
+    eyebrow: '暗号資産（USDT）で支払う',
+    hint: 'カードやPayPalが使えない地域向けのお支払い方法',
+    sub: 'TRON（TRC-20）ネットワークのUSDTでお支払いください。実勢ユーロレート換算で、PayPalと同額——暗号資産の割増はありません。',
+    chain: 'このTRON（TRC-20）アドレスに送金',
+    copy: 'コピー',
+    how1: '送金後、',
+    how2: 'とPassを受け取るメールアドレスを次の宛先へ: ',
+    how3: ' 署名済みのPassをメールでお送りします（通常24時間以内）。',
+    btcChain: 'またはビットコイン（オンチェーン）をこのアドレスへ',
+    btcNote: '現在のレートでユーロ価格相当のBTCを送金してください。1承認（約10〜60分）が必要で、ネットワーク手数料はご負担ください。その後、同様にTXIDをメールでお送りください。',
+    pitfalls: [
+      'TRC-20（TRON）のみ対応——他のネットワークで送金したUSDTは復元できません。',
+      '着金額が価格を下回らないようにしてください。取引所の出金手数料は別途かかります。',
+      'Pass発行前に、このアドレスと金額をオンチェーンで照合します。',
+    ],
+  },
+  ko: {
+    eyebrow: 'USDT로 결제',
+    hint: '카드나 PayPal을 사용할 수 없는 지역을 위한 결제 방법',
+    sub: 'TRON(TRC-20) 네트워크의 USDT로 결제합니다. 실시간 유로 환율 기준으로 PayPal과 동일한 가격이며, 암호화폐 할증이 없습니다.',
+    chain: '이 TRON(TRC-20) 주소로 송금',
+    copy: '복사',
+    how1: '송금 후 ',
+    how2: '와 Pass를 받을 이메일 주소를 다음으로 보내주세요: ',
+    how3: ' 서명된 Pass를 이메일로 보내드립니다(보통 24시간 이내).',
+    btcChain: '또는 비트코인(온체인)을 이 주소로',
+    btcNote: '현재 환율로 유로 가격에 해당하는 BTC를 보내주세요. 1회 승인(약 10-60분)이 필요하며 네트워크 수수료는 부담하셔야 합니다. 그 후 TXID를 이메일로 보내주세요.',
+    pitfalls: [
+      'TRC-20(TRON) 전용 - 다른 네트워크로 보낸 USDT는 복구할 수 없습니다.',
+      '수령 금액이 가격 이상이어야 합니다. 거래소 출금 수수료는 별도입니다.',
+      'Pass 발급 전에 주소와 금액을 온체인에서 검증합니다.',
+    ],
+  },
+};
+const cx = CRYPTO_TEXT[lang] ?? CRYPTO_TEXT.en;
+const TXID_LABEL: Record<string, string> = {
+  zh: '交易 ID（TXID）',
+  'zh-hant': '交易 ID（TXID）',
+  ja: 'トランザクションID（TXID）',
+  ko: '트랜잭션 ID(TXID)',
+};
+const txidLabel = TXID_LABEL[lang] ?? 'transaction ID';
+// Mainland-China route note: PayPal is effectively unusable there, and 5.1%
+// CN conversion against 38.9% TW / 26.1% HK (same language, same price) says
+// the RAIL is the blocker, not the offer. Simplified Chinese only - TW/HK/MO
+// readers (zh-hant) have working PayPal and get the normal order.
+const railNote = lang === 'zh'
+  ? { text: '中国大陆用户：PayPal 在大陆通常无法使用，推荐直接用 USDT 购买（同价，不加价）。', link: '跳到 USDT 付款' }
+  : null;
+// The two purchase rails. Each paid plan offers both, as a MATCHED pair:
+// same wording pattern, same button style, same width. They are two ways to
+// buy the identical thing, so anything that made one look primary was just
+// telling the reader a preference that does not exist - and for a buyer
+// whose PayPal is blocked or unavailable, the "secondary" one is their only
+// door.
+//
+// "Buy", not "Support": this is a licence purchase. Calling it support
+// would both understate what the reader gets and collide with the real
+// support option - the ongoing Patreon tiers, which are a different thing
+// the app already names separately.
+//
+// Localized here rather than in the locale dictionaries for the same reason
+// CRYPTO_TEXT is: two short strings owned by this block, and eleven
+// dictionary keys invite drift (and collide with concurrent i18n work).
+// English is the fallback for any locale not listed.
+// One label above the pair, then the two rails as bare brand names. Three
+// reasons the verb moved out of the buttons:
+//
+// - Two full-width filled buttons stacked turned every paid card into a
+//   slab of accent colour twice the weight of its own content.
+// - "Buy on PayPal" / "Comprar con PayPal" cannot sit side by side in a
+//   third-of-a-row card without wrapping, and wrapped buttons stop reading
+//   as a pair. The brand names alone always fit, so the pair fits on ONE
+//   row and the card gets its height back.
+// - Saying "Buy" twice under a price is the same word twice for no reader.
+//
+// The verb still exists - once, as the label over the pair - so the
+// buttons never have to carry it.
+const RAIL_TEXT: Record<string, { lead: string }> = {
+  en: { lead: 'Buy with' },
+  de: { lead: 'Kaufen mit' },
+  es: { lead: 'Comprar con' },
+  fr: { lead: 'Acheter avec' },
+  it: { lead: 'Acquista con' },
+  pt: { lead: 'Comprar com' },
+  ru: { lead: 'Купить через' },
+  ja: { lead: '購入方法' },
+  ko: { lead: '구매 방법' },
+  zh: { lead: '购买方式' },
+  'zh-hant': { lead: '購買方式' },
+};
+const rails = RAIL_TEXT[lang] ?? RAIL_TEXT.en;
+
+// The two crypto tiers wear the same localized names as the plan cards
+// (plans[1] = Pro 1 year, plans[2] = Pro perpetual) - the English labels in
+// consts are the fallback for locales whose dictionaries drift.
+const cryptoTierNames = [s.pricing.plans[1]?.name, s.pricing.plans[2]?.name];
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+// Visible sale deadline under the pricing header ("nothing said until when").
+// The label comes from pricing.json; only the "until <date>" part localizes.
+const promoUntil = (() => {
+  if (!PROMO_ACTIVE || !PROMO_ENDS) return null;
+  const [, m, d] = PROMO_ENDS.split('-').map((x) => parseInt(x, 10));
+  const EN_MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const until: Record<string, string> = {
+    en: `until ${EN_MONTHS[m - 1]} ${d}`,
+    de: `bis ${d}.${m}.`,
+    es: `hasta el ${d}/${m}`,
+    fr: `jusqu'au ${d}/${m}`,
+    it: `fino al ${d}/${m}`,
+    ja: `${m}月${d}日まで`,
+    ko: `${m}월 ${d}일까지`,
+    pt: `até ${d}/${m}`,
+    ru: `до ${d}.${String(m).padStart(2, '0')}`,
+    zh: `截止 ${m} 月 ${d} 日`,
+    'zh-hant': `截止 ${m} 月 ${d} 日`,
+  };
+  return `${PROMO!.label} · ${until[lang] ?? until.en}`;
+})();
+---
+
+<section id="pricing" class={standalone ? 'section-standalone' : ''}>
+  <div class="wrap" data-reveal>
+    <div class="section-head">
+      <p class="eyebrow">{s.pricing.eyebrow}</p>
+      <Heading>{s.pricing.title}</Heading>
+      {s.pricing.body.split('\n').map((line) => <p>{line}</p>)}
+      {promoUntil && <p class="promo-until" data-promo-until>{promoUntil}</p>}
+      {railNote && (
+        <p class="rail-note">
+          {railNote.text} <a href="#crypto">{railNote.link} ↓</a>
+        </p>
+      )}
+    </div>
+    <div class="plans">
+      {s.pricing.plans.map((plan, i) => {
+        const meta = PLAN_META[i];
+        const onPromo = !!meta.promoLabel;
+        // Revert target if the promo lapses between static rebuilds: the list
+        // price, its PayPal URL, and the umami event without the -promo suffix.
+        const promoData = onPromo
+          ? {
+              'data-promo-ends': PROMO_ENDS,
+              'data-list-price': meta.listPrice,
+              'data-list-href': meta.href.replace(`/${meta.amount}?`, `/${meta.listAmount}?`),
+              'data-base-event': meta.event.replace(/-promo$/, ''),
+            }
+          : {};
+        return (
+          <article class={`plan${meta.featured ? ' plan-featured' : ''}${onPromo ? ' plan-promo' : ''}`} {...promoData}>
+            {plan.badge && <span class="plan-badge">{plan.badge}</span>}
+            <h3>{plan.name}</h3>
+            <div class="plan-price">
+              <span class={`brand-text${onPromo ? ' plan-sale' : ''}`} data-price>{meta.price}</span>
+              {localApprox(meta.amount, lang) && (
+                <span class="plan-approx">{localApprox(meta.amount, lang)}</span>
+              )}
+            </div>
+            <p class="plan-cadence">{plan.cadence}</p>
+            <p class="plan-blurb">{plan.blurb}</p>
+            <ul>
+              {plan.perks.map((perk) => <li>{perk}</li>)}
+            </ul>
+            {meta.patreon ? (
+              // Two rails, one pair, one row. The card's own style still says
+              // whether the PLAN is featured; within a card the two match.
+              <div class="plan-buy">
+                <span class="plan-buy-lead">{rails.lead}</span>
+                <div class="plan-rails">
+                  <a class={`btn ${meta.featured ? 'btn-primary' : 'btn-ghost'} plan-cta`} data-cta href={meta.href} target="_blank" rel="noopener" data-umami-event={meta.event}>
+                    PayPal
+                  </a>
+                  <a class={`btn ${meta.featured ? 'btn-primary' : 'btn-ghost'} plan-cta`} href={meta.patreon} target="_blank" rel="noopener" data-umami-event={meta.patreonEvent}>
+                    Patreon
+                  </a>
+                </div>
+              </div>
+            ) : (
+              <a class={`btn ${meta.featured ? 'btn-primary' : 'btn-ghost'} plan-cta`} data-cta href={meta.href} target="_blank" rel="noopener" data-umami-event={meta.event}>
+                {plan.cta}
+              </a>
+            )}
+          </article>
+        );
+      })}
+    </div>
+    {s.pricing.note.split('\n').map((line) => <p class="pricing-note">{line}</p>)}
+
+    {CRYPTO.usdtAddress && (
+      <details class="crypto-pay" id="crypto" data-reveal open={lang === 'zh'}>
+        <summary class="crypto-summary">
+          <span class="crypto-eyebrow">{cx.eyebrow}</span>
+          <span class="crypto-summary-hint">{cx.hint}</span>
+        </summary>
+        <div class="crypto-body">
+          <p class="crypto-sub">{cx.sub}</p>
+          <div class="crypto-prices">
+            {CRYPTO.prices.map((p, i) => (
+              <div class="crypto-price">
+                <span class="crypto-price-tier">{cryptoTierNames[i] ?? p.label}</span>
+                <span class="crypto-price-amt">{p.usdt}<small>USDT</small></span>
+                <span class="crypto-price-eur">(€{p.eur})</span>
+              </div>
+            ))}
+          </div>
+          <div class="crypto-addr">
+            <span class="crypto-chain">{cx.chain}</span>
+            <div class="crypto-copyrow">
+              <code>{CRYPTO.usdtAddress}</code>
+              <button type="button" class="crypto-copy" data-copy={CRYPTO.usdtAddress} data-umami-event="crypto-usdt">{cx.copy}</button>
+            </div>
+          </div>
+          {CRYPTO.btcAddress && (
+            <div class="crypto-addr">
+              <span class="crypto-chain">{cx.btcChain}</span>
+              <div class="crypto-copyrow">
+                <code>{CRYPTO.btcAddress}</code>
+                <button type="button" class="crypto-copy" data-copy={CRYPTO.btcAddress} data-umami-event="crypto-btc">{cx.copy}</button>
+              </div>
+              <p class="crypto-sub">{cx.btcNote}</p>
+            </div>
+          )}
+          <p class="crypto-how">
+            {cx.how1}<b>{txidLabel}</b>{cx.how2}
+            <a href={`mailto:${CRYPTO.support}`}>{CRYPTO.support}</a>.{cx.how3}
+          </p>
+          <ul class="crypto-pitfalls">
+            {cx.pitfalls.map((line) => <li>{line}</li>)}
+          </ul>
+          {cx.tutorial && (
+            <p class="crypto-how">
+              <a href={`${base}/zh/how-to-buy-with-usdt/`} data-umami-event="crypto-tutorial">{cx.tutorial} →</a>
+            </p>
+          )}
+        </div>
+      </details>
+    )}
+  </div>
+</section>
+
+<script>
+  // ── Promo expiry guard ────────────────────────────────────────────────────
+  // A promo is server-rendered only while live, but a static build can outlast
+  // the promo window. If today is past a card's data-promo-ends, revert it to
+  // the list price/URL and strip the promo visuals so an expired sale never shows.
+  // (Pair with a daily GitHub Actions cron rebuild so promos also auto-START.)
+  (function () {
+    var today = new Date().toISOString().slice(0, 10);
+    document.querySelectorAll('.plan-promo[data-promo-ends]').forEach(function (card) {
+      if (card.getAttribute('data-promo-ends') >= today) return;
+      card.classList.remove('plan-promo');
+      var badge = card.querySelector('[data-promo-badge]'); if (badge) badge.remove();
+      document.querySelectorAll('[data-promo-until]').forEach(function (el) { el.remove(); });
+      var price = card.querySelector('[data-price]');
+      var listPrice = card.getAttribute('data-list-price');
+      if (price && listPrice) price.textContent = listPrice;
+      if (price) price.classList.remove('plan-sale'); // back to the brand ink
+      var cta = card.querySelector('[data-cta]');
+      var listHref = card.getAttribute('data-list-href');
+      var baseEvent = card.getAttribute('data-base-event');
+      if (cta && listHref) cta.setAttribute('href', listHref);
+      if (cta && baseEvent) cta.setAttribute('data-umami-event', baseEvent);
+    });
+  })();
+
+  // One-click copy for the crypto address.
+  document.querySelectorAll('.crypto-copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var addr = btn.getAttribute('data-copy');
+      var done = function () {
+        var prev = btn.textContent;
+        btn.textContent = 'Copied';
+        btn.classList.add('copied');
+        setTimeout(function () { btn.textContent = prev; btn.classList.remove('copied'); }, 1500);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(addr).then(done).catch(function () {});
+      } else {
+        var t = document.createElement('textarea');
+        t.value = addr; document.body.appendChild(t); t.select();
+        try { document.execCommand('copy'); done(); } catch (e) {}
+        document.body.removeChild(t);
+      }
+    });
+  });
+</script>
+
+<style>
+  /* Opt out of the homepage's one-section-per-screen rhythm (see the
+     `standalone` prop doc above) - natural content height, modest
+     top/bottom padding instead of a forced full-viewport centered box. */
+  .section-standalone { min-height: 0; display: block; padding: 8px 0 60px; }
+  /* The intro spans the full content width here (the global 640px cap left it
+     cramped in a narrow left column); the paragraph keeps a readable line. */
+  #pricing .section-head { max-width: none; }
+  #pricing .section-head p { max-width: 90ch; }
+  .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: start; }
+  .plan {
+    position: relative; background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 28px 24px; display: flex; flex-direction: column; height: 100%;
+  }
+  .plan-featured { border-color: var(--teal); box-shadow: 0 0 0 1px var(--teal), 0 20px 60px -30px rgba(34, 211, 238, 0.6); }
+  /* One identity badge per card (MOST POPULAR / BEST VALUE). The sale itself
+     is communicated by the struck price + the deadline line under the header
+     - a per-card SUMMER SALE badge next to these read as clutter. */
+  .plan-badge {
+    position: absolute; top: -11px; left: 24px; background: var(--brand); color: #04181c;
+    white-space: nowrap;
+    font-size: 0.7rem; font-weight: 750; padding: 3px 10px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .promo-until { color: var(--coral); font-weight: 700; font-size: 0.95rem; margin-top: 6px; }
+  /* The mainland rail note: informative, not alarmed - it names the working
+     door, it doesn't apologize for the broken one. */
+  .rail-note { color: var(--text); font-size: 0.95rem; margin-top: 10px; padding: 10px 14px; border: 1px solid rgba(34,211,238,0.30); border-radius: 10px; background: rgba(34,211,238,0.06); display: inline-block; }
+  .rail-note a { color: var(--teal); font-weight: 600; }
+  .plan-approx { color: var(--muted); font-size: 0.95rem; font-weight: 600; }
+  .crypto-price-eur { font-size: 0.72rem; color: var(--muted); }
+  .crypto-pitfalls { text-align: left; color: var(--muted); font-size: 0.85rem; margin: 14px 0 0; padding-left: 18px; display: grid; gap: 5px; }
+  .plan h3 { font-size: 1.2rem; margin-bottom: 10px; }
+  .plan-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; }
+  .plan-price span { font-size: 2rem; font-weight: 800; }
+  /* Sale price takes the theme coral (orange) - no struck "was" price
+     beside it: that compared against today's config base price, not what
+     a viewer was ever actually charged, and read as a false discount. */
+  .plan-sale { color: var(--coral); }
+  .plan-cadence {
+    color: var(--muted); font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em;
+    margin: 4px 0 0;
+  }
+  .plan-blurb { color: var(--muted); font-size: 0.92rem; min-height: 42px; margin: 6px 0 16px; }
+  .plan ul { list-style: none; margin: 0 0 22px; padding: 0; display: grid; gap: 9px; flex: 1; }
+  .plan ul li { font-size: 0.9rem; padding-left: 22px; position: relative; }
+  .plan ul li::before { content: '✓'; position: absolute; left: 0; color: var(--teal); font-weight: 700; }
+  .plan-cta { width: 100%; justify-content: center; }
+  /* The two rails, side by side on ONE row. Bare brand names always fit at
+     half a card's width, in every locale, so the pair never wraps and the
+     card is not topped by two full-width slabs of accent colour. */
+  .plan-rails { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  /* The verb, once, over the pair - so neither button has to carry it. */
+  .plan-buy-lead {
+    display: block; margin-bottom: 7px; text-align: center;
+    color: var(--muted); font-size: 0.75rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  /* Last element in the card, so the CTAs of all three cards share one
+     baseline however many perks each lists. */
+  .plan-buy { margin-top: auto; }
+  .pricing-note { text-align: center; color: var(--muted); margin-top: 28px; font-size: 0.95rem; }
+  .pricing-note a { color: var(--teal); }
+  .crypto-pay { max-width: 600px; margin: 40px auto 0; padding: 30px 32px; border: 1px solid #1E2A38; border-radius: 16px; background: linear-gradient(180deg, #141d28, #0F161E); text-align: center; }
+  .crypto-eyebrow { display: inline-block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); border: 1px solid rgba(34,211,238,0.30); border-radius: 999px; padding: 4px 13px; margin-bottom: 14px; }
+  .crypto-pay > summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .crypto-pay > summary::-webkit-details-marker { display: none; }
+  .crypto-pay > summary .crypto-eyebrow { margin: 0; }
+  .crypto-summary-hint { color: var(--muted); font-size: 0.9rem; }
+  .crypto-summary::after { content: "▾"; color: var(--teal); font-size: 0.9rem; transition: transform .2s ease; }
+  .crypto-pay[open] .crypto-summary::after { transform: rotate(180deg); }
+  .crypto-body { margin-top: 22px; }
+  .crypto-sub { color: var(--muted); margin: 0 auto 24px; font-size: 0.94rem; max-width: 430px; line-height: 1.5; }
+  .crypto-prices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 24px; }
+  .crypto-price { background: #0B131B; border: 1px solid #1A2531; border-radius: 12px; padding: 14px 8px; display: flex; flex-direction: column; gap: 6px; }
+  .crypto-price-tier { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+  .crypto-price-amt { font-size: 1.35rem; font-weight: 800; color: #EAF0F6; display: flex; align-items: baseline; justify-content: center; gap: 4px; }
+  .crypto-price-amt small { font-size: 0.62rem; font-weight: 600; color: var(--teal); letter-spacing: 0.05em; }
+  .crypto-addr { text-align: left; margin-bottom: 18px; }
+  .crypto-chain { display: block; font-size: 0.78rem; color: var(--teal); margin-bottom: 7px; letter-spacing: .03em; }
+  .crypto-copyrow { display: flex; align-items: stretch; gap: 8px; }
+  .crypto-copyrow code { flex: 1 1 auto; min-width: 0; display: block; white-space: nowrap; overflow-x: auto; padding: 11px 12px; border-radius: 8px; background: #0B1219; border: 1px solid #1A2531; font-size: 0.85rem; color: #E7EDF3; font-family: ui-monospace, monospace; }
+  .crypto-copy { flex: 0 0 auto; padding: 0 18px; border-radius: 8px; border: 1px solid #22d3ee; background: transparent; color: #22d3ee; font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: background .12s, color .12s; }
+  .crypto-copy:hover { background: rgba(34,211,238,0.12); }
+  .crypto-copy.copied { background: #22d3ee; color: #04222a; border-color: #22d3ee; }
+  .crypto-how { color: var(--muted); margin: 0; font-size: 0.92rem; }
+  .crypto-how a { color: var(--teal); }
+  @media (max-width: 980px) { .plans { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .plans { grid-template-columns: 1fr; } }
+</style>

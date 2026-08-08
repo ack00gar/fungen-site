@@ -1,0 +1,82 @@
+---
+import Article from '../../layouts/Article.astro';
+
+const title = 'VR funscript：生成互动脚本并在头显里播放 - FunGen';
+const description =
+  'VR funscript 的原理以及如何自己制作。FunGen 支持从鱼眼、等距柱状、左右和上下格式的 VR 成人影片生成 funscript，POV 与非 POV 场景均可。';
+const canonicalPath = '/zh/vr-funscripts';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'VR funscript：生成互动脚本并在头显里播放',
+  description,
+  inLanguage: 'zh',
+  dateModified: '2026-07-17',
+  mainEntityOfPage: 'https://fungen.app/zh/vr-funscripts',
+  author: { '@type': 'Organization', name: 'FunGen' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FunGen',
+    logo: { '@type': 'ImageObject', url: 'https://fungen.app/icon-512.png' },
+  },
+};
+const breadcrumbs = [{ name: 'VR funscript', path: '/zh/vr-funscripts' }];
+---
+
+<Article
+  {title}
+  {description}
+  heading="VR funscript"
+  lang="zh"
+  {canonicalPath}
+  {articleLd}
+  {breadcrumbs}
+>
+  <p class="lead">
+    <strong>VR funscript</strong> 和普通的
+    <a href={`${base}/zh/what-is-a-funscript/`}>funscript</a>（互动脚本）是同一个思路-与视频同步的运动数据-
+    只不过它面向沉浸式的头显影片，那里的镜头投影和景深让打脚本变得更难。
+    <a href={`${base}/zh/`}>FunGen</a> 能自动生成，让你为自己的 VR 片库打脚本，而不必等别人来做。
+  </p>
+
+  <h2>VR 有什么不同</h2>
+  <p>
+    VR 视频不是一块平面矩形。它为头显做了畸变处理-通常是<strong>鱼眼</strong>、
+    <strong>等距柱状</strong>、<strong>左右格式</strong>或<strong>上下格式</strong>的立体影像-
+    而动作发生在 POV 的景深之中。脚本模型必须理解这套几何才能正确跟踪运动，
+    这正是通用 2D 方案一碰到 VR 就失灵的原因。
+  </p>
+
+  <h2>FunGen 如何处理 VR</h2>
+  <p>
+    FunGen 内置一个<strong>专用的 VR AI 模型</strong>，与 2D / 平面模型相互独立。
+    它自动识别画面布局，在 GPU 上展开畸变画面，并同时跟踪 <strong>POV 与非 POV</strong> 场景，
+    生成的 funscript 与你在头显里实际看到的画面一致。无论是欧美 VR 成人影片还是 JAVR（日本VR成人影片），
+    输出都是多轴的，随时可以播放或微调。
+  </p>
+  <ul>
+    <li>自动识别鱼眼、等距柱状、左右和上下格式。</li>
+    <li>GPU 展开畸变 + 针对头显景深和 POV 构图调校的跟踪。</li>
+    <li>全质量多轴输出，可在时间轴上继续润色。</li>
+    <li>整夜批量处理一整个文件夹的 VR 影片。</li>
+  </ul>
+
+  <h2>在头显里播放 VR funscript</h2>
+  <p>
+    生成之后，VR funscript 的播放方式与其他脚本无异。FunGen 内置的串流功能，加上
+    <strong>HereSphere</strong> 和 <strong>DeoVR</strong> 桥接（以及 XBVR 集成），
+    会在头显里把脚本与视频同步，并驱动你的设备-<strong>The Handy</strong>、
+    <strong>OSR2 / SR6</strong>、<strong>Autoblow</strong>，或任何
+    <strong>Buttplug.io / Intiface</strong> 设备-延迟补偿确保动作不掉拍。
+  </p>
+
+  <h2>制作你自己的 VR funscript</h2>
+  <p>
+    把 FunGen 指向一段 VR 影片，免费跑一段 20 秒预览检查跟踪效果，再生成整部影片。
+    一切都在你自己的电脑上本地运行，你的 VR 片库始终保持私密。
+    分步操作见<a href={`${base}/zh/generate-funscripts-from-video/`}>完整教程</a>，
+    或者<a href={`${base}/zh/`}>下载 FunGen</a>，用你自己的影片试一试。
+  </p>
+</Article>
